@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    
+            <h:form id="enrollment_student">            
+                <p:messages id="msgs" closable="true" globalOnly="true"/>
+                    <h:panelGrid id="add"
+                                 style="float: #{langBean.styleFloat};text-align: right" 
+                                 columns="4" 
+                                 
+                                 dir="#{langBean.dir}">  
+                        
+                        <p:outputLabel value="#{msgs.student_name_en}/#{msgs.student_number_en}:" for="student_n"/>
+                        <p:inputText id="student_n"
+                                     style="width:170px"
+                                     value="#{addEditEventBean.nameEn}"
+                                     
+                                     >                                     
+                        </p:inputText>
+                        <h:message for="student_n" styleClass="errorMsg"/>
+                        <p:commandButton
+                                 styleClass="searchButton"
+                                 icon="ui-icon-search"
+                                 iconPos="#{langBean.styleFloat}"
+                                 ajax="false"
+                                 style="float:#{langBean.styleFloat}"                                                                   
+                                 actionListener="#{addEditEventBean.saveEvent()}" />
+                       
+                        <p:outputLabel value="#{msgs.student_name_en}:" for="student_name"/>
+                        <p:inputText id="student_name"
+                                     style="width:170px"
+                                     value="#{addEditEventBean.nameEn}"
+                                     readonly="true"
+                                     >                                     
+                        </p:inputText>
+                        
+                        <h:message for="student_name" styleClass="errorMsg"/>
+                        
+                        <p:outputLabel/> 
+                        <p:outputLabel value="#{msgs.division_number_en}:" for="division_n"/>                        
+                       <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                                         id="division_n"
+                                         style="width:150px"
+                                         required="true"                                                                                  
+                                         requiredMessage=" #{msgs.required_msg}">
+                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                          itemValue=""/>
+                            <f:selectItems var="type"
+                                           value="#{addEditEventBean.eventTypes}" 
+                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
+                                           itemValue="#{type.typeId}"/>                             
+                        </p:selectOneMenu>
+                        <h:message for="division_n" styleClass="errorMsg"/> 
+                          <p:outputLabel/> 
+                         <p:selectBooleanCheckbox id="pay_checkbox"
+                                            value="#{addEditEventBean.placeEn}"                                 
+                                     >
+                   </p:selectBooleanCheckbox>
+                          <p:outputLabel value="#{msgs.pay_checkbox_en} "/>
+                          <p:outputLabel/> <p:outputLabel/> 
+                        <p:outputLabel value="#{msgs.level_cost_en}:" for="level_cost"/>
+                        <p:inputText id="level_cost"
+                                     style="width:170px"
+                                     value="#{addEditEventBean.nameEn}"
+                                     readonly="true"
+                                     >                                     
+                        </p:inputText>
+                        <h:message for="level_cost" styleClass="errorMsg"/>
+                        <p:outputLabel/> 
+                        <p:outputLabel value="#{msgs.amount_en}:" for="amount"/>
+                        <p:inputText id="amount"
+                                     style="width:170px"
+                                     value="#{addEditEventBean.nameEn}"
+                                     >                                     
+                        </p:inputText>
+                        
+                        <h:message for="amount" styleClass="errorMsg"/>
+                        </h:panelGrid>
+                
+
+                <p:commandButton value="#{msgs.save}"
+                                 styleClass="commandButton"
+                                 icon="ui-icon-disk"
+                                 iconPos="#{langBean.styleFloat}"
+                                 ajax="false"
+                                 style="float:#{langBean.styleFloat}"                                                                   
+                                 actionListener="#{addEditEventBean.saveEvent()}" />
+                <p:commandButton value="#{msgs.cancel}"
+                                 icon="ui-icon-cancel"  
+                                 iconPos="#{langBean.styleFloat}"
+                                 styleClass="commandButton"
+                                 immediate="true" 
+                                 style="float:#{langBean.styleFloat}"                                 
+                                 action="manage_events"  />                                   
+            </h:form>
+        
+</ui:composition> 

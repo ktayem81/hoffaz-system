@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+       <h:form>
+                <h:panelGrid columns="4">
+                    <h:graphicImage value="/resources/images/2.png"/>
+                    <h:outputLabel value=""/>
+                    <h:outputLabel value=""/>
+                    <h:outputLabel value=""/>
+                     <h:inputText  value=""/>
+                    <h:outputLabel value="  السنة"/>
+                    <h:inputText  value=""/>
+                    <h:outputLabel value="  الفصل"/>
+                   <h:inputText value=""/>
+                    <h:outputLabel value=" المستوى"/>
+                     <h:inputText value=""/>
+                    <h:outputLabel value=" الصف"/>
+                   
+                    <h:selectOneMenu value="">
+                          <f:selectItem itemValue = "1" itemLabel = "ALi" /> 
+                          <f:selectItem itemValue = "2" itemLabel = "Item 2" /> 
+                      </h:selectOneMenu>
+                    <h:outputLabel value=" المدرس"/>
+                   <h:outputLabel value=" "/>
+                   <h:outputLabel value=" "/>
+                     
+                    
+                    <h:commandButton value="OK" action="home"/>
+                    <h:commandButton value="cancel" action="login"/>
+                    
+                </h:panelGrid>
+            </h:form>
+    </h:body>
+</html>
+

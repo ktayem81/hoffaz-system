@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{msgs.add_center}</title>
+    </h:head>
+    <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml">  
+            <h:form id="add_center">            
+                <p:messages id="msgs" closable="true" globalOnly="true"/>
+
+                <p:panel header="#{msgs.center_info}"                            
+                         style="min-height:300px; 
+                                direction:#{langBean.dir};margin-top:10px; font-size:10pt">
+                    <h:panelGrid id="add"
+                                 style="float: #{langBean.styleFloat};" 
+                                 columns="3"                              
+                                 dir="#{langBean.dir}">
+                        <p:outputLabel value="#{msgs.center_name}:" for="center_name"/>
+                        <p:inputText id="center_name"
+                                     style="width:600px"
+                                     value=""                                      
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage="#{msgs.required_msg}">
+                        </p:inputText>
+                        <h:message for="center_name" styleClass="errorMsg"/>
+
+                       
+
+                        <p:outputLabel value="#{msgs.branch_name}:" for="branch_name"/>
+                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                                         id="branch_name"
+                                         required="true"                                                                                  
+                                         requiredMessage=" #{msgs.required_msg}">
+                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                          itemValue=""/>
+                            <f:selectItems var="type"
+                                           value="#{addEditEventBean.eventTypes}" 
+                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
+                                           itemValue="#{type.typeId}"/>                             
+                        </p:selectOneMenu>
+                        <h:message for="brach_name" styleClass="errorMsg"/>                    
+
+                        <p:outputLabel value="#{msgs.center_num}:" for="center_num"/>
+                        <p:inputText id="center_num"
+                                     value="#{addEditEventBean.placeEn}"
+                                     style="width:600px"
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage=" #{msgs.required_msg}">
+                        </p:inputText> 
+                        <h:message for="center_num" styleClass="errorMsg"/>
+
+                        <p:outputLabel value="#{msgs.tele}:" for="tele"/>
+                        <p:inputText id="tele"
+                                     value="#{addEditEventBean.placeAr}"
+                                     style="width:600px"
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage=" #{msgs.required_msg}">
+                        </p:inputText>
+                        <h:message for="tele" styleClass="errorMsg"/>
+
+                        <p:outputLabel value="#{msgs.comments}:" for="comments"/>
+                        <p:inputText id="comments"
+                                     value="#{addEditEventBean.placeAr}"
+                                     style="width:600px"
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage=" #{msgs.required_msg}">
+                        </p:inputText>
+                        <h:message for="comments" styleClass="errorMsg"/>                                        
+
+                                               
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:commandButton value="#{msgs.save}"
+                                 styleClass="commandButton"
+                                 icon="ui-icon-disk"
+                                 iconPos="#{langBean.styleFloat}"
+                                 ajax="false"
+                                 style="float:#{langBean.styleFloat}"                                                                   
+                                 actionListener="#{addEditEventBean.saveEvent()}" />
+                <p:commandButton value="#{msgs.cancel}"
+                                 icon="ui-icon-cancel"  
+                                 iconPos="#{langBean.styleFloat}"
+                                 styleClass="commandButton"
+                                 immediate="true" 
+                                 style="float:#{langBean.styleFloat}"                                 
+                                 action="manage_events"  />                                   
+            </h:form>
+        </ui:decorate>
+    </h:body>
+</html>
+

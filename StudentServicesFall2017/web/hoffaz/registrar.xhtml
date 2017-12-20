@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{msgs.registrar}</title>
+    </h:head>
+    <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml"> 
+            <h:form id="registrar" style="height:100%;
+                                          direction:#{langBean.dir}; 
+                                          font-size:8pt"> 
+                <p:tabView orientation="#{langBean.styleFloat}" >    
+                    <p:tab title="#{msgs.add_student_en}">
+                        <ui:insert>
+                            <ui:include src="/hoffaz/registrar/add_student.xhtml"/>
+                        </ui:insert>
+                    </p:tab>
+                       
+                        <p:tab title="#{msgs.enrollment_student_en}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/registrar/enrollment_student.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                        <!--
+                        <p:tab title="#{msgs.update_student_en}">
+                            <ui:insert>
+                                <ui:include src="hoffaz_Teacher.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                        -->
+                    </p:tabView>                            
+            </h:form>
+        </ui:decorate>         
+    </h:body>
+</html>
+

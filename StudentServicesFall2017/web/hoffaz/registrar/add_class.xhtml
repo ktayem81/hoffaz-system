@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{msgs.add_class_en}</title>
+    </h:head>
+    <h:body>
+       <ui:decorate template="/app_templates/app_template.xhtml">  
+            <h:form id="add_class">            
+                <p:messages id="msgs" closable="true" globalOnly="true"/>
+               
+                <p:panel header="#{msgs.add_class_en}"                            
+                         style="min-height:400px; 
+                                direction:#{langBean.dir};margin-top:10px; font-size:10pt">
+                    <h:panelGrid id="add"
+                                 style="float: #{langBean.styleFloat};text-align: right" 
+                                 columns="3" 
+                                 
+                                 dir="#{langBean.dir}">  
+                        
+                        <p:outputLabel value="#{msgs.class_number_en}:" for="class_number"/>
+                        <p:inputText id="class_number"
+                                     style="width:170px"
+                                     value="#{addEditEventBean.nameEn}"
+                                     readonly="true"
+                                     >                                     
+                        </p:inputText>
+                        <h:message for="class_number" styleClass="errorMsg"/>
+                      
+                       
+                        <p:outputLabel /><p:outputLabel/><p:outputLabel/>
+                        
+                        
+                        <p:outputLabel value="#{msgs.class_name_en}:" for="class_name"/>
+                        <p:inputText id="class_name"
+                                     style="width:170px"
+                                     value="#{addEditEventBean.nameEn}"                                      
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage="#{msgs.required_msg}">
+                        </p:inputText>
+                        <h:message for="class_name" styleClass="errorMsg"/>
+                        
+                        <p:outputLabel value="#{msgs.age}:"/>
+                         <p:outputLabel /> <p:outputLabel />
+                     <p:outputLabel value="#{msgs.from_en}:" for="age_from"/>
+                       
+                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                                         id="age_from"
+                                         style="width:150px"
+                                         required="true"                                                                                  
+                                         requiredMessage=" #{msgs.required_msg}">
+                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                          itemValue=""/>
+                            <f:selectItems var="type"
+                                           value="#{addEditEventBean.eventTypes}" 
+                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
+                                           itemValue="#{type.typeId}"/>                             
+                        </p:selectOneMenu>
+                        <h:message for="age_from" styleClass="errorMsg"/>                    
+    
+                        <p:outputLabel value="#{msgs.to_en}:" for="age_to"/>
+                       
+                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                                         id="age_to"
+                                         style="width:150px"
+                                         required="true"                                                                                  
+                                         requiredMessage=" #{msgs.required_msg}">
+                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                          itemValue=""/>
+                            <f:selectItems var="type"
+                                           value="#{addEditEventBean.eventTypes}" 
+                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
+                                           itemValue="#{type.typeId}"/>                             
+                        </p:selectOneMenu>
+                        <h:message for="age_to" styleClass="errorMsg"/> 
+                        
+                        <p:outputLabel value="#{msgs.note_en}:" for="note"/>
+                        <p:inputTextarea id="note"
+                                     value="#{addEditEventBean.placeEn}"
+                                     style="width:170px"
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage=" #{msgs.required_msg}"
+                                     
+                                     >
+                        </p:inputTextarea>
+                        <h:message for="note" styleClass="errorMsg"/>
+                    </h:panelGrid>
+                  
+                  
+                </p:panel>
+
+                <p:commandButton value="#{msgs.save}"
+                                 styleClass="commandButton"
+                                 icon="ui-icon-disk"
+                                 iconPos="#{langBean.styleFloat}"
+                                 ajax="false"
+                                 style="float:#{langBean.styleFloat}"                                                                   
+                                 actionListener="#{addEditEventBean.saveEvent()}" />
+                <p:commandButton value="#{msgs.cancel}"
+                                 icon="ui-icon-cancel"  
+                                 iconPos="#{langBean.styleFloat}"
+                                 styleClass="commandButton"
+                                 immediate="true" 
+                                 style="float:#{langBean.styleFloat}"                                 
+                                 action="manage_events"  />                                   
+            </h:form>
+        </ui:decorate>
+    </h:body>
+    
+</html>
+
