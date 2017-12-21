@@ -12,8 +12,6 @@
                                  style="float: #{langBean.styleFloat};text-align: right" 
                                  columns="6" 
                                  dir="#{langBean.dir}">  
-                        
-                       
                       
                         <p:outputLabel /><p:outputLabel/><p:outputLabel />
                         <p:outputLabel /><p:outputLabel/><p:outputLabel/>
@@ -60,7 +58,7 @@
                        
                         <p:selectOneMenu value="#{addStudentBean.nationality}"
                                          id="student_nationalty"
-                                         style="width:170px float:#{langBean.styleFloat} direction:#{langBean.dir}"
+                                         style="width:170px; float:#{langBean.styleFloat} direction:#{langBean.dir}"
                                          required="true" panelStyle="float:#{langBean.styleFloat}"                                                                                  
                                          requiredMessage=" #{msgs.required_msg}">
                             <f:selectItem itemLabel="#{msgs.select_one}"
@@ -103,7 +101,7 @@
                                     yearRange="c-10:c+1"
                                     timeInput="true"
                                     requiredMessage=" #{msgs.required_msg}"
-                                    style="width:170px float:#{langBean.styleFloat}"/> 
+                                    style="width:170px; float:#{langBean.styleFloat}"/> 
                         <h:message for="birhtdate" styleClass="errorMsg"/>                                        
 
                        <p:outputLabel/><p:outputLabel/><p:outputLabel/>
@@ -157,9 +155,9 @@
                        
                      <p:selectOneMenu value="#{addStudentBean.tripId}"
                                          id="transportation_line"
-                                         style="width:170px float:#{langBean.styleFloat}"
-                                         >
-                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                         style="width:170px; float:#{langBean.styleFloat}">
+                         <p:ajax listener="#{addStudentBean.onTripIdChange}" update="stop_area" />
+                         <f:selectItem itemLabel="#{msgs.select_line}"
                                           itemValue=""/>
                             <f:selectItems var="trip"
                                            value="#{addStudentBean.tripList}" 
@@ -174,13 +172,12 @@
                        
                         <p:selectOneMenu value="#{addStudentBean.stopId}"
                                          id="stop_area"
-                                         style="width:170px float:#{langBean.styleFloat}"
-                                         >
-                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                         style="width:170px; float:#{langBean.styleFloat}">
+                            <f:selectItem itemLabel="#{msgs.select_stop}"
                                           itemValue=""/>
                             <f:selectItems var="tripDetail"
                                            value="#{addStudentBean.tripDetailList}" 
-                                           itemLabel="#{tripDetail.stopDesc}"
+                                           itemLabel="#{tripDetail.stopDescription}"
                                            itemValue="#{tripDetail.stopId}"/>                             
                         </p:selectOneMenu>
                         <h:message for="stop_area" styleClass="errorMsg"/> 
