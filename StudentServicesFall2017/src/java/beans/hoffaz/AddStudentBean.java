@@ -386,12 +386,20 @@ public class AddStudentBean implements Serializable{
         try {
              nationalityList = nationalityDao.getNationalityList();
              tripList = tripDao.getTripList(branchId, centerId);
-             tripDetailList = tripDetailDao.getTripList(branchId, centerId, tripId);
+             
              
             } catch (Exception ex) {
             Logger.getLogger(AddStudentBean.class.getName()).log(Level.SEVERE, null, ex);
            }
         } 
+    
+    public void onTripIdChange (){
+        try {          
+            tripDetailList = tripDetailDao.getTripList(sessionBean.getBranchId(), sessionBean.getCenterId(), this.tripId);
+        } catch (Exception ex) {
+            Logger.getLogger(AddStudentBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public void saveStudent() {
         
