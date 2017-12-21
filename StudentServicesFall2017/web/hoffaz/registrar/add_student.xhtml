@@ -76,7 +76,6 @@
                                      style="width:170px"
                                      value="#{addStudentBean.nationalityNumber}"                                      
                                      required="true"
-                                     maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
                         </p:inputText>
                                                   
@@ -154,10 +153,10 @@
                      <p:outputLabel value="#{msgs.transportation_line_en}:" for="transportation_line"/>
                        
                      <p:selectOneMenu value="#{addStudentBean.tripId}"
-                                         id="transportation_line"
-                                         style="width:170px; float:#{langBean.styleFloat}">
+                                      id="transportation_line"
+                                         style="width:170px; float:#{langBean.styleFloat}; text-align:#{langBean.styleFloat};">
                          <p:ajax listener="#{addStudentBean.onTripIdChange}" update="stop_area" />
-                         <f:selectItem itemLabel="#{msgs.select_line}"
+                         <f:selectItem itemLabel="#{msgs.select_line}" 
                                           itemValue=""/>
                             <f:selectItems var="trip"
                                            value="#{addStudentBean.tripList}" 
@@ -184,9 +183,7 @@
                    
               
                         <p:outputLabel/><p:outputLabel/><p:outputLabel/><p:outputLabel/>
-                
-                 </h:panelGrid>
-                <p:commandButton value="#{msgs.save}"
+                 <p:commandButton value="#{msgs.save}"
                                  styleClass="commandButton"
                                  icon="ui-icon-disk"
                                  iconPos="#{langBean.styleFloat}"
@@ -200,6 +197,8 @@
                                  immediate="true" 
                                  style="float:#{langBean.styleFloat}"                                 
                                  action="manage_events"/> 
+                 </h:panelGrid>
+               
             </h:form>
       
 </ui:composition>
