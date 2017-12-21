@@ -149,3 +149,6 @@
         float: right
     }
     
+.ui-selectonemenu .ui-selectonemenu-label {
+    text-align: right;
+}    

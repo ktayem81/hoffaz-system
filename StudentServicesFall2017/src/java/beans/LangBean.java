@@ -20,12 +20,18 @@ public class LangBean implements Serializable {
     private boolean isEnglish;
     
     public LangBean() {
-        locale = "en";
+        locale = "ar";
+        lang = "ar";            
+        dir = "rtl";            
+        styleFloat= "right";
+        linkLabel = "انجليزي";
+        /*locale = "en";
         lang = "en";        
         dir = "ltr";        
         styleFloat= "left";
         linkLabel = "Arabic";
-        isEnglish = true;        
+        isEnglish = true;*/
+        
     }
     
     public String getLocale() {
