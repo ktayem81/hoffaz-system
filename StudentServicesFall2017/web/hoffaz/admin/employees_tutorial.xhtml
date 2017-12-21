@@ -1,63 +1,57 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>#{msgs.add_place}</title>
-    </h:head>
-    <h:body>
-        <ui:decorate template="/app_templates/app_template.xhtml">  
-            <h:form id="add_place">            
+    
+            <h:form id="add_employee_tutorials">            
                 <p:messages id="msgs" closable="true" globalOnly="true"/>
 
-                <p:panel header="#{msgs.place_info}"                            
+                <p:panel header="#{msgs.employee_tutorials_info}"                            
                          style="min-height:200px; 
                                 direction:#{langBean.dir};margin-top:10px; font-size:10pt">
                     <h:panelGrid id="add"
                                  style="float: #{langBean.styleFloat};" 
                                  columns="3"                              
                                  dir="#{langBean.dir}">
-                        <p:outputLabel value="#{msgs.place_name}:" for="place_name"/>
-                        <p:inputText id="place_name"
-                                     style="width:200px"
+                        <p:outputLabel value="#{msgs.tutorial_name}:" for="tutorial_name"/>
+                        <p:inputText id="tutorial_name"
+                                     style="width:300px"
                                      value=""                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
                         </p:inputText>
-                        <h:message for="place_name" styleClass="errorMsg"/>
+                        <h:message for="tutorial_name" styleClass="errorMsg"/>
 
                        
 
-                        <p:outputLabel value="#{msgs.line_name}:" for="line_name"/>
-                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
-                                         id="line_name"
-                                         required="true"                                                                                  
-                                         requiredMessage=" #{msgs.required_msg}">
-                            <f:selectItem itemLabel="#{msgs.select_one}"
-                                          itemValue=""/>
-                            <f:selectItems var="type"
-                                           value="#{addEditEventBean.eventTypes}" 
-                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
-                                           itemValue="#{type.typeId}"/>                             
-                        </p:selectOneMenu>
-                        <h:message for="line_name" styleClass="errorMsg"/>                    
+                                        
 
-                        <p:outputLabel value="#{msgs.place_num}:" for="place_num"/>
-                        <p:inputText id="place_num"
+                        <p:outputLabel value="#{msgs.tutorial_num}:" for="tutorial_num"/>
+                        <p:inputText id="tutorial_num"
                                      value="#{addEditEventBean.placeEn}"
-                                     style="width:200px"
+                                     style="width:300px"
                                      required="true"
                                      maxlength="512"
                                      requiredMessage=" #{msgs.required_msg}">
                         </p:inputText> 
-                        <h:message for="place_num" styleClass="errorMsg"/>
+                        <h:message for="tutorial_num" styleClass="errorMsg"/>
 
-                                                             
+                        
+
+                        <p:outputLabel value="#{msgs.description}:" for="description"/>
+                        <p:inputTextarea id="description"
+                                     value="#{addEditEventBean.placeAr}"
+                                     style="width:600px"
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage=" #{msgs.required_msg}">
+                        </p:inputTextarea>
+                        <h:message for="description" styleClass="errorMsg"/>                                        
 
                                                
                     </h:panelGrid>
@@ -78,7 +72,6 @@
                                  style="float:#{langBean.styleFloat}"                                 
                                  action="manage_events"  />                                   
             </h:form>
-        </ui:decorate>
-    </h:body>
-</html>
+        
+</ui:composition>
 

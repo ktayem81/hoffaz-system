@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"> 
+
+            <h:form id="attendence_form">     
+                
+                <p:messages id="msgs" closable="true" globalOnly="true"/>
+                    <h:panelGrid id="add_student_grid"
+                                 style="float: #{langBean.styleFloat};text-align: right" 
+                                 columns="6" 
+                                 dir="#{langBean.dir}">  
+                        
+                       
+                 </h:panelGrid>
+                <p:commandButton value="#{msgs.save}"
+                                 styleClass="commandButton"
+                                 icon="ui-icon-disk"
+                                 iconPos="#{langBean.styleFloat}"
+                                 ajax="false"
+                                 style="float:#{langBean.styleFloat}"                                                                   
+                                 actionListener="#{addStudentBean.saveStudent()}" />
+                <p:commandButton value="#{msgs.cancel}"
+                                 icon="ui-icon-cancel"  
+                                 iconPos="#{langBean.styleFloat}"
+                                 styleClass="commandButton"
+                                 immediate="true" 
+                                 style="float:#{langBean.styleFloat}"                                 
+                                 action="manage_events"/> 
+            </h:form>
+      
+</ui:composition>
+  

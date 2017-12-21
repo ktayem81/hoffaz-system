@@ -9,10 +9,77 @@
     </h:head>
     <h:body>
         
-        <ui:decorate template="/app_templates/app_template.xhtml">
-        #{msgs.admin}
-       
-            </ui:decorate>
+      <ui:decorate template="/app_templates/app_template.xhtml"> 
+            <h:form id="registrar" style="height:100%;
+                                          direction:#{langBean.dir}; 
+                                          font-size:8pt"> 
+                <p:tabView orientation="#{langBean.styleFloat}" >    
+                    <p:tab title="#{msgs.add_branch}">
+                        <ui:insert>
+                            <ui:include src="/hoffaz/admin/Branch.xhtml"/>
+                        </ui:insert>
+                    </p:tab>
+                       
+                    <p:tab title="#{msgs.add_place}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/admin/add_place.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                        
+                    <p:tab title="#{msgs.add_center}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/admin/center.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                    <p:tab title="#{msgs.add_trip}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/admin/trip.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                    <p:tab title="#{msgs.add_employees}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/admin/employees.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                    <p:tab title="#{msgs.add_employee_tutorials}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/admin/employees_tutorial.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                    
+                    <p:tab title="#{msgs.add_users}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/admin/users.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                    <p:tab title="#{msgs.add_class_en}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/admin/add_class.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                    <p:tab title="#{msgs.add_division_en}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/admin/add_division.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                    <p:tab title="#{msgs.add_level_class_en}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/admin/add_level_class.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                    <p:tab title="#{msgs.add_semester_en}">
+                            <ui:insert>
+                                <ui:include src="/hoffaz/admin/add_semester.xhtml"/>
+                        </ui:insert>
+                        </p:tab>
+                    
+                    
+                    
+                     
+                        
+                    </p:tabView>                            
+            </h:form>
+        </ui:decorate>         
      
     </h:body>
 </html>
