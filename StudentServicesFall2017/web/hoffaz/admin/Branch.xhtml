@@ -30,16 +30,16 @@
                        
 
                         <p:outputLabel value="#{msgs.branch_state}:" for="branch_state"/>
-                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                        <p:selectOneMenu value="#{addBranchBean.province_List}"
                                          id="branch_state"
                                          required="true"                                                                                  
                                          requiredMessage=" #{msgs.required_msg}">
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
                             <f:selectItems var="type"
-                                           value="#{addEditEventBean.eventTypes}" 
-                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
-                                           itemValue="#{type.typeId}"/>                             
+                                           value="#{addBranchBean.province_List}" 
+                                           itemLabel="#{Province.province_Id}"
+                                           itemValue="#{Province.province_Name}"/>                             
                         </p:selectOneMenu>
                         <h:message for="event_type" styleClass="errorMsg"/>                    
 

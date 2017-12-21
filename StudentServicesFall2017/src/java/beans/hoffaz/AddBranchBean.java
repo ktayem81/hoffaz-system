@@ -5,6 +5,8 @@
  */
 package beans.hoffaz;
 
+import daos.hoffaz.AddBranchDao;
+import daos.hoffaz.ProvinceDao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.inject.Named;
@@ -22,6 +24,8 @@ public class AddBranchBean implements Serializable{
     /**
      * Creates a new instance of AddBranchBean
      */
+    private final AddBranchDao addStudentDao = new AddBranchDao();
+    private final ProvinceDao nationalityDao = new ProvinceDao();
     private String branch_name;
     private ArrayList<Province> province_List=new ArrayList<Province>();
     private int branch_num;
