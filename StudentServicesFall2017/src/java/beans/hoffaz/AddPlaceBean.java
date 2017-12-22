@@ -5,9 +5,14 @@
  */
 package beans.hoffaz;
 
+import daos.hoffaz.AddPlaceDao;
+import daos.hoffaz.TripDao;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import models.hoffaz.Place;
+import models.hoffaz.Trip;
 
 /**
  *
@@ -20,6 +25,9 @@ public class AddPlaceBean implements Serializable{
     /**
      * Creates a new instance of AddPlaceBean
      */
+    private final AddPlaceDao addStudentDao = new AddPlaceDao();
+    private final TripDao tripDao = new TripDao();
+    private ArrayList<Trip> Trip_List=new ArrayList<Trip>();
     private String line_name;
     private int region_num ;
     private String region_name ;
