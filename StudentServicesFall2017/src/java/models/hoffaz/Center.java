@@ -12,9 +12,9 @@ package models.hoffaz;
 public class Center {
     private int branch_Id;
     private int center_Id;
-private String center_Name;
-   private String description;
- private String phone;
+    private String center_Name;
+    private String description;
+    private String phone;
     public Center(int branch_Id, int center_Id, String center_Name, String description, String phone) {
         this.branch_Id = branch_Id;
         this.center_Id = center_Id;

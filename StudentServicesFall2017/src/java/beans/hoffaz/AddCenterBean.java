@@ -5,8 +5,12 @@
  */
 package beans.hoffaz;
 
+import daos.hoffaz.AddCenterDao;
+import daos.hoffaz.BranchDao;
+import java.util.ArrayList;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import models.hoffaz.Center;
 
 /**
  *
@@ -19,7 +23,9 @@ public class AddCenterBean {
     /**
      * Creates a new instance of AddCenterBean
      */
-    private String branch_Name;
+    private final AddCenterDao addcenterDao = new AddCenterDao();
+    private final BranchDao branchDao = new BranchDao();
+    private ArrayList<Center> center_List=new ArrayList<Center>();
     private int center_Num;
     private String center_Name;
      private String telephone;
@@ -27,23 +33,6 @@ public class AddCenterBean {
     public AddCenterBean() {
     }
 
-    /**
-     * @return the branch_Name
-     */
-    public String getBranch_Name() {
-        return branch_Name;
-    }
-
-    /**
-     * @param branch_Name the branch_Name to set
-     */
-    public void setBranch_Name(String branch_Name) {
-        this.branch_Name = branch_Name;
-    }
-
-    /**
-     * @return the center_Num
-     */
     public int getCenter_Num() {
         return center_Num;
     }
@@ -95,6 +84,20 @@ public class AddCenterBean {
      */
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    /**
+     * @return the center_List
+     */
+    public ArrayList<Center> getCenter_List() {
+        return center_List;
+    }
+
+    /**
+     * @param center_List the center_List to set
+     */
+    public void setCenter_List(ArrayList<Center> center_List) {
+        this.center_List = center_List;
     }
     
 }
