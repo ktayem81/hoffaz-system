@@ -3,31 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models.hoffaz;
+package beans.hoffaz;
 
+import daos.hoffaz.AddSemesterDao;
 import java.sql.Timestamp;
+import javax.inject.Named;
+import javax.enterprise.context.Dependent;
+import javax.faces.view.ViewScoped;
 
 /**
  *
- * @author eng_ayman
+ * @author khale
  */
-public class Semestes {
+@Named(value = "addSemesterBean")
+@ViewScoped
+public class AddSemesterBean {
+
+    /**
+     * Creates a new instance of AddSemesterBean
+     */
+     private final AddSemesterDao addSemestertDao = new AddSemesterDao();
    private int semester_Id;
    private String  comments;
    private String description;
-   private Timestamp semester_begin;
-   private Timestamp semester_end;
-
-    public Semestes() {
-    }
-
-    public Semestes(int semester_Id, String comments, String description, Timestamp semester_begin, Timestamp semester_end) {
-        this.semester_Id = semester_Id;
-        this.comments = comments;
-        this.description = description;
-        this.semester_begin = semester_begin;
-        this.semester_end = semester_end;
-    }
 
     public int getSemester_Id() {
         return semester_Id;
@@ -68,13 +66,9 @@ public class Semestes {
     public void setSemester_end(Timestamp semester_end) {
         this.semester_end = semester_end;
     }
-
-   
-
-    
-
-   
-   
-
+   private Timestamp semester_begin;
+   private Timestamp semester_end;
+    public AddSemesterBean() {
+    }
     
 }

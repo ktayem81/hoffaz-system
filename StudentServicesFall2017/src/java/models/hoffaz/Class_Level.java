@@ -10,7 +10,7 @@ package models.hoffaz;
  * @author eng_ayman
  */
 public class Class_Level {
- private int class_ID;
+  private int class_ID;
   private int level_ID;
   private String level_Name;  
   private String description;
