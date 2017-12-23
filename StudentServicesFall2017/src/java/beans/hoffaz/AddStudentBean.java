@@ -5,7 +5,7 @@
  */
 package beans.hoffaz;
 
-import daos.hoffaz.AddStudentDao;
+import daos.hoffaz.StudentsDao;
 import daos.hoffaz.NationalityDao;
 import daos.hoffaz.TripDao;
 import daos.hoffaz.TripDetailDao;
@@ -32,7 +32,7 @@ import models.hoffaz.TripDetail;
 @ViewScoped
 public class AddStudentBean implements Serializable{
     
-    private final AddStudentDao addStudentDao = new AddStudentDao();
+    private final StudentsDao addStudentDao = new StudentsDao();
     private final NationalityDao nationalityDao = new NationalityDao();
     private final TripDao tripDao = new TripDao();
     private final TripDetailDao tripDetailDao = new TripDetailDao();
@@ -441,7 +441,7 @@ public class AddStudentBean implements Serializable{
             addStudentDao.insertStudent(student);
             
         } catch (Exception ex) {
-            Logger.getLogger(AddStudentDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentsDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         sessionBean.setStudent(student);
