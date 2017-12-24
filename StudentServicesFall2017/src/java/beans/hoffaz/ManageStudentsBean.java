@@ -12,9 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import models.hoffaz.Student;
 import org.primefaces.event.SelectEvent;
@@ -24,7 +24,7 @@ import org.primefaces.event.SelectEvent;
  * @author khaled
  */
 @Named(value = "manageStudentsBean")
-@Dependent
+@ViewScoped
 public class ManageStudentsBean implements Serializable{
     private Student selectedStudent;
     private final StudentsDao studentsDao = new StudentsDao();
@@ -71,16 +71,20 @@ public class ManageStudentsBean implements Serializable{
     public void setSessionBean(SessionBean sessionBean) {
         this.sessionBean = sessionBean;
     }
+    
+    public void saveSelectedItemId(){
+        sessionBean.setSelectedItemId(selectedStudent.getStudentId());
+    }
 
     public void onRowSelect(SelectEvent student) {
         FacesMessage msg = new FacesMessage("student Selected", ((Student) student.getObject()).getFirstName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        this.selectedStudent = (Student) student.getObject();
     }
     
     public void deleteSelectedStudent(){
         try {
             studentsDao.deleteStudent(selectedStudent.getStudentId());
+            
         } catch (Exception ex) {
             Logger.getLogger(ManageStudentsBean.class.getName()).log(Level.SEVERE, null, ex);
         }

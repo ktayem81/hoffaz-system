@@ -35,6 +35,10 @@ public class SessionBean implements Serializable {
     private Student student;
 
     public String getRoleDescription() {
+        return roleDescription;
+    }
+    
+    public String getRole() {
         return "/hoffaz/" + roleDescription + ".xhtml";
     }
 
@@ -142,7 +146,7 @@ public class SessionBean implements Serializable {
         try {
             if (loginDao.getEmployee(Integer.parseInt(this.username), Integer.parseInt(this.password))) {
                 success = true;
-            };
+            }
 
             this.branchName = loginDao.getBranchName();
             this.centerName = loginDao.getCenterName();

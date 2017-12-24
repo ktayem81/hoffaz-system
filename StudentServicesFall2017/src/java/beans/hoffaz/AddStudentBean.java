@@ -32,7 +32,7 @@ import models.hoffaz.TripDetail;
 @ViewScoped
 public class AddStudentBean implements Serializable{
     
-    private final StudentsDao addStudentDao = new StudentsDao();
+    private final StudentsDao studentDao = new StudentsDao();
     private final NationalityDao nationalityDao = new NationalityDao();
     private final TripDao tripDao = new TripDao();
     private final TripDetailDao tripDetailDao = new TripDetailDao();
@@ -53,8 +53,8 @@ public class AddStudentBean implements Serializable{
     private int nationality;
     private String nationalityDesc;
     private int nationalityNumber;
-    private String phone;
-    private String whatsup;
+    private int phone;
+    private int whatsup;
     private int branchId;
     private String branchName;
     private int centerId;
@@ -74,10 +74,11 @@ public class AddStudentBean implements Serializable{
     private Date updateDate;      
     private String updateHostIp;    
     private String updateHostOS;
-    private Date date;
 
-        @Inject
+    @Inject
     private SessionBean sessionBean;
+    
+    
         
     public int getStudentId() {
         return studentId;
@@ -175,19 +176,19 @@ public class AddStudentBean implements Serializable{
         this.nationalityNumber = nationalityNumber;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
-    public String getWhatsup() {
+    public int getWhatsup() {
         return whatsup;
     }
 
-    public void setWhatsup(String whatsup) {
+    public void setWhatsup(int whatsup) {
         this.whatsup = whatsup;
     }
 
@@ -376,25 +377,61 @@ public class AddStudentBean implements Serializable{
     }
     
     @PostConstruct
-    public void init(){   
-        
+    public void init() {
+
         branchId = sessionBean.getBranchId();
         centerId = sessionBean.getCenterId();
         insertEmployeeId = Integer.parseInt(sessionBean.getUsername());
-        
-        
+
+        studentId = sessionBean.getSelectedItemId();
+
         try {
-             nationalityList = nationalityDao.getNationalityList();
-             tripList = tripDao.getTripList(branchId, centerId);
-             
-             
-            } catch (Exception ex) {
+            if (studentId > 0) {
+                Student student = studentDao.getStudent(branchId, centerId, studentId);
+                this.firstName = student.getFirstName();
+                this.secondName = student.getSecondName();
+                this.thirdName = student.getThirdName();
+                this.familyName = student.getFamilyName();
+                this.birthDate = student.getBirthDate();
+                this.sexId = student.getSexId();
+                this.sexDescription = student.getSexDescription();
+                this.dateOfJoin = student.getDateOfJoin();
+                this.nationality = student.getNationality();
+                this.nationalityDesc = student.getNationalityDesc();
+                this.nationalityNumber = student.getNationalityNumber();
+                this.phone = student.getPhone();
+                this.whatsup = student.getWhatsup();
+                this.branchId = student.getBranchId();
+                this.branchName = student.getBranchName();
+                this.centerId = student.getCenterId();
+                this.centerName = student.getCenterName();
+                this.tripId = student.getTripId();
+                this.tripDesc = student.getTripDesc();
+                this.stopId = student.getStopId();
+                this.stopDesc = student.getStopDesc();
+                this.addressDetails = student.getAddressDetails();
+                this.transportation = student.getTransportation();
+                this.transportationDesc = student.getTransportationDesc();
+                this.insertEmployeeId = student.getInsertEmployeeId();
+                this.insertHostIp = student.getInsertHostIp();
+                this.insertDate = student.getInsertDate();
+                this.insertHostOS = student.getInsertHostOS();
+                this.updatEmployeeId = student.getUpdatEmployeeId();
+                this.updateDate = student.getUpdateDate();
+                this.updateHostIp = student.getUpdateHostIp();
+                this.updateHostOS = student.getUpdateHostOS();
+
+            }
+            nationalityList = nationalityDao.getNationalityList();
+            tripList = tripDao.getTripList(branchId, centerId);
+
+        } catch (Exception ex) {
             Logger.getLogger(AddStudentBean.class.getName()).log(Level.SEVERE, null, ex);
-           }
-        } 
-    
-    public void onTripIdChange (){
-        try {          
+        }
+    }
+
+    public void onTripIdChange() {
+        try {
             tripDetailList = tripDetailDao.getTripList(sessionBean.getBranchId(), sessionBean.getCenterId(), this.tripId);
         } catch (Exception ex) {
             Logger.getLogger(AddStudentBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -412,6 +449,7 @@ public class AddStudentBean implements Serializable{
         Student student = new Student();
         
         try {
+            student.setStudentId(studentId);
             student.setFirstName(firstName);
             student.setSecondName(secondName);
             student.setThirdName(thirdName);
@@ -438,13 +476,21 @@ public class AddStudentBean implements Serializable{
             student.setUpdateHostIp(updateHostIp);
             student.setUpdateHostOS(updateHostOS);
             
-            addStudentDao.insertStudent(student);
+            if (sessionBean.getSelectedItemId() > 0) {
+                studentDao.updateStudent(student);
+            } else {
+                studentDao.insertStudent(student);
+            }
+            
+            
+            sessionBean.setStudent(student);
+            sessionBean.navigate("/hoffaz/registrar/studentreport");
             
         } catch (Exception ex) {
             Logger.getLogger(StudentsDao.class.getName()).log(Level.SEVERE, null, ex);
+            sessionBean.navigate("/hoffaz/sql_exception.xhtml");
         }
 
-        sessionBean.setStudent(student);
-        sessionBean.navigate("/hoffaz/registrar/studentreport");
+        
     }
 }

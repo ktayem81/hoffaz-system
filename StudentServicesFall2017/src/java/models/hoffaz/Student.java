@@ -25,8 +25,8 @@ public class Student {
     private int nationality;
     private String nationalityDesc;
     private int nationalityNumber;
-    private String phone;
-    private String whatsup;
+    private int phone;
+    private int whatsup;
     private int branchId;
     private String branchName;
     private int centerId;
@@ -50,7 +50,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(int studentId, String firstName, String secondName, String thirdName, String familyName, Date birthDate, int sexId, Date dateOfJoin, int nationalityId, int nationalityNumber, String phone, String whatsup, int branchId, int centerId, int tripId, int stopId, String addressDetails, boolean transportation, int insertEmployeeId, String insertHostIp, Date insertDate, String insertHostOS, int updatEmployeeId, Date updateDate, String updateHostIp, String updateHostOS) {
+    public Student(int studentId, String firstName, String secondName, String thirdName, String familyName, Date birthDate, int sexId, Date dateOfJoin, int nationalityId, int nationalityNumber, int phone, int whatsup, int branchId, int centerId, int tripId, int stopId, String addressDetails, boolean transportation, int insertEmployeeId, String insertHostIp, Date insertDate, String insertHostOS, int updatEmployeeId, Date updateDate, String updateHostIp, String updateHostOS) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -175,19 +175,19 @@ public class Student {
         this.nationalityNumber = nationalityNumber;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
-    public String getWhatsup() {
+    public int getWhatsup() {
         return whatsup;
     }
 
-    public void setWhatsup(String whatsup) {
+    public void setWhatsup(int whatsup) {
         this.whatsup = whatsup;
     }
 

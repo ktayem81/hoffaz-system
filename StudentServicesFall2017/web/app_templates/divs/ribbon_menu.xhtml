@@ -3,6 +3,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">  
+
     <h:form id="ribbon_menu"             
             style="direction:#{langBean.dir}; width:100%">           
         <p:ribbon activeIndex="#{sessionBean.menuIndex}">                        
@@ -17,7 +18,7 @@
                     </p:commandButton>
                 </p:ribbonGroup>               
             </p:tab>
-            
+
             <p:tab title="#{msgs.alumni}">  
                 <p:ribbonGroup styleClass="ribbonGroup"
                                style="float:#{langBean.styleFloat};">
@@ -29,19 +30,14 @@
                     </p:commandButton>
                 </p:ribbonGroup>               
             </p:tab>
-            
+
             <p:tab title="#{msgs.hoffaz}">
                 <p:ribbonGroup styleClass="ribbonGroup"
-                               style="float:#{langBean.styleFloat};">
-                   <p:commandButton   value="#{msgs.hoffaz}"  
-                                      styleClass="ribbonButton" 
-                                      style="float:#{langBean.styleFloat};"
-                                      actionListener="#{sessionBean.setMenuIndex(2)}"
-                                      action="#{sessionBean.getRoleDescription()}">                         
-                    </p:commandButton>
+                               style="float:#{langBean.styleFloat};" >
+                    <ui:include src="/hoffaz/registrar.xhtml" />
                 </p:ribbonGroup>               
             </p:tab>
-            
+
             <p:tab title="#{msgs.houses}">  
                 <p:ribbonGroup styleClass="ribbonGroup"
                                style="float:#{langBean.styleFloat};">
@@ -53,7 +49,7 @@
                     </p:commandButton>
                 </p:ribbonGroup>               
             </p:tab>
-            
+
             <p:tab title="#{msgs.licensing}">  
                 <p:ribbonGroup styleClass="ribbonGroup"
                                style="float:#{langBean.styleFloat};">
