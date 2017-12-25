@@ -34,7 +34,7 @@
             <p:tab title="#{msgs.hoffaz}">
                 <p:ribbonGroup styleClass="ribbonGroup"
                                style="float:#{langBean.styleFloat};" >
-                    <ui:include src="/hoffaz/registrar.xhtml" />
+                    <ui:include src="#{sessionBean.getRole()}" />
                 </p:ribbonGroup>               
             </p:tab>
 

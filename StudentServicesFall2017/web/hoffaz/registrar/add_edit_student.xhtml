@@ -26,7 +26,7 @@
                         <p:outputLabel value="#{msgs.name}:" for="student_first_name"/>
                         <p:inputText id="student_first_name"
                                      style="width:170px"
-                                     value="#{addStudentBean.firstName}"                                      
+                                     value="#{addEditStudentBean.firstName}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
@@ -35,7 +35,7 @@
                         
                         <p:inputText id="student_second_name"
                                      style="width:170px"
-                                     value="#{addStudentBean.secondName}"                                      
+                                     value="#{addEditStudentBean.secondName}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
@@ -44,7 +44,7 @@
                        
                         <p:inputText id="student_third_name"
                                      style="width:170px"
-                                     value="#{addStudentBean.thirdName}"                                      
+                                     value="#{addEditStudentBean.thirdName}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
@@ -53,7 +53,7 @@
                         
                         <p:inputText id="student_last_name"
                                      style="width:170px"
-                                     value="#{addStudentBean.familyName}"                                      
+                                     value="#{addEditStudentBean.familyName}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
@@ -63,7 +63,7 @@
                         
                         <p:outputLabel value="#{msgs.student_nationalty_en}:" for="student_nationalty"/>
                        
-                        <p:selectOneMenu value="#{addStudentBean.nationality}"
+                        <p:selectOneMenu value="#{addEditStudentBean.nationality}"
                                          id="student_nationalty"
                                          style="width:170px; float:#{langBean.styleFloat} direction:#{langBean.dir}"
                                          required="true" panelStyle="float:#{langBean.styleFloat}"                                                                                  
@@ -71,7 +71,7 @@
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
                             <f:selectItems var="nationality"
-                                           value="#{addStudentBean.nationalityList}" 
+                                           value="#{addEditStudentBean.nationalityList}" 
                                            itemLabel="#{nationality.nationalityDesc}"
                                            itemValue="#{nationality.nationality}"/>                             
                         </p:selectOneMenu>
@@ -81,7 +81,7 @@
                         <p:outputLabel value="#{msgs.nationalty_id_en}:" for="nationalty_id"/>
                         <p:inputText id="nationalty_id"
                                      style="width:170px"
-                                     value="#{addStudentBean.nationalityNumber}"                                      
+                                     value="#{addEditStudentBean.nationalityNumber}"                                      
                                      required="true"
                                      requiredMessage="#{msgs.required_msg}">
                         </p:inputText>
@@ -89,7 +89,7 @@
                         
                         
                         <p:outputLabel value="#{msgs.sex}:" for="student_nationalty"/>
-                        <p:selectOneRadio id="sex_checkbox" value="#{addStudentBean.sexId}" 
+                        <p:selectOneRadio id="sex_checkbox" value="#{addEditStudentBean.sexId}" 
                                          required="true" requiredMessage=" #{msgs.required_msg}">
                              <f:selectItem itemLabel="#{msgs.male}" itemValue="1"  />
                              <f:selectItem itemLabel="#{msgs.female}" itemValue="2" />
@@ -99,7 +99,7 @@
                         
                         <p:outputLabel value="#{msgs.birhtdate_en}:" for="birhtdate"/>
                         <p:calendar id="birhtdate"
-                                    value="#{addStudentBean.birthDate}"
+                                    value="#{addEditStudentBean.birthDate}"
                                     dir="#{langBean.dir}"
                                     pattern="yyyy-MM-dd" 
                                     navigator="true"
@@ -117,7 +117,7 @@
                         <p:outputLabel value="#{msgs.phone_en}:" for="phone"/>
                         
                         <p:inputText id="phone"
-                                     value="#{addStudentBean.phone}"
+                                     value="#{addEditStudentBean.phone}"
                                      style="width:170px"
                                      required="true"
                                      maxlength="512"
@@ -127,7 +127,7 @@
                                               
                         <p:outputLabel value="#{msgs.whatsapp_en}:" for="whatsapp"/>
                         <p:inputText id="whatsapp"
-                                     value="#{addStudentBean.whatsup}"
+                                     value="#{addEditStudentBean.whatsup}"
                                      style="width:170px; float:#{langBean.styleFloat};"
                                      required="true"
                                      maxlength="512"
@@ -138,7 +138,7 @@
                          <p:outputLabel/>
                          <p:outputLabel value="#{msgs.address_en}:" for="address"/>
                         <p:inputTextarea id="address"
-                                         value="#{addStudentBean.addressDetails}"
+                                         value="#{addEditStudentBean.addressDetails}"
                                      style="width:170px"
                                      required="true"
                                      maxlength="512"
@@ -148,9 +148,9 @@
                          
                          <p:outputLabel/><p:outputLabel/><p:outputLabel/>
                          
-                         <p:outputLabel value="#{msgs.line_checkbox_en}:" for="line_checkbox"/>
+                         <p:outputLabel value="#{msgs.transportation}:" for="line_checkbox"/>
                          <p:selectBooleanCheckbox id="line_checkbox"
-                                                  value="#{addStudentBean.transportation}" 
+                                                  value="#{addEditStudentBean.transportation}" 
                                                   style="float:#{langBean.styleFloat}">
                           </p:selectBooleanCheckbox>
                      
@@ -159,14 +159,14 @@
                      <p:outputLabel ></p:outputLabel><p:outputLabel ></p:outputLabel>
                      <p:outputLabel value="#{msgs.transportation_line_en}:" for="transportation_line"/>
                        
-                     <p:selectOneMenu value="#{addStudentBean.tripId}"
+                     <p:selectOneMenu value="#{addEditStudentBean.tripId}"
                                       id="transportation_line"
                                          style="width:170px; float:#{langBean.styleFloat}; text-align:#{langBean.styleFloat};">
-                         <p:ajax listener="#{addStudentBean.onTripIdChange}" update="stop_area" />
+                         <p:ajax listener="#{addEditStudentBean.onTripIdChange}" update="stop_area" />
                          <f:selectItem itemLabel="#{msgs.select_line}" 
                                           itemValue=""/>
                             <f:selectItems var="trip"
-                                           value="#{addStudentBean.tripList}" 
+                                           value="#{addEditStudentBean.tripList}" 
                                            itemLabel="#{trip.tripDescription}"
                                            itemValue="#{trip.tripId}"/>                             
                         </p:selectOneMenu>
@@ -176,13 +176,13 @@
     
                         <p:outputLabel value="#{msgs.stop_area_en}:" for="stop_area"/>
                        
-                        <p:selectOneMenu value="#{addStudentBean.stopId}"
+                        <p:selectOneMenu value="#{addEditStudentBean.stopId}"
                                          id="stop_area"
                                          style="width:170px; float:#{langBean.styleFloat}">
                             <f:selectItem itemLabel="#{msgs.select_stop}"
                                           itemValue=""/>
                             <f:selectItems var="tripDetail"
-                                           value="#{addStudentBean.tripDetailList}" 
+                                           value="#{addEditStudentBean.tripDetailList}" 
                                            itemLabel="#{tripDetail.stopDescription}"
                                            itemValue="#{tripDetail.stopId}"/>                             
                         </p:selectOneMenu>
@@ -197,14 +197,15 @@
                                  ajax="false"
                                  style="float:#{langBean.styleFloat}" 
                                  onclick="#{sessionBean.setMenuIndex(2)}"
-                                 actionListener="#{addStudentBean.saveStudent()}" />
+                                 actionListener="#{addEditStudentBean.saveStudent()}" />
                 <p:commandButton value="#{msgs.cancel}"
                                  icon="ui-icon-cancel"  
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  immediate="true" 
-                                 style="float:#{langBean.styleFloat}"                                 
-                                 action="manage_events"/> 
+                                 style="float:#{langBean.styleFloat}" 
+                                 actionListener="#{sessionBean.resetData()}"
+                                 action="add_edit_student"/> 
                  </h:panelGrid>
                
             </h:form>

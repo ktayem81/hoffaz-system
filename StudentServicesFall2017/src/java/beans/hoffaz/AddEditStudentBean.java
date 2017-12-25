@@ -28,9 +28,9 @@ import models.hoffaz.TripDetail;
  *
  * @author khaled
  */
-@Named(value = "addStudentBean")
+@Named(value = "addEditStudentBean")
 @ViewScoped
-public class AddStudentBean implements Serializable{
+public class AddEditStudentBean implements Serializable{
     
     private final StudentsDao studentDao = new StudentsDao();
     private final NationalityDao nationalityDao = new NationalityDao();
@@ -373,7 +373,7 @@ public class AddStudentBean implements Serializable{
     /**
      * Creates a new instance of AddStudentBean
      */
-    public AddStudentBean() {
+    public AddEditStudentBean() {
     }
     
     @PostConstruct
@@ -426,7 +426,7 @@ public class AddStudentBean implements Serializable{
             tripList = tripDao.getTripList(branchId, centerId);
 
         } catch (Exception ex) {
-            Logger.getLogger(AddStudentBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddEditStudentBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -434,7 +434,7 @@ public class AddStudentBean implements Serializable{
         try {
             tripDetailList = tripDetailDao.getTripList(sessionBean.getBranchId(), sessionBean.getCenterId(), this.tripId);
         } catch (Exception ex) {
-            Logger.getLogger(AddStudentBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddEditStudentBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -484,6 +484,7 @@ public class AddStudentBean implements Serializable{
             
             
             sessionBean.setStudent(student);
+            
             sessionBean.navigate("/hoffaz/registrar/studentreport");
             
         } catch (Exception ex) {

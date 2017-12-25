@@ -76,6 +76,13 @@
                       sortBy="#{student.familyName}">                    
                 <h:outputText value="#{student.familyName}"/>  
             </p:column>
+            
+             <p:column headerText="#{msgs.birhtdate_en}"
+                      style="width:15%"
+                      sortBy="#{student.birthDate}">                    
+                <h:outputText value="#{student.birthDate}"/>  
+            </p:column>
+
 
             <p:column headerText="#{msgs.Nationality}"
                       style="width:20%"
@@ -92,13 +99,15 @@
                       >                    
                 <h:outputText value="#{student.nationalityNumber}"/>  
             </p:column>
-
-            <p:column headerText="#{msgs.date}"
+            
+            <p:column headerText="#{msgs.transportation}"
                       style="width:15%"
-                      sortBy="#{student.birthDate}">                    
-                <h:outputText value="#{student.birthDate}"/>  
+                      sortBy="#{student.transportation}">                    
+                 <h:outputText value="#{student.transportationDesc}"/>  
             </p:column>
 
+
+           
             <f:facet name="footer">
                 <p:toolbar style="border: none">
                     <p:toolbarGroup align="#{languageBean.screenLeft}">
@@ -119,7 +128,7 @@
                                          style="float:#{langBean.styleFloat}"                                                                                                
                                          disabled="#{manageStudentsBean.selectedStudent==null}"                                                 
                                          actionListener="#{manageStudentsBean.saveSelectedItemId()}"
-                                         action="add_student" />
+                                         action="add_edit_student" />
                     </p:toolbarGroup>
                 </p:toolbar>
             </f:facet>
@@ -133,7 +142,7 @@
                          styleClass="commandButton"
                          style="float:#{langBean.styleFloat}" 
                          actionListener="#{sessionBean.setSelectedItemId(-1)}"
-                         action="/hoffaz/registrar/add_student" />                
+                         action="/hoffaz/registrar/add_edit_student" />                
     </h:form>
 
         </ui:decorate>         
