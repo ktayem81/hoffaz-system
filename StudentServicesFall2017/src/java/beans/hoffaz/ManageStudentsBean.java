@@ -83,7 +83,7 @@ public class ManageStudentsBean implements Serializable{
     
     public void deleteSelectedStudent(){
         try {
-            studentsDao.deleteStudent(selectedStudent.getStudentId());
+            studentsDao.deleteStudent(selectedStudent.getStudentId(), sessionBean.getBranchId(), sessionBean.getCenterId());
             
         } catch (Exception ex) {
             Logger.getLogger(ManageStudentsBean.class.getName()).log(Level.SEVERE, null, ex);

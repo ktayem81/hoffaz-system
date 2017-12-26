@@ -24,6 +24,12 @@
                        actionListener="#{sessionBean.setMenuIndex(2)}"
                        action="/hoffaz/registrar/enrollment_student.xhtml">
     </p:commandButton> 
+    <p:commandButton   value="#{msgs.add_class_en}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/registrar/add_edit_class.xhtml">
+    </p:commandButton> 
 
 
 </ui:composition>

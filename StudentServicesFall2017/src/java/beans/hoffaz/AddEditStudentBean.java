@@ -440,12 +440,8 @@ public class AddEditStudentBean implements Serializable{
     
     public void saveStudent() {
         
-        insertEmployeeId = Integer.parseInt(sessionBean.getUsername());
+        int employeeId = Integer.parseInt(sessionBean.getUsername());
        
-        //insertDate = new Timestamp(System.currentTimeMillis());//new Timestamp(date.getTime());
-        //new Timestamp(System.currentTimeMillis());
-        insertHostIp = sessionBean.getRemoteAddress();
-        insertHostOS = sessionBean.getRemoteHost();
         Student student = new Student();
         
         try {
@@ -467,18 +463,18 @@ public class AddEditStudentBean implements Serializable{
             student.setStopId(stopId);
             student.setAddressDetails(addressDetails);
             student.setTransportation(transportation);
-            student.setInsertEmployeeId(insertEmployeeId);
-            student.setInsertDate(insertDate);
-            student.setInsertHostIp(insertHostIp);
-            student.setInsertHostOS(insertHostOS);
-            student.setUpdatEmployeeId(updatEmployeeId);
-            student.setUpdateDate(updateDate);
-            student.setUpdateHostIp(updateHostIp);
-            student.setUpdateHostOS(updateHostOS);
-            
+       
             if (sessionBean.getSelectedItemId() > 0) {
+                student.setUpdatEmployeeId(employeeId);
+                student.setUpdateDate(updateDate);
+                student.setUpdateHostIp(sessionBean.getRemoteAddress());
+                student.setUpdateHostOS(sessionBean.getRemoteHost());                
                 studentDao.updateStudent(student);
             } else {
+                student.setInsertEmployeeId(employeeId);
+                student.setInsertDate(insertDate);
+                student.setInsertHostIp(sessionBean.getRemoteAddress());
+                student.setInsertHostOS(sessionBean.getRemoteHost());
                 studentDao.insertStudent(student);
             }
             
