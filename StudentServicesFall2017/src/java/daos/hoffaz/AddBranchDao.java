@@ -31,6 +31,7 @@ public class AddBranchDao extends ConnectionDao{
             ps.setString(2, branch.getBranch_Name());
             ps.setString(3, branch.getDescription());
             ps.setString(4, branch.getPhone());
+            ps.setString(5, branch.getProvince());
  ps.executeUpdate();
             
             ps.close();
