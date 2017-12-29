@@ -16,13 +16,13 @@ import models.hoffaz.Branch;
  * @author khale
  */
 public class AddBranchDao extends ConnectionDao{
-    public void insertStudent(Branch branch) throws Exception {   
+    public void insertBranch(Branch branch) throws Exception {   
             
             Connection conn = getConnection();
             
                  
             String sql ;
-        sql = "";
+        sql = "SELECT * FROM BRANCH";
             
         try {
             

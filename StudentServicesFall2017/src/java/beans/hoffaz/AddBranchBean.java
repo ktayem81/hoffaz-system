@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import models.hoffaz.Branch;
 import models.hoffaz.Province;
 
 /**
@@ -26,11 +27,12 @@ public class AddBranchBean implements Serializable{
      */
     private final AddBranchDao addStudentDao = new AddBranchDao();
     private final ProvinceDao nationalityDao = new ProvinceDao();
-    private String branch_name;
     private ArrayList<Province> province_List=new ArrayList<Province>();
     private int branch_num;
+      private String branch_name;
     private String telephone;
     private String comments;
+    private String province;
     public AddBranchBean() {
     }
 
@@ -107,5 +109,33 @@ public class AddBranchBean implements Serializable{
     /**
      * @return the branch_name
      */
+    public void saveBranch() {
+        
+        
+        Branch branch = new Branch();
+        
+        try {
+            branch.setBranch_Id(branch_num);
+            branch.setBranch_Name(branch_name);
+            branch.setDescription(comments);
+            branch.setPhone(telephone);
+            branch.setProvince(province);
+            
+            
+       
+            
+            
+            
+            
+            
+           
+            
+        } catch (Exception ex) {
+            
+            
+        }
+
+        
+    }
    
 }

@@ -13,18 +13,22 @@ public class Branch {
     
    private int branch_Id;
    private String branch_Name;
+   private String Province;
    private String description;
    private String phone;
-   
-   public Branch(int branch_Id,String branch_Name,String description,String phone){
-   this.branch_Id=branch_Id;
-   this.branch_Name=branch_Name;
-   this.description=description;
-   this.phone=phone;   
-   }
 
     public Branch() {
     }
+
+    public Branch(int branch_Id, String branch_Name, String Province, String description, String phone) {
+        this.branch_Id = branch_Id;
+        this.branch_Name = branch_Name;
+        this.Province = Province;
+        this.description = description;
+        this.phone = phone;
+        
+    }
+   
    
 
     /**
@@ -32,6 +36,14 @@ public class Branch {
      */
     public int getBranch_Id() {
         return branch_Id;
+    }
+
+    public String getProvince() {
+        return Province;
+    }
+
+    public void setProvince(String Province) {
+        this.Province = Province;
     }
 
     /**
