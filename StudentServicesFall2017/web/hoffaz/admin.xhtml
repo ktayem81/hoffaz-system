@@ -1,86 +1,64 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-  <h:head>
-        <title>#{msgs.welcome_msg}</title>          
-    </h:head>
-    <h:body>
-        
-      <ui:decorate template="/app_templates/app_template.xhtml"> 
-            <h:form id="registrar" style="height:100%;
-                                          direction:#{langBean.dir}; 
-                                          font-size:8pt"> 
-                <p:tabView orientation="#{langBean.styleFloat}" >    
-                    <p:tab title="#{msgs.add_branch}">
-                        <ui:insert>
-                            <ui:include src="/hoffaz/admin/Branch.xhtml"/>
-                        </ui:insert>
-                    </p:tab>
-                       
-                    <p:tab title="#{msgs.add_place}">
-                            <ui:insert>
-                                <ui:include src="/hoffaz/admin/add_place.xhtml"/>
-                        </ui:insert>
-                        </p:tab>
-                        
-                    <p:tab title="#{msgs.add_center}">
-                            <ui:insert>
-                                <ui:include src="/hoffaz/admin/center.xhtml"/>
-                        </ui:insert>
-                        </p:tab>
-                    <p:tab title="#{msgs.add_trip}">
-                            <ui:insert>
-                                <ui:include src="/hoffaz/admin/trip.xhtml"/>
-                        </ui:insert>
-                        </p:tab>
-                    <p:tab title="#{msgs.add_employees}">
-                            <ui:insert>
-                                <ui:include src="/hoffaz/admin/employees.xhtml"/>
-                        </ui:insert>
-                        </p:tab>
-                    <p:tab title="#{msgs.add_employee_tutorials}">
-                            <ui:insert>
-                                <ui:include src="/hoffaz/admin/employees_tutorial.xhtml"/>
-                        </ui:insert>
-                        </p:tab>
-                    
-                    <p:tab title="#{msgs.add_users}">
-                            <ui:insert>
-                                <ui:include src="/hoffaz/admin/users.xhtml"/>
-                        </ui:insert>
-                        </p:tab>
-                    <p:tab title="#{msgs.add_class_en}">
-                            <ui:insert>
-                                <ui:include src="/hoffaz/admin/add_class.xhtml"/>
-                        </ui:insert>
-                        </p:tab>
-                    <p:tab title="#{msgs.add_division_en}">
-                            <ui:insert>
-                                <ui:include src="/hoffaz/admin/add_division.xhtml"/>
-                        </ui:insert>
-                        </p:tab>
-                    <p:tab title="#{msgs.add_level_class_en}">
-                            <ui:insert>
-                                <ui:include src="/hoffaz/admin/add_level_class.xhtml"/>
-                        </ui:insert>
-                        </p:tab>
-                    <p:tab title="#{msgs.add_semester_en}">
-                            <ui:insert>
-                                <ui:include src="/hoffaz/admin/add_semester.xhtml"/>
-                        </ui:insert>
-                        </p:tab>
-                    
-                    
-                    
-                     
-                        
-                    </p:tabView>                            
-            </h:form>
+          
+    <p:commandButton   value="#{msgs.add_branch}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/admin/Branch.xhtml">
+    </p:commandButton>
+    <p:commandButton   value="#{msgs.add_place}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/admin/add_place.xhtml">
+    </p:commandButton>
+               <p:commandButton   value="#{msgs.add_center}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/admin/center.xhtml">
+               </p:commandButton> 
+    <p:commandButton   value="#{msgs.add_trip}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/admin/trip.xhtml">
+    </p:commandButton> 
+          
+          <p:commandButton   value="#{msgs.add_employees}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/admin/employees.xhtml">
+          </p:commandButton> 
+          
+          <p:commandButton   value="#{msgs.add_employee_tutorials}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/admin/employees_tutorial.xhtml">
+          </p:commandButton> 
+          
+          
+          <p:commandButton   value="#{msgs.add_users}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/admin/users.xhtml">
+          </p:commandButton> 
+          
+          <p:commandButton   value="#{msgs.add_division_en}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/admin/add_division.xhtml">
+          </p:commandButton> 
+            
         </ui:decorate>         
-     
-    </h:body>
-</html>
+   
 
