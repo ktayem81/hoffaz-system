@@ -5,7 +5,8 @@
  */
 package beans.hoffaz;
 
-import daos.hoffaz.AddBranchDao;
+
+import daos.hoffaz.BranchDao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -26,8 +27,8 @@ import org.primefaces.event.SelectEvent;
 @Named(value = "manageBranchBean")
 @ViewScoped
 public class ManageBranchBean implements Serializable{
-    private Branch selectedStudent;
-    private final AddBranchDao branchesDao = new AddBranchDao();
+    private Branch selectedBranch;
+    private final BranchDao branchDao = new BranchDao();
     private ArrayList<Branch> branches; 
     
     @Inject 
@@ -38,12 +39,13 @@ public class ManageBranchBean implements Serializable{
      */
     public ManageBranchBean() {
     }
+    
     @PostConstruct
     public void init(){
         try {
-            this.branches = AddBranchDao.buildBranches();
+            this.branches = branchDao.buildBranches();
         } catch (Exception ex) {
-            Logger.getLogger(ManageStudentsBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageBranchBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -72,20 +74,20 @@ public class ManageBranchBean implements Serializable{
     }
     
     public void saveSelectedItemId(){
-        sessionBean.setSelectedItemId(selectedStudent.getBranchId());
+        sessionBean.setSelectedItemId(selectedBranch.getBranchId());
     }
 
     public void onRowSelect(SelectEvent branch) {
-        FacesMessage msg = new FacesMessage("student Selected", ((Branch) branch.getObject()).getBranch_Name());
+        FacesMessage msg = new FacesMessage("branch Selected", ((Branch) branch.getObject()).getBranchName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
-    public void deleteSelectedStudent(){
+    public void deleteSelectedBranch(){
         try {
-            studentsDao.deleteStudent(selectedStudent.getStudentId(), sessionBean.getBranchId(), sessionBean.getCenterId());
+            branchDao.deleteBranch(selectedBranch.getBranchId());
             
         } catch (Exception ex) {
-            Logger.getLogger(ManageStudentsBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageBranchBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

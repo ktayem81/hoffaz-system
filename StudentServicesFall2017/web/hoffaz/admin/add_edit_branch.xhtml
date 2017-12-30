@@ -25,7 +25,7 @@
                         <p:outputLabel value="#{msgs.branch_name_en}:" for="branch_name_en"/>
                         <p:inputText id="branch_name_en"
                                      style="width:600px"
-                                     value="#{addBranchBean.branch_name}"                                      
+                                     value="#{addEditBranchBean.branchName}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
@@ -35,32 +35,26 @@
                        
 
                         <p:outputLabel value="#{msgs.branch_state}:" for="branch_state"/>
-                        <p:selectOneMenu value="#{addBranchBean.province_List}"
+                        
+                        <p:selectOneMenu value="#{addEditBranchBean.governorateId}"
                                          id="branch_state"
                                          required="true"                                                                                  
                                          requiredMessage=" #{msgs.required_msg}">
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
-                            <f:selectItems var="type"
-                                           value="#{addBranchBean.province_List}" 
-                                           itemLabel="#{Province.province_Id}"
-                                           itemValue="#{Province.province_Name}"/>                             
+                            <f:selectItems var="gover"
+                                           value="#{addEditBranchBean.governorateList}" 
+                                           itemLabel="#{gover.description}"
+                                           itemValue="#{gover.governorate_Id}"/>                             
                         </p:selectOneMenu>
                         <h:message for="event_type" styleClass="errorMsg"/>                    
 
-                        <p:outputLabel value="#{msgs.branch_num}:" for="branch_num"/>
-                        <p:inputText id="branch_num"
-                                     value="#{addBranchBean.branch_num}"
-                                     style="width:600px"
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage=" #{msgs.required_msg}">
-                        </p:inputText> 
-                        <h:message for="branch_num" styleClass="errorMsg"/>
+                        
+                      
 
                         <p:outputLabel value="#{msgs.tele}:" for="tele"/>
                         <p:inputText id="tele"
-                                     value="#{addBranchBean.telephone}"
+                                     value="#{addEditBranchBean.phone}"
                                      style="width:600px"
                                      required="true"
                                      maxlength="512"
@@ -70,7 +64,7 @@
 
                         <p:outputLabel value="#{msgs.comments}:" for="comments"/>
                         <p:inputText id="comments"
-                                     value="#{addBranchBean.comments}"
+                                     value="#{addEditBranchBean.description}"
                                      style="width:600px"
                                      required="true"
                                      maxlength="512"
@@ -88,14 +82,14 @@
                                  iconPos="#{langBean.styleFloat}"
                                  ajax="false"
                                  style="float:#{langBean.styleFloat}"                                                                   
-                                 actionListener="#{addBranchBean.saveBranch()}" />
+                                 actionListener="#{addEditBranchBean.saveBranch()}" />
                 <p:commandButton value="#{msgs.cancel}"
                                  icon="ui-icon-cancel"  
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  immediate="true" 
                                  style="float:#{langBean.styleFloat}"                                 
-                                 action="Branch" />                                   
+                                 action="/hoffaz/admin/add_edit_branch.xhtml" />                                   
             </h:form>
        </ui:decorate>         
     </h:body>

@@ -10,14 +10,15 @@
     </h:head>
     <h:body>
           <ui:decorate template="/app_templates/app_template.xhtml"> 
+              
     <h:form id="manage_branch_form">  
         
         
        <p:dataTable id="manage_branch_table"
                     styleClass="dataTable"
-                    var="class"
-                    value="#{addBranchBean.branches}"                    
-                    selection="#{addBranchBean.selectedBranch}"
+                    var="branch"
+                    value="#{manageBranchBean.branches}"                    
+                    selection="#{manageBranchBean.selectedBranch}"
                     rowKey="#{branch.branchId}"                    
                     rows="10"     
                     rowsPerPageTemplate="5,10,20"
@@ -36,9 +37,9 @@
            <p:ajax event="rowSelectRadio"
                    update=":manage_branch_form:manage_branch_table"/>
            
-            <p:column selectionMode="single" style="width:5%;text-align:center;"/>
+            <p:column selectionMode="single" style="width:5%; text-align:center;"/>
 
-            <p:column headerText="#{msgs.branch_name}"
+            <p:column headerText="#{msgs.branch_num}"
                       style="width:20%;"
                       filterBy="#{branch.branchId}"
                       filterMatchMode="contains"
@@ -46,38 +47,26 @@
                 <h:outputText value="#{branch.branchId}"/>  
             </p:column>
             
-            <p:column headerText="#{msgs.branch_state}"
-                      style="width:20%"
-                      filterBy="#{branch.branch_state}"
+            <p:column headerText="#{msgs.branch_name}"
+                      style="width:20%;"
+                      filterBy="#{branch.branchName}"
                       filterMatchMode="contains"
-                      sortBy="#{branch.branch_state}">                    
-                <h:outputText value="#{branch.branch_state}"/>  
-            </p:column>
-            <p:column headerText="#{msgs.branch_num}"
-                      style="width:20%"
-                      filterBy="#{branch.branch_num}"
-                      filterMatchMode="contains"
-                      sortBy="#{branch.branch_num}">                    
-                <h:outputText value="#{branch.branch_num}"/>  
-            </p:column>
-            <p:column headerText="#{msgs.tele}"
-                      style="width:20%"
-                      filterBy="#{branch.tele}"
-                      filterMatchMode="contains"
-                      sortBy="#{branch.tele}">                    
-                <h:outputText value="#{branch.tele}"/>  
-            </p:column>
-            <p:column headerText="#{msgs.comments}"
-                      style="width:20%"
-                      filterBy="#{branch.comments}"
-                      filterMatchMode="contains"
-                      sortBy="#{branch.comments}">                    
-                <h:outputText value="#{branch.comments}"/>  
+                      sortBy="#{branch.branchName}">                    
+                <h:outputText value="#{branch.branchName}"/>  
             </p:column>
             
-             <
-
-
+            <p:column headerText="#{msgs.branch_state}"
+                      style="width:20%"
+                      filterBy="#{branch.governorateDesc}"
+                      filterMatchMode="contains"
+                      sortBy="#{branch.governorateId}">                    
+                <h:outputText value="#{branch.governorateDesc}"/>  
+            </p:column>
+           
+            <p:column headerText="#{msgs.tele}"
+                      style="width:20%">                    
+                <h:outputText value="#{branch.phone}"/>  
+            </p:column>
            
             <f:facet name="footer">
                 <p:toolbar style="border: none">
@@ -88,18 +77,19 @@
                                          styleClass="commandButton"
                                          style="float:#{langBean.styleFloat}"
                                          update="@form"
-                                         disabled="#{addBranchBean.selectedBranch==null}" 
-                                         onclick="return confirm('#{msgs.confirm_delete_event}?');"
-                                         actionListener="#{addBranchBean.deleteSelectedBranch()}"
+                                         disabled="#{manageBranchBean.selectedBranch==null}" 
+                                         onclick="return confirm('#{msgs.confirm_delete_branch}?');"
+                                         actionListener="#{manageBranchBean.deleteSelectedBranch()}"
                                          action="/hoffaz/admin/manage_branch.xhtml" />
+                        
                         <p:commandButton value="#{msgs.edit}"
                                          icon="ui-icon-pencil"                                  
                                          iconPos="#{langBean.styleFloat}"
                                          styleClass="commandButton"
                                          style="float:#{langBean.styleFloat}"                                                                                                
-                                         disabled="#{addBranchBean.selectedBranch==null}"                                                 
-                                         actionListener="#{addBranchBean.saveSelectedItemId()}"
-                                         action="Branch" />
+                                         disabled="#{manageBranchBean.selectedBranch==null}"                                                 
+                                         actionListener="#{manageBranchBean.saveSelectedItemId()}"
+                                         action="/hoffaz/admin/add_edit_branch.xhtml" />
                     </p:toolbarGroup>
                 </p:toolbar>
             </f:facet>
@@ -113,7 +103,7 @@
                          styleClass="commandButton"
                          style="float:#{langBean.styleFloat}" 
                          actionListener="#{sessionBean.setSelectedItemId(-1)}"
-                         action="/hoffaz/admin/Branch" />                
+                         action="/hoffaz/admin/add_edit_branch.xhtml" />                
     </h:form>
 
         </ui:decorate>   
