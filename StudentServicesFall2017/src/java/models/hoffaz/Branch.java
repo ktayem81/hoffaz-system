@@ -5,11 +5,13 @@
  */
 package models.hoffaz;
 
+import java.io.Serializable;
+
 /**
  *
  * @author eng_ayman
  */
-public class Branch {
+public class Branch implements Serializable{
     
    private int branch_Id;
    private String branch_Name;
