@@ -5,11 +5,13 @@
  */
 package models.hoffaz;
 
+import java.io.Serializable;
+
 /**
  *
  * @author khale
  */
-public class Province {
+public class Province implements Serializable{
     private int province_Id;
     private String province_Name;
 

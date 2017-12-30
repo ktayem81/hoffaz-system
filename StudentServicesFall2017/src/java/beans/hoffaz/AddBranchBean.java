@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import models.hoffaz.Branch;
 import models.hoffaz.Province;
 import org.primefaces.event.SelectEvent;
@@ -26,13 +27,17 @@ public class AddBranchBean implements Serializable{
     /**
      * Creates a new instance of AddBranchBean
      */
-    private final AddBranchDao addStudentDao = new AddBranchDao();
-    private final ProvinceDao nationalityDao = new ProvinceDao();
+    private final AddBranchDao addBranchDao = new AddBranchDao();
+    private final ProvinceDao provinceyDao = new ProvinceDao();
     private ArrayList<Province> province_List=new ArrayList<Province>();
     private ArrayList<Branch> branches;
     private Branch selectedBranch;
     private int branch_num;
-      private String branch_name;
+    private String branch_name;
+    
+    @Inject 
+    SessionBean sessionBean;
+    
 
     public ArrayList<Branch> getBranches() {
         return branches;
@@ -50,16 +55,16 @@ public class AddBranchBean implements Serializable{
         this.branches = branches;
     }
 
-    public String getProvince() {
+    public int getProvince() {
         return province;
     }
 
-    public void setProvince(String province) {
+    public void setProvince(int province) {
         this.province = province;
     }
     private String telephone;
     private String comments;
-    private String province;
+    private int province;
     public AddBranchBean() {
     }
 
