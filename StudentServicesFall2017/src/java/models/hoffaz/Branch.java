@@ -5,26 +5,32 @@
  */
 package models.hoffaz;
 
+import java.io.Serializable;
+
 /**
  *
  * @author eng_ayman
  */
-public class Branch {
+public class Branch implements Serializable{
     
    private int branch_Id;
    private String branch_Name;
+   private int Province;
    private String description;
    private String phone;
-   
-   public Branch(int branch_Id,String branch_Name,String description,String phone){
-   this.branch_Id=branch_Id;
-   this.branch_Name=branch_Name;
-   this.description=description;
-   this.phone=phone;   
-   }
 
     public Branch() {
     }
+
+    public Branch(int branch_Id, String branch_Name, int Province, String description, String phone) {
+        this.branch_Id = branch_Id;
+        this.branch_Name = branch_Name;
+        this.Province = Province;
+        this.description = description;
+        this.phone = phone;
+        
+    }
+   
    
 
     /**
@@ -32,6 +38,14 @@ public class Branch {
      */
     public int getBranch_Id() {
         return branch_Id;
+    }
+
+    public int getProvince() {
+        return Province;
+    }
+
+    public void setProvince(int Province) {
+        this.Province = Province;
     }
 
     /**

@@ -9,9 +9,13 @@ import daos.hoffaz.AddBranchDao;
 import daos.hoffaz.ProvinceDao;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import models.hoffaz.Branch;
 import models.hoffaz.Province;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -24,13 +28,49 @@ public class AddBranchBean implements Serializable{
     /**
      * Creates a new instance of AddBranchBean
      */
-    private final AddBranchDao addStudentDao = new AddBranchDao();
-    private final ProvinceDao nationalityDao = new ProvinceDao();
-    private String branch_name;
+    private final AddBranchDao addBranchDao = new AddBranchDao();
+    private final ProvinceDao provinceDao = new ProvinceDao();
     private ArrayList<Province> province_List=new ArrayList<Province>();
+    private ArrayList<Branch> branches;
+    private Branch selectedBranch;
     private int branch_num;
+    private String branch_name;
+    
+    @Inject 
+    SessionBean sessionBean;
+    
+    @PostConstruct
+    public void init() {
+        
+    }
+    
+    
+    public ArrayList<Branch> getBranches() {
+        return branches;
+    }
+
+    public Branch getSelectedBranch() {
+        return selectedBranch;
+    }
+
+    public void setSelectedBranch(Branch selectedBranch) {
+        this.selectedBranch = selectedBranch;
+    }
+
+    public void setBranches(ArrayList<Branch> branches) {
+        this.branches = branches;
+    }
+
+    public int getProvince() {
+        return province;
+    }
+
+    public void setProvince(int province) {
+        this.province = province;
+    }
     private String telephone;
     private String comments;
+    private int province;
     public AddBranchBean() {
     }
 
@@ -107,5 +147,50 @@ public class AddBranchBean implements Serializable{
     /**
      * @return the branch_name
      */
+    public void saveBranch() {
+        
+        
+        Branch branch = new Branch();
+        
+        try {
+            branch.setBranch_Id(branch_num);
+            branch.setBranch_Name(branch_name);
+            branch.setDescription(comments);
+            branch.setPhone(telephone);
+            branch.setProvince(province);
+            
+            
+       
+            
+            
+            
+            
+            
+           
+            
+        } catch (Exception ex) {
+            
+            
+        }
+
+        
+    }
+    
+    public void onRowSelect(SelectEvent branch) {
+        FacesMessage msg = new FacesMessage("student Selected", ((branch) branch.getObject()).getFirstName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void deleteSelectedBranch(){
+        try {
+            AddBranchDao.deleteBranch(selectedBranch.getStudentId(), sessionBean.getBranchId(), sessionBean.getCenterId());
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ManageStudentsBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void saveSelectedItemId(){
+        sessionBean.setSelectedItemId(selectedBranch.getStudentId());
+    }
    
 }

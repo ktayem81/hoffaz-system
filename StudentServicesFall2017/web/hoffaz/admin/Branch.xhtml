@@ -1,12 +1,17 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
      
+    <h:head>
+        <title>#{msgs.admin}</title>
+    </h:head>
+    <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml">
             <h:form id="add_branch">            
                 <p:messages id="msgs" closable="true" globalOnly="true"/>
 
@@ -20,7 +25,7 @@
                         <p:outputLabel value="#{msgs.branch_name_en}:" for="branch_name_en"/>
                         <p:inputText id="branch_name_en"
                                      style="width:600px"
-                                     value=""                                      
+                                     value="#{addBranchBean.branch_name}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
@@ -45,7 +50,7 @@
 
                         <p:outputLabel value="#{msgs.branch_num}:" for="branch_num"/>
                         <p:inputText id="branch_num"
-                                     value="#{addEditEventBean.placeEn}"
+                                     value="#{addBranchBean.branch_num}"
                                      style="width:600px"
                                      required="true"
                                      maxlength="512"
@@ -55,7 +60,7 @@
 
                         <p:outputLabel value="#{msgs.tele}:" for="tele"/>
                         <p:inputText id="tele"
-                                     value="#{addEditEventBean.placeAr}"
+                                     value="#{addBranchBean.telephone}"
                                      style="width:600px"
                                      required="true"
                                      maxlength="512"
@@ -65,7 +70,7 @@
 
                         <p:outputLabel value="#{msgs.comments}:" for="comments"/>
                         <p:inputText id="comments"
-                                     value="#{addEditEventBean.placeAr}"
+                                     value="#{addBranchBean.comments}"
                                      style="width:600px"
                                      required="true"
                                      maxlength="512"
@@ -83,16 +88,17 @@
                                  iconPos="#{langBean.styleFloat}"
                                  ajax="false"
                                  style="float:#{langBean.styleFloat}"                                                                   
-                                 actionListener="#{addEditEventBean.saveEvent()}" />
+                                 actionListener="#{addBranchBean.saveBranch()}" />
                 <p:commandButton value="#{msgs.cancel}"
                                  icon="ui-icon-cancel"  
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  immediate="true" 
                                  style="float:#{langBean.styleFloat}"                                 
-                                 action="manage_events"  />                                   
+                                 action="Branch" />                                   
             </h:form>
-       
+       </ui:decorate>         
+    </h:body>
+</html>
     
-</ui:composition>
 
