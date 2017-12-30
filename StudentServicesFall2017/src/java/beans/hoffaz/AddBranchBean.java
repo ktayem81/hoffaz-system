@@ -13,6 +13,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import models.hoffaz.Branch;
 import models.hoffaz.Province;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -28,8 +29,34 @@ public class AddBranchBean implements Serializable{
     private final AddBranchDao addStudentDao = new AddBranchDao();
     private final ProvinceDao nationalityDao = new ProvinceDao();
     private ArrayList<Province> province_List=new ArrayList<Province>();
+    private ArrayList<Branch> branches;
+    private Branch selectedBranch;
     private int branch_num;
       private String branch_name;
+
+    public ArrayList<Branch> getBranches() {
+        return branches;
+    }
+
+    public Branch getSelectedBranch() {
+        return selectedBranch;
+    }
+
+    public void setSelectedBranch(Branch selectedBranch) {
+        this.selectedBranch = selectedBranch;
+    }
+
+    public void setBranches(ArrayList<Branch> branches) {
+        this.branches = branches;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
     private String telephone;
     private String comments;
     private String province;
@@ -136,6 +163,22 @@ public class AddBranchBean implements Serializable{
         }
 
         
+    }
+    public void onRowSelect(SelectEvent branch) {
+        FacesMessage msg = new FacesMessage("student Selected", ((branch) branch.getObject()).getFirstName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void deleteSelectedBranch(){
+        try {
+            AddBranchDao.deleteBranch(selectedBranch.getStudentId(), sessionBean.getBranchId(), sessionBean.getCenterId());
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ManageStudentsBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void saveSelectedItemId(){
+        sessionBean.setSelectedItemId(selectedBranch.getStudentId());
     }
    
 }
