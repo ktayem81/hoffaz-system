@@ -36,7 +36,8 @@ public class StudentsDao extends ConnectionDao {
                     + " LEFT JOIN TRIPDETAIL TR ON  S.TRIPID=TR.TRIPID AND S.STOPID=TR.STOPID " 
                     + " LEFT JOIN NATIONALITY N ON  S.NATIONALITY=N.NATIONALITY "  
                     + " LEFT JOIN BRANCH B ON  S.BRANCHID=B.BRANCHID "  
-                    + " LEFT JOIN CENTER C ON  S.BRANCHID=C.BRANCHID AND S.CENTERID=C.CENTERID AND S.BRANCHID=? AND S.CENTERID=?"
+                    + " LEFT JOIN CENTER C ON  S.BRANCHID=C.BRANCHID AND S.CENTERID=C.CENTERID "
+                    + " WHERE S.BRANCHID=? AND S.CENTERID=?"
                     + " ORDER BY S.STUDENTID";
             
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -102,10 +103,6 @@ public class StudentsDao extends ConnectionDao {
 
         Connection conn = getConnection();
 
-        java.util.Date date = new java.util.Date();
-        long t = date.getTime();
-        java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(t);
-
         String sqlStudentNo = "SELECT NVL(MAX(STUDENTID),0)+1 AS studentId FROM STUDENTS WHERE BRANCHID=? AND CENTERID=?";
 
         PreparedStatement ps1 = conn.prepareStatement(sqlStudentNo);
@@ -143,6 +140,10 @@ public class StudentsDao extends ConnectionDao {
         PreparedStatement ps = conn.prepareStatement(sql);
 
         try {
+            java.util.Date date = new java.util.Date();
+            long t = date.getTime();
+            java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(t);
+           
             ps.setInt(1, student.getBranchId());
             ps.setInt(2, student.getCenterId());
             ps.setString(3, student.getFirstName());
@@ -151,7 +152,7 @@ public class StudentsDao extends ConnectionDao {
             ps.setString(6, student.getFamilyName());
             ps.setTimestamp(7, new java.sql.Timestamp(student.getBirthDate().getTime()));
             ps.setInt(8, student.getSexId());
-            ps.setTimestamp(9, (Timestamp) student.getDateOfJoin());
+            ps.setTimestamp(9, new java.sql.Timestamp(student.getDateOfJoin().getTime()));
             ps.setInt(10, student.getNationality());
             ps.setInt(11, student.getNationalityNumber());
             ps.setInt(12, student.getPhone());
@@ -185,7 +186,16 @@ public class StudentsDao extends ConnectionDao {
             Connection conn = getConnection();
 
             String sql = "UPDATE STUDENTS S "
-                    + "SET S.PHONE=?, "
+                    + "SET S.FIRSTNAME=?,"
+                    + "    S.SECONDNAME=?, "
+                    + "    S.THIRDNAME=?, "
+                    + "    S.FAMILYNAME=?, "
+                    + "    S.BIRTHDATE=?, "
+                    + "    S.SEXID=?, "
+                    + "    S.DATEOFJOIN=?, "
+                    + "    S.NATIONALITY=?, "
+                    + "    S.NATIONALITYNUMBER=?, "
+                    + "    S.PHONE=?, "
                     + "    S.WHATSUP=?, "
                     + "    S.TRIPID=?, "
                     + "    S.STOPID=?, "
@@ -198,21 +208,35 @@ public class StudentsDao extends ConnectionDao {
                     + "    WHERE S.STUDENTID=? "
                     + "      AND S.BRANCHID=? "
                     + "      AND S.CENTERID=? ";
+            
             PreparedStatement ps = conn.prepareStatement(sql);
             
-            ps.setInt(1, student.getPhone());
-            ps.setInt(2, student.getWhatsup());
-            ps.setInt(3, student.getTripId());
-            ps.setInt(4, student.getStopId());
-            ps.setString(5, student.getAddressDetails());
-            ps.setInt(6, (student.getTransportation()==true?1:0));
-            ps.setInt(7, student.getUpdatEmployeeId());
-            ps.setTimestamp(8, (Timestamp) student.getUpdateDate());
-            ps.setString(9, student.getUpdateHostIp());
-            ps.setString(10, student.getUpdateHostOS());
-            ps.setInt(11, student.getStudentId());
-            ps.setInt(12, student.getBranchId());
-            ps.setInt(13, student.getCenterId());
+            java.util.Date date = new java.util.Date();
+            long t = date.getTime();
+            java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(t);
+            
+            ps.setString(1, student.getFirstName());
+            ps.setString(2, student.getSecondName());
+            ps.setString(3, student.getThirdName());
+            ps.setString(4, student.getFamilyName());
+            ps.setTimestamp(5, new java.sql.Timestamp(student.getBirthDate().getTime()));
+            ps.setInt(6, student.getSexId());
+            ps.setTimestamp(7, new java.sql.Timestamp(student.getDateOfJoin().getTime()));
+            ps.setInt(8, student.getNationality());
+            ps.setInt(9, student.getNationalityNumber());
+            ps.setInt(10, student.getPhone());
+            ps.setInt(11, student.getWhatsup());
+            ps.setInt(12, student.getTripId());
+            ps.setInt(13, student.getStopId());
+            ps.setString(14, student.getAddressDetails());
+            ps.setInt(15, (student.getTransportation()==true?1:0));
+            ps.setInt(16, student.getUpdatEmployeeId());
+            ps.setTimestamp(17, sqlTimestamp);
+            ps.setString(18, student.getUpdateHostIp());
+            ps.setString(19, student.getUpdateHostOS());
+            ps.setInt(20, student.getStudentId());
+            ps.setInt(21, student.getBranchId());
+            ps.setInt(22, student.getCenterId());
 
             ps.executeUpdate();
             
@@ -222,15 +246,15 @@ public class StudentsDao extends ConnectionDao {
         }
     }
     
-     public void deleteStudent(int studentId, int branchId, int centerId) throws Exception {
+     public void deleteStudent(int branchId, int centerId, int studentId) throws Exception {
         Connection conn = getConnection();
         
         try {
-            String sql = "DELETE FROM STUDENTS WHERE STUDENTID=? AND S.BRANCHID=? AND S.CENTERID=?";                               
+            String sql = "DELETE FROM STUDENTS WHERE BRANCHID=? AND CENTERID=? AND STUDENTID=?";                               
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, studentId);
-            ps.setInt(2, branchId);
-            ps.setInt(3, centerId);
+            ps.setInt(1, branchId);
+            ps.setInt(2, centerId);
+            ps.setInt(3, studentId);
             
             ps.executeUpdate();
 
@@ -245,15 +269,7 @@ public class StudentsDao extends ConnectionDao {
             Student student = null;
             Connection conn = getConnection();
             
-            String sql1 = "SELECT S.STUDENTID,S.FIRSTNAME,S.SECONDNAME,S.THIRDNAME,S.FAMILYNAME,S.BIRTHDATE,S.SEXID,SE.DESCRIPTION,S.DATEOFJOIN,S.NATIONALITY,N.NATIONALITYDESC,S.NATIONALITYNUMBER,S.PHONE,S.WHATSUP,S.BRANCHID,B.BRANCHNAME,S.CENTERID,C.CENTERNAME,S.TRIPID,T.TRIPDESCRIPTION,S.STOPID,TR.STOPDESCRIPTION,S.ADDRESSDETAILS,S.TRANSPORTATION,S.INSERTEMPLOYEEID,S.INSERTDATE,S.INSERTHOSTIP,S.INSERTHOSTOS,S.UPDATEMPLOYEEID,S.UPDATEDATE,S.UPDATEHOSTIP,S.UPDATEHOSTOS "
-                    + " FROM STUDENTS S "
-                    + " LEFT JOIN TRIP T ON  S.TRIPID=T.TRIPID "
-                    + " LEFT JOIN SEXDESCRIPTION SE ON  S.SEXID=SE.SEXID "
-                    + " LEFT JOIN TRIPDETAIL TR ON  S.TRIPID=TR.TRIPID AND S.STOPID=TR.STOPID " 
-                    + " LEFT JOIN NATIONALITY N ON  S.NATIONALITY=N.NATIONALITY "  
-                    + " LEFT JOIN BRANCH B ON  S.BRANCHID=B.BRANCHID "  
-                    + " LEFT JOIN CENTER C ON  S.BRANCHID=C.BRANCHID AND S.CENTERID=C.CENTERID AND S.BRANCHID=? AND S.CENTERID=?  AND S.STUDENTID=?";
-                      
+                    
             String sql = "SELECT S.STUDENTID,S.FIRSTNAME,S.SECONDNAME,S.THIRDNAME,S.FAMILYNAME,S.BIRTHDATE,S.SEXID,SE.DESCRIPTION,S.DATEOFJOIN,S.NATIONALITY,N.NATIONALITYDESC,S.NATIONALITYNUMBER,S.PHONE,S.WHATSUP,S.BRANCHID,B.BRANCHNAME,S.CENTERID,C.CENTERNAME,S.TRIPID,T.TRIPDESCRIPTION,TR.TRANSPORTATIONDESC,S.STOPID,TR.STOPDESCRIPTION,S.ADDRESSDETAILS,S.TRANSPORTATION,S.INSERTEMPLOYEEID,S.INSERTDATE,S.INSERTHOSTIP,S.INSERTHOSTOS,S.UPDATEMPLOYEEID,S.UPDATEDATE,S.UPDATEHOSTIP,S.UPDATEHOSTOS "
                     + " FROM STUDENTS S "
                     + " LEFT JOIN TRIP T ON  S.TRIPID=T.TRIPID "
@@ -262,7 +278,8 @@ public class StudentsDao extends ConnectionDao {
                     + " LEFT JOIN TRIPDETAIL TR ON  S.TRIPID=TR.TRIPID AND S.STOPID=TR.STOPID " 
                     + " LEFT JOIN NATIONALITY N ON  S.NATIONALITY=N.NATIONALITY "  
                     + " LEFT JOIN BRANCH B ON  S.BRANCHID=B.BRANCHID "  
-                    + " LEFT JOIN CENTER C ON  S.BRANCHID=C.BRANCHID AND S.CENTERID=C.CENTERID AND S.BRANCHID=? AND S.CENTERID=? AND S.STUDENTID=?";
+                    + " LEFT JOIN CENTER C ON  S.BRANCHID=C.BRANCHID AND S.CENTERID=C.CENTERID "
+                    + " WHERE S.BRANCHID=? AND S.CENTERID=? AND S.STUDENTID=?";
             
             PreparedStatement ps = conn.prepareStatement(sql);            
             ps.setInt(1, branchId);

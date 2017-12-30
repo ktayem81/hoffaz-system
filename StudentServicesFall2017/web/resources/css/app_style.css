@@ -152,3 +152,10 @@
 .ui-selectonemenu .ui-selectonemenu-label {
     text-align: right;
 }    
+
+ .outerpanelgrid tbody tr, .outerpanelgrid tbody td{  
+    border: none;
+ }
+.innerpanelgrid tbody tr, .innerpanelgrid tbody td{
+    border: 1px solid red ;
+}

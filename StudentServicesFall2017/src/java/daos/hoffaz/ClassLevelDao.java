@@ -12,45 +12,47 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import models.hoffaz.ClassDef;
+import models.hoffaz.ClassLevel;
 
 /**
  *
- * @author khaled
+ * @author khale
  */
-public class ClassDefDao extends ConnectionDao{
-    
-    public ArrayList<ClassDef> buildClassDef(int branchId, int centerId)
+public class ClassLevelDao extends ConnectionDao {
+
+    public ArrayList<ClassLevel> buildClassLevel(int branchId, int centerId, int classID) 
             throws Exception {
 
-        ArrayList<ClassDef> classDefList = new ArrayList<>();
+        ArrayList<ClassLevel> classLevelList = new ArrayList<>();
 
         try {
             Connection conn = getConnection();
 
-            String sql = "SELECT CD.BRANCHID,CD.CENTERID,CD.CLASS_ID,CD.CLASS_NAME,CD.CLASS_DEF_DESC,CD.GRADE_ID_FROM,CGF.GRADE_DESC AS GRADE_DESC_FROM,CD.GRADE_ID_TO,CGT.GRADE_DESC  AS GRADE_DESC_TO,CD.INSERTEMPLOYEEID,CD.INSERTDATE,CD.INSERTHOSTIP,CD.INSERTHOSTOS,CD.UPDATEMPLOYEEID,CD.UPDATEDATE,CD.UPDATEHOSTIP,CD.UPDATEHOSTOS "
-                    + "                     FROM CLASS_DEF CD  "
-                    + "                     LEFT JOIN CLASS_GRADE CGF ON  CD.GRADE_ID_FROM=CGF.GRADE_ID  "
-                    + "                     LEFT JOIN CLASS_GRADE CGT ON  CD.GRADE_ID_TO=CGT.GRADE_ID "
-                    + "                     LEFT JOIN BRANCH B ON  CD.BRANCHID=B.BRANCHID "
-                    + "                     LEFT JOIN CENTER C ON  CD.BRANCHID=C.BRANCHID AND CD.CENTERID=C.CENTERID  "
-                    + "                     WHERE CD.BRANCHID=? AND CD.CENTERID=? "
-                    + "                     ORDER BY CD.BRANCHID,CD.CENTERID,CD.CLASS_ID ";
-            
-            
+            String sql = "SELECT CL.BRANCHID,CL.CENTERID,CL.CLASS_ID,CD.CLASS_NAME,CL.LEVEL_ID,CL.LEVEL_NAME,CL.LEVEL_DESC,CD.CLASS_DEF_DESC,CD.GRADE_ID_FROM,CGF.GRADE_DESC AS GRADE_DESC_FROM,CD.GRADE_ID_TO,CGT.GRADE_DESC  AS GRADE_DESC_TO,CL.INSERTEMPLOYEEID,CL.INSERTDATE,CL.INSERTHOSTIP,CL.INSERTHOSTOS,CL.UPDATEMPLOYEEID,CL.UPDATEDATE,CL.UPDATEHOSTIP,CL.UPDATEHOSTOS "
+                    + "                                      FROM CLASS_LEVEL CL "
+                    + "                                      LEFT JOIN CLASS_DEF CD  ON CL.CLASS_ID=CD.CLASS_ID "
+                    + "                                      LEFT JOIN CLASS_GRADE CGF ON  CD.GRADE_ID_FROM=CGF.GRADE_ID "
+                    + "                                      LEFT JOIN CLASS_GRADE CGT ON  CD.GRADE_ID_TO=CGT.GRADE_ID "
+                    + "                                      LEFT JOIN BRANCH B ON  CL.BRANCHID=B.BRANCHID "
+                    + "                                      LEFT JOIN CENTER C ON  CL.BRANCHID=C.BRANCHID AND CL.CENTERID=C.CENTERID "
+                    + "                                      WHERE CD.BRANCHID=? AND CL.CENTERID=? AND CL.CLASS_ID=?"
+                    + "                                      ORDER BY CD.BRANCHID,CD.CENTERID,CD.CLASS_ID";
+
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setInt(1, branchId);
                 ps.setInt(2, centerId);
-                
+                ps.setInt(2, classID);
+
                 ResultSet rs = ps.executeQuery();
-                
+
                 while (rs.next()) {
-                    classDefList.add(populateClassDef(rs));
+                    ClassDefList.add(populateClassDef(rs));
                 }
-                
+
                 rs.close();
             }
 
-            return classDefList;
+            return ClassDefList;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
@@ -58,7 +60,7 @@ public class ClassDefDao extends ConnectionDao{
 
     private ClassDef populateClassDef(ResultSet rs) throws SQLException {
         ClassDef classDef = new ClassDef();
-        
+
         classDef.setBranchId(rs.getInt("BRANCHID"));
         classDef.setCenterId(rs.getInt("CENTERID"));
         classDef.setClassID(rs.getInt("CLASS_ID"));
@@ -76,7 +78,7 @@ public class ClassDefDao extends ConnectionDao{
         classDef.setUpdateDate(rs.getTimestamp("UPDATEDATE"));
         classDef.setUpdateHostIp(rs.getString("UPDATEHOSTIP"));
         classDef.setUpdateHostOS(rs.getString("UPDATEHOSTOS"));
-        
+
         return classDef;
     }
 
@@ -91,7 +93,7 @@ public class ClassDefDao extends ConnectionDao{
         try {
             ps1.setInt(1, classDef.getBranchId());
             ps1.setInt(2, classDef.getCenterId());
-            
+
             ResultSet rs = ps1.executeQuery();
 
             while (rs.next()) {
@@ -115,7 +117,7 @@ public class ClassDefDao extends ConnectionDao{
                 + " C.INSERTEMPLOYEEID, "
                 + " C.INSERTDATE,"
                 + " C.INSERTHOSTIP,"
-                + " C.INSERTHOSTOS)"               
+                + " C.INSERTHOSTOS)"
                 + " VALUES ((SELECT NVL(MAX(CLASS_ID),0)+1 FROM CLASS_DEF WHERE BRANCHID=? AND CENTERID=?),"
                 + "?,?,?,?,?,"
                 + "?,?,?,?,?)";
@@ -123,29 +125,28 @@ public class ClassDefDao extends ConnectionDao{
         PreparedStatement ps = conn.prepareStatement(sql);
 
         try {
-            
+
             java.util.Date date = new java.util.Date();
             long t = date.getTime();
             java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(t);
-        
-              //FOR INNER SELECT
+
+            //FOR INNER SELECT
             ps.setInt(1, classDef.getBranchId());
             ps.setInt(2, classDef.getCenterId());
             //TO SAVE BRANCH AND CENTER
             ps.setInt(3, classDef.getBranchId());
             ps.setInt(4, classDef.getCenterId());
-             
+
             ps.setString(5, classDef.getClassName());
             ps.setString(6, classDef.getClassDefDesc());
             ps.setInt(7, classDef.getGradeIdFrom());
             ps.setInt(8, classDef.getGradeIdTo());
-            
-           
+
             ps.setInt(9, classDef.getInsertEmployeeId());
             ps.setTimestamp(10, sqlTimestamp);
             ps.setString(11, classDef.getInsertHostIp());
             ps.setString(12, classDef.getInsertHostOS());
-            
+
             ps.executeUpdate();
             ps.close();
 
@@ -153,7 +154,7 @@ public class ClassDefDao extends ConnectionDao{
             throw new SQLException(e.getMessage());
         }
     }
-    
+
     public void updateClassDef(ClassDef classDef) throws Exception {
         try {
             Connection conn = getConnection();
@@ -170,22 +171,22 @@ public class ClassDefDao extends ConnectionDao{
                     + "     WHERE C.BRANCHID=? "
                     + "       AND C.CENTERID=? "
                     + "       AND C.CLASS_ID=? ";
-            
+
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             java.util.Date date = new java.util.Date();
             long t = date.getTime();
             java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(t);
-            
+
             ps.setString(1, classDef.getClassName());
-            ps.setString(2, classDef.getClassDefDesc() );
+            ps.setString(2, classDef.getClassDefDesc());
             ps.setInt(3, classDef.getGradeIdFrom());
             ps.setInt(4, classDef.getGradeIdTo());
             ps.setInt(5, classDef.getUpdatEmployeeId());
-            ps.setTimestamp(6,  sqlTimestamp);
+            ps.setTimestamp(6, sqlTimestamp);
             ps.setString(7, classDef.getUpdateHostIp());
             ps.setString(8, classDef.getUpdateHostOS());
-            ps.setInt(9,classDef.getBranchId());
+            ps.setInt(9, classDef.getBranchId());
             ps.setInt(10, classDef.getCenterId());
             ps.setInt(11, classDef.getClassID());
             //ps.setInt      (24, );
@@ -194,24 +195,24 @@ public class ClassDefDao extends ConnectionDao{
             //ps.setString   (27, );
 
             ps.executeUpdate();
-            
+
             ps.close();
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
     }
-    
-     public void deleteClassDef(int branchId, int centerId, int classID) throws Exception {
+
+    public void deleteClassDef(int branchId, int centerId, int classID) throws Exception {
         Connection conn = getConnection();
-        
+
         try {
-            String sql = "DELETE FROM CLASS_DEF WHERE BRANCHID=? AND CENTERID=? AND CLASS_ID=?";                               
+            String sql = "DELETE FROM CLASS_DEF WHERE BRANCHID=? AND CENTERID=? AND CLASS_ID=?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             ps.setInt(1, branchId);
             ps.setInt(2, centerId);
             ps.setInt(3, classID);
-            
+
             ps.executeUpdate();
 
             ps.close();
@@ -219,12 +220,12 @@ public class ClassDefDao extends ConnectionDao{
             throw new SQLException(e.getMessage());
         }
     }
-     
-      public ClassDef getClassDef (int branchId, int centerId, int classID) throws Exception {
-        try {   
+
+    public ClassDef getClassDef(int branchId, int centerId, int classID) throws Exception {
+        try {
             ClassDef classDef = null;
             Connection conn = getConnection();
-            
+
             String sql = "SELECT CD.BRANCHID,CD.CENTERID,CD.CLASS_ID,CD.CLASS_NAME,CD.CLASS_DEF_DESC,CD.GRADE_ID_FROM,CGF.GRADE_DESC AS GRADE_DESC_FROM,CD.GRADE_ID_TO,CGT.GRADE_DESC  AS GRADE_DESC_TO,CD.INSERTEMPLOYEEID,CD.INSERTDATE,CD.INSERTHOSTIP,CD.INSERTHOSTOS,CD.UPDATEMPLOYEEID,CD.UPDATEDATE,CD.UPDATEHOSTIP,CD.UPDATEHOSTOS "
                     + "                     FROM CLASS_DEF CD  "
                     + "                     LEFT JOIN CLASS_GRADE CGF ON  CD.GRADE_ID_FROM=CGF.GRADE_ID  "
@@ -233,25 +234,24 @@ public class ClassDefDao extends ConnectionDao{
                     + "                     LEFT JOIN CENTER C ON  CD.BRANCHID=C.BRANCHID AND CD.CENTERID=C.CENTERID  "
                     + "                     WHERE CD.BRANCHID=? AND CD.CENTERID=? AND CD.CLASS_ID=? ";
 
-                                           
-            PreparedStatement ps = conn.prepareStatement(sql);            
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, branchId);
             ps.setInt(2, centerId);
             ps.setInt(3, classID);
-            
-            ResultSet rs = ps.executeQuery();           
 
-            while (rs.next())  
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
                 classDef = populateClassDef(rs);
-            
+            }
 
             rs.close();
             ps.close();
-            
-            return classDef;            
+
+            return classDef;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
     }
-    
+
 }

@@ -383,11 +383,12 @@ public class AddEditStudentBean implements Serializable{
         centerId = sessionBean.getCenterId();
         insertEmployeeId = Integer.parseInt(sessionBean.getUsername());
 
-        studentId = sessionBean.getSelectedItemId();
+        studentId = sessionBean.getSelectedStudentId();
 
         try {
             if (studentId > 0) {
                 Student student = studentDao.getStudent(branchId, centerId, studentId);
+                
                 this.firstName = student.getFirstName();
                 this.secondName = student.getSecondName();
                 this.thirdName = student.getThirdName();
@@ -464,7 +465,7 @@ public class AddEditStudentBean implements Serializable{
             student.setAddressDetails(addressDetails);
             student.setTransportation(transportation);
        
-            if (sessionBean.getSelectedItemId() > 0) {
+            if (sessionBean.getSelectedStudentId() > 0) {
                 student.setUpdatEmployeeId(employeeId);
                 student.setUpdateDate(updateDate);
                 student.setUpdateHostIp(sessionBean.getRemoteAddress());

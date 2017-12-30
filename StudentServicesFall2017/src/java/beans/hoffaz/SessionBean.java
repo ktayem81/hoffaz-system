@@ -23,6 +23,7 @@ public class SessionBean implements Serializable {
     private String password;
     private Connection connection;
     private int selectedItemId;
+    
     private int menuIndex = 0;
     private String roleDescription;
     private String fullName;
@@ -32,7 +33,10 @@ public class SessionBean implements Serializable {
     private String centerName;
     private String remoteAddress;
     private String remoteHost;
+    
     private Student student;
+    private int selectedStudentId;
+    private int selectedclassID;
 
     public String getRoleDescription() {
         return roleDescription;
@@ -136,6 +140,23 @@ public class SessionBean implements Serializable {
     public void setStudent(Student student) {
         this.student = student;
     }
+
+    public int getSelectedStudentId() {
+        return selectedStudentId;
+    }
+
+    public void setSelectedStudentId(int selectedStudentId) {
+        this.selectedStudentId = selectedStudentId;
+    }
+
+    public int getSelectedclassID() {
+        return selectedclassID;
+    }
+
+    public void setSelectedclassID(int selectedclassID) {
+        this.selectedclassID = selectedclassID;
+    }
+    
     
     
 
@@ -226,8 +247,10 @@ public class SessionBean implements Serializable {
     }
     
     public void resetData(){
-    this.student = null;
-    this.selectedItemId=0;
+      this.student = null;
+      this.selectedItemId=0;
+      this.selectedStudentId=0;
+      this.selectedStudentId=0;
     }
 
     public void navigate(String url) {

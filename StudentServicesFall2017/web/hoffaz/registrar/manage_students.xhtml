@@ -79,8 +79,10 @@
             
              <p:column headerText="#{msgs.birhtdate_en}"
                       style="width:15%"
-                      sortBy="#{student.birthDate}">                    
-                <h:outputText value="#{student.birthDate}"/>  
+                      sortBy="#{student.birthDate}" >                    
+                 <h:outputText value="#{student.birthDate}">
+                 <f:convertDateTime pattern="yyyy-MM-dd" />
+                 </h:outputText>  
             </p:column>
 
 
@@ -118,7 +120,7 @@
                                          style="float:#{langBean.styleFloat}"
                                          update="@form"
                                          disabled="#{manageStudentsBean.selectedStudent==null}" 
-                                         onclick="return confirm('#{msgs.confirm_delete_event}?');"
+                                         onclick="return confirm('#{msgs.confirm_delete_student}?');"
                                          actionListener="#{manageStudentsBean.deleteSelectedStudent()}"
                                          action="/hoffaz/registrar/manage_students.xhtml" />
                         <p:commandButton value="#{msgs.edit}"
@@ -127,7 +129,7 @@
                                          styleClass="commandButton"
                                          style="float:#{langBean.styleFloat}"                                                                                                
                                          disabled="#{manageStudentsBean.selectedStudent==null}"                                                 
-                                         actionListener="#{manageStudentsBean.saveSelectedItemId()}"
+                                         actionListener="#{manageStudentsBean.saveSelectedStudentId()}"
                                          action="add_edit_student" />
                     </p:toolbarGroup>
                 </p:toolbar>
@@ -141,7 +143,7 @@
                          iconPos="#{langBean.styleFloat}"
                          styleClass="commandButton"
                          style="float:#{langBean.styleFloat}" 
-                         actionListener="#{sessionBean.setSelectedItemId(-1)}"
+                         actionListener="#{sessionBean.setSelectedStudentId(-1)}"
                          action="/hoffaz/registrar/add_edit_student" />                
     </h:form>
 

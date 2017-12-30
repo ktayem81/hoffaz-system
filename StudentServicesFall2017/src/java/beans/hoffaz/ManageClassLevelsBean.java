@@ -12,14 +12,14 @@ import javax.faces.view.ViewScoped;
  *
  * @author khaled
  */
-@Named(value = "addEditClassBean")
+@Named(value = "manageClassLevelsBean")
 @ViewScoped
-public class AddEditClassBean {
+public class ManageClassLevelsBean {
 
     /**
-     * Creates a new instance of AddEditClassBean
+     * Creates a new instance of ManageClassLevelsBean
      */
-    public AddEditClassBean() {
+    public ManageClassLevelsBean() {
     }
     
 }

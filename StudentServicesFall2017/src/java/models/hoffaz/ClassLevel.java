@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author eng_ayman
  */
-public class ClassDef {
+public class ClassLevel {
 
     private int branchId;
     private String branchName;
@@ -24,6 +24,9 @@ public class ClassDef {
     private int gradeIdTo;
     private String gradeIdToDesc;
     private String classDefDesc;
+    private int levelId;
+    private String levelName;
+    private String description;
     private int insertEmployeeId;
     private String insertHostIp;    
     private Date insertDate;      
@@ -32,8 +35,9 @@ public class ClassDef {
     private Date updateDate;      
     private String updateHostIp;    
     private String updateHostOS;
+    
 
-    public ClassDef() {
+    public ClassLevel() {
     }
 
     public int getBranchId() {
@@ -124,6 +128,30 @@ public class ClassDef {
         this.classDefDesc = classDefDesc;
     }
 
+    public int getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(int levelId) {
+        this.levelId = levelId;
+    }
+
+    public String getLevelName() {
+        return levelName;
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getInsertEmployeeId() {
         return insertEmployeeId;
     }
@@ -187,8 +215,6 @@ public class ClassDef {
     public void setUpdateHostOS(String updateHostOS) {
         this.updateHostOS = updateHostOS;
     }
-    
-    
-    
 
+   
 }

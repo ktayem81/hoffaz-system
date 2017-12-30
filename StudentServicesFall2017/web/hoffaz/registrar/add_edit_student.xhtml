@@ -6,211 +6,239 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-  
+
     <h:head>
         <title>#{msgs.registrar}</title>
     </h:head>
 
- <h:body>
+    <h:body>
         <ui:decorate template="/app_templates/app_template.xhtml"> 
             <h:form id="add_student_form">    
-                
+
                 <p:messages id="msgs" closable="true" globalOnly="true"/>
-                    <h:panelGrid id="add_student_grid"
-                                 style="float: #{langBean.styleFloat};text-align: right" 
-                                 columns="6" 
-                                 dir="#{langBean.dir}">  
-                      
-                        <p:outputLabel /><p:outputLabel/><p:outputLabel />
-                        <p:outputLabel /><p:outputLabel/><p:outputLabel/>
-                        
-                        <p:outputLabel value="#{msgs.name}:" for="student_first_name"/>
-                        <p:inputText id="student_first_name"
-                                     style="width:170px"
-                                     value="#{addEditStudentBean.firstName}"                                      
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage="#{msgs.required_msg}">
-                        </p:inputText>
-                        
-                        
-                        <p:inputText id="student_second_name"
-                                     style="width:170px"
-                                     value="#{addEditStudentBean.secondName}"                                      
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage="#{msgs.required_msg}">
-                        </p:inputText>
-                        
-                       
-                        <p:inputText id="student_third_name"
-                                     style="width:170px"
-                                     value="#{addEditStudentBean.thirdName}"                                      
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage="#{msgs.required_msg}">
-                        </p:inputText>
-                        
-                        
-                        <p:inputText id="student_last_name"
-                                     style="width:170px"
-                                     value="#{addEditStudentBean.familyName}"                                      
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage="#{msgs.required_msg}">
-                        </p:inputText>
-                        
-                        <p:outputLabel/>
-                        
-                        <p:outputLabel value="#{msgs.student_nationalty_en}:" for="student_nationalty"/>
-                       
-                        <p:selectOneMenu value="#{addEditStudentBean.nationality}"
-                                         id="student_nationalty"
-                                         style="width:170px; float:#{langBean.styleFloat} direction:#{langBean.dir}"
-                                         required="true" panelStyle="float:#{langBean.styleFloat}"                                                                                  
-                                         requiredMessage=" #{msgs.required_msg}">
-                            <f:selectItem itemLabel="#{msgs.select_one}"
-                                          itemValue=""/>
-                            <f:selectItems var="nationality"
-                                           value="#{addEditStudentBean.nationalityList}" 
-                                           itemLabel="#{nationality.nationalityDesc}"
-                                           itemValue="#{nationality.nationality}"/>                             
-                        </p:selectOneMenu>
-                        <h:message for="student_nationalty" styleClass="errorMsg"/> 
-                        <p:outputLabel/><p:outputLabel/><p:outputLabel/>
-
-                        <p:outputLabel value="#{msgs.nationalty_id_en}:" for="nationalty_id"/>
-                        <p:inputText id="nationalty_id"
-                                     style="width:170px"
-                                     value="#{addEditStudentBean.nationalityNumber}"                                      
-                                     required="true"
-                                     requiredMessage="#{msgs.required_msg}">
-                        </p:inputText>
-                                                  
-                        
-                        
-                        <p:outputLabel value="#{msgs.sex}:" for="student_nationalty"/>
-                        <p:selectOneRadio id="sex_checkbox" value="#{addEditStudentBean.sexId}" 
-                                         required="true" requiredMessage=" #{msgs.required_msg}">
-                             <f:selectItem itemLabel="#{msgs.male}" itemValue="1"  />
-                             <f:selectItem itemLabel="#{msgs.female}" itemValue="2" />
-                         </p:selectOneRadio>
-                        
-                        <p:outputLabel /><p:outputLabel />
-                        
-                        <p:outputLabel value="#{msgs.birhtdate_en}:" for="birhtdate"/>
-                        <p:calendar id="birhtdate"
-                                    value="#{addEditStudentBean.birthDate}"
-                                    dir="#{langBean.dir}"
-                                    pattern="yyyy-MM-dd" 
-                                    navigator="true"
-                                    required="true"
-                                    yearRange="c-10:c+1"
-                                    timeInput="true"
-                                    requiredMessage=" #{msgs.required_msg}"
-                                    style="width:170px; float:#{langBean.styleFloat}"/> 
-                        <h:message for="birhtdate" styleClass="errorMsg"/>                                        
-
-                       <p:outputLabel/><p:outputLabel/><p:outputLabel/>
-                       
-                        
-                        
-                        <p:outputLabel value="#{msgs.phone_en}:" for="phone"/>
-                        
-                        <p:inputText id="phone"
-                                     value="#{addEditStudentBean.phone}"
-                                     style="width:170px"
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage=" #{msgs.required_msg}">
-                        </p:inputText>
-                        
-                                              
-                        <p:outputLabel value="#{msgs.whatsapp_en}:" for="whatsapp"/>
-                        <p:inputText id="whatsapp"
-                                     value="#{addEditStudentBean.whatsup}"
-                                     style="width:170px; float:#{langBean.styleFloat};"
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage=" #{msgs.required_msg}">
-                        </p:inputText>
-                        <h:message for="whatsapp" styleClass="errorMsg"/>
-                        
-                         <p:outputLabel/>
-                         <p:outputLabel value="#{msgs.address_en}:" for="address"/>
-                        <p:inputTextarea id="address"
-                                         value="#{addEditStudentBean.addressDetails}"
-                                     style="width:170px"
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage=" #{msgs.required_msg}">
-                        </p:inputTextarea>
-                         <h:message for="address" styleClass="errorMsg"/>
-                         
-                         <p:outputLabel/><p:outputLabel/><p:outputLabel/>
-                         
-                         <p:outputLabel value="#{msgs.transportation}:" for="line_checkbox"/>
-                         <p:selectBooleanCheckbox id="line_checkbox"
-                                                  value="#{addEditStudentBean.transportation}" 
-                                                  style="float:#{langBean.styleFloat}">
-                          </p:selectBooleanCheckbox>
-                     
-                     
-                     <p:outputLabel ></p:outputLabel><p:outputLabel ></p:outputLabel>
-                     <p:outputLabel ></p:outputLabel><p:outputLabel ></p:outputLabel>
-                     <p:outputLabel value="#{msgs.transportation_line_en}:" for="transportation_line"/>
-                       
-                     <p:selectOneMenu value="#{addEditStudentBean.tripId}"
-                                      id="transportation_line"
-                                         style="width:170px; float:#{langBean.styleFloat}; text-align:#{langBean.styleFloat};">
-                         <p:ajax listener="#{addEditStudentBean.onTripIdChange}" update="stop_area" />
-                         <f:selectItem itemLabel="#{msgs.select_line}" 
-                                          itemValue=""/>
-                            <f:selectItems var="trip"
-                                           value="#{addEditStudentBean.tripList}" 
-                                           itemLabel="#{trip.tripDescription}"
-                                           itemValue="#{trip.tripId}"/>                             
-                        </p:selectOneMenu>
-                        <h:message for="transportation_line" styleClass="errorMsg"/> 
-                        
-                        <p:outputLabel/><p:outputLabel/><p:outputLabel/>
-    
-                        <p:outputLabel value="#{msgs.stop_area_en}:" for="stop_area"/>
-                       
-                        <p:selectOneMenu value="#{addEditStudentBean.stopId}"
-                                         id="stop_area"
-                                         style="width:170px; float:#{langBean.styleFloat}">
-                            <f:selectItem itemLabel="#{msgs.select_stop}"
-                                          itemValue=""/>
-                            <f:selectItems var="tripDetail"
-                                           value="#{addEditStudentBean.tripDetailList}" 
-                                           itemLabel="#{tripDetail.stopDescription}"
-                                           itemValue="#{tripDetail.stopId}"/>                             
-                        </p:selectOneMenu>
-                        <h:message for="stop_area" styleClass="errorMsg"/> 
+                <p:panel header="#{msgs.add_student}"                            
+                         style="min-height:300px; text-align:center;     
+                         direction:#{langBean.dir}; margin-top:10px; font-size:14pt; font-weight:900;">
+                <h:panelGrid id="add_student_grid" 
+                             style="float: #{langBean.styleFloat};text-align: #{langBean.styleFloat};
+                             font-size:12pt; font-weight:bold;" 
+                             columns="5" 
+                             dir="#{langBean.dir}">  
+                    
                    
-              
-                        <p:outputLabel/><p:outputLabel/><p:outputLabel/><p:outputLabel/>
-                 <p:commandButton value="#{msgs.save}"
-                                 styleClass="commandButton"
-                                 icon="ui-icon-disk"
-                                 iconPos="#{langBean.styleFloat}"
-                                 ajax="false"
-                                 style="float:#{langBean.styleFloat}" 
-                                 onclick="#{sessionBean.setMenuIndex(2)}"
-                                 actionListener="#{addEditStudentBean.saveStudent()}" />
-                <p:commandButton value="#{msgs.cancel}"
-                                 icon="ui-icon-cancel"  
-                                 iconPos="#{langBean.styleFloat}"
-                                 styleClass="commandButton"
-                                 immediate="true" 
-                                 style="float:#{langBean.styleFloat}" 
-                                 actionListener="#{sessionBean.resetData()}"
-                                 action="add_edit_student"/> 
-                 </h:panelGrid>
-               
+
+
+                    <p:outputLabel value="#{msgs.name}:" for="student_first_name"/>
+                    <p:inputText id="student_first_name"
+                                 style="width:170px"
+                                 value="#{addEditStudentBean.firstName}"                                      
+                                 required="true"
+                                 maxlength="512"
+                                 requiredMessage="#{msgs.required_msg}">
+                    </p:inputText>
+
+
+                    <p:inputText id="student_second_name"
+                                 style="width:170px"
+                                 value="#{addEditStudentBean.secondName}"                                      
+                                 required="true"
+                                 maxlength="512"
+                                 requiredMessage="#{msgs.required_msg}">
+                    </p:inputText>
+
+
+                    <p:inputText id="student_third_name"
+                                 style="width:170px"
+                                 value="#{addEditStudentBean.thirdName}"                                      
+                                 required="true"
+                                 maxlength="512"
+                                 requiredMessage="#{msgs.required_msg}">
+                    </p:inputText>
+
+
+                    <p:inputText id="student_last_name"
+                                 style="width:170px"
+                                 value="#{addEditStudentBean.familyName}"                                      
+                                 required="true"
+                                 maxlength="512"
+                                 requiredMessage="#{msgs.required_msg}">
+                    </p:inputText>
+
+                    <p:outputLabel/>
+                    <h:message for="student_first_name" styleClass="errorMsg"/> 
+                    <h:message for="student_second_name" styleClass="errorMsg"/>
+                    <h:message for="student_third_name" styleClass="errorMsg"/>
+                    <h:message for="student_last_name" styleClass="errorMsg"/>
+
+                    <p:outputLabel value="#{msgs.student_nationalty_en}:" for="student_nationalty"/>
+
+                    <p:selectOneMenu value="#{addEditStudentBean.nationality}"
+                                     id="student_nationalty"
+                                     style="width:170px; float:#{langBean.styleFloat} direction:#{langBean.dir}"
+                                     required="true" panelStyle="float:#{langBean.styleFloat}"                                                                                  
+                                     requiredMessage=" #{msgs.required_msg}">
+                        <f:selectItem itemLabel="#{msgs.select_one}"
+                                      itemValue=""/>
+                        <f:selectItems var="nationality"
+                                       value="#{addEditStudentBean.nationalityList}" 
+                                       itemLabel="#{nationality.nationalityDesc}"
+                                       itemValue="#{nationality.nationality}"/>                             
+                    </p:selectOneMenu>
+                    <h:message for="student_nationalty" styleClass="errorMsg"/> 
+                    <p:outputLabel/><p:outputLabel/>
+
+                    <p:outputLabel value="#{msgs.nationalty_id_en}:" for="nationalty_id"/>
+                    <p:inputText id="nationalty_id"
+                                 style="width:170px"
+                                 value="#{addEditStudentBean.nationalityNumber}"                                      
+                                 required="true"
+                                 requiredMessage="#{msgs.required_msg}">
+                    </p:inputText>
+                    <h:message for="nationalty_id" styleClass="errorMsg"/> 
+                    <p:outputLabel/><p:outputLabel/>                        
+
+
+                    <p:outputLabel value="#{msgs.sex}:" for="sex_checkbox"/>
+                    <p:selectOneRadio id="sex_checkbox" value="#{addEditStudentBean.sexId}" 
+                                      required="true" requiredMessage=" #{msgs.required_msg}">
+                        <f:selectItem itemLabel="#{msgs.male}" itemValue="1"  />
+                        <f:selectItem itemLabel="#{msgs.female}" itemValue="2" />
+                    </p:selectOneRadio>
+                    <h:message for="sex_checkbox" styleClass="errorMsg"/>
+
+                    <p:outputLabel /><p:outputLabel />
+
+                    <p:outputLabel value="#{msgs.birhtdate_en}:" for="birhtdate"/>
+                    <p:calendar id="birhtdate"
+                                value="#{addEditStudentBean.birthDate}"
+                                showOn="button"
+                                dir="#{langBean.dir}"
+                                pattern="dd-MM-yyyy" 
+                                navigator="true"
+                                required="true" 
+                               
+                                requiredMessage=" #{msgs.required_msg}"
+                                style="width:170px;"/> 
+                    <h:message for="birhtdate" styleClass="errorMsg"/>
+                    <p:outputLabel/><p:outputLabel/>
+
+                    <p:outputLabel value="#{msgs.date_of_join}:" for="date_of_join"/>
+                    <p:calendar id="date_of_join"
+                                showOn="button"
+                                showButtonPanel="true"
+                                value="#{addEditStudentBean.dateOfJoin}"
+                                dir="#{langBean.dir}"
+                                pattern="dd-MM-yyyy" 
+                                navigator="true"
+                                required="true" 
+                                
+                                requiredMessage=" #{msgs.required_msg}"
+                                style="width:170px;"/> 
+                    <h:message for="date_of_join" styleClass="errorMsg"/> 
+
+                    <p:outputLabel/><p:outputLabel/>
+
+
+
+                    <p:outputLabel value="#{msgs.phone_en}:" for="phone"/>
+
+                    <p:inputText id="phone"
+                                 value="#{addEditStudentBean.phone}"
+                                 style="width:170px"
+                                 required="true"
+                                 maxlength="512"
+                                 requiredMessage=" #{msgs.required_msg}">
+                    </p:inputText>
+                    <h:message for="phone" styleClass="errorMsg"/>
+                    <p:outputLabel/><p:outputLabel/>
+
+                    <p:outputLabel value="#{msgs.whatsapp_en}:" for="whatsapp"/>
+                    <p:inputText id="whatsapp"
+                                 value="#{addEditStudentBean.whatsup}"
+                                 style="width:170px; float:#{langBean.styleFloat};"
+                                 required="true"
+                                 maxlength="512"
+                                 requiredMessage=" #{msgs.required_msg}">
+                    </p:inputText>
+                    <h:message for="whatsapp" styleClass="errorMsg"/>
+
+                    <p:outputLabel/><p:outputLabel/>
+
+                    <p:outputLabel value="#{msgs.address_en}:" for="address"/>
+                    <p:inputTextarea id="address"
+                                     value="#{addEditStudentBean.addressDetails}"
+                                     style="width:170px"
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage=" #{msgs.required_msg}">
+                    </p:inputTextarea>
+                    <h:message for="address" styleClass="errorMsg"/>
+
+                    <p:outputLabel/><p:outputLabel/>
+
+                    <p:outputLabel value="#{msgs.transportation}:" for="line_checkbox"/>
+                    <p:selectBooleanCheckbox id="line_checkbox"
+                                             value="#{addEditStudentBean.transportation}" 
+                                             style="float:#{langBean.styleFloat}">
+                    </p:selectBooleanCheckbox>
+                    <h:message for="line_checkbox" styleClass="errorMsg"/>
+
+                    <p:outputLabel/><p:outputLabel/>
+
+                    <p:outputLabel value="#{msgs.transportation_line_en}:" for="transportation_line"/>
+
+                    <p:selectOneMenu value="#{addEditStudentBean.tripId}"
+                                     id="transportation_line"
+                                     style="width:170px; float:#{langBean.styleFloat}; text-align:#{langBean.styleFloat};">
+                        <p:ajax listener="#{addEditStudentBean.onTripIdChange}" update="stop_area" />
+                        <f:selectItem itemLabel="#{msgs.select_line}" 
+                                      itemValue=""/>
+                        <f:selectItems var="trip"
+                                       value="#{addEditStudentBean.tripList}" 
+                                       itemLabel="#{trip.tripDescription}"
+                                       itemValue="#{trip.tripId}"/>                             
+                    </p:selectOneMenu>
+                    <h:message for="transportation_line" styleClass="errorMsg"/> 
+
+                    <p:outputLabel/><p:outputLabel/>
+
+                    <p:outputLabel value="#{msgs.stop_area_en}:" for="stop_area"/>
+
+                    <p:selectOneMenu value="#{addEditStudentBean.stopId}"
+                                     id="stop_area"
+                                     style="width:170px; float:#{langBean.styleFloat}">
+                        <f:selectItem itemLabel="#{msgs.select_stop}"
+                                      itemValue=""/>
+                        <f:selectItems var="tripDetail"
+                                       value="#{addEditStudentBean.tripDetailList}" 
+                                       itemLabel="#{tripDetail.stopDescription}"
+                                       itemValue="#{tripDetail.stopId}"/>                             
+                    </p:selectOneMenu>
+                    <h:message for="stop_area" styleClass="errorMsg"/> 
+
+
+                    <p:outputLabel/><p:outputLabel/>
+                    <p:outputLabel/>
+                    <p:commandButton value="#{msgs.save}"
+                                     styleClass="commandButton"
+                                     icon="ui-icon-disk"
+                                     iconPos="#{langBean.styleFloat}"
+                                     ajax="false"
+                                     style="float:#{langBean.styleFloat}" 
+                                     onclick="#{sessionBean.setMenuIndex(2)}"
+                                     actionListener="#{addEditStudentBean.saveStudent()}" />
+                    <p:commandButton value="#{msgs.cancel}"
+                                     icon="ui-icon-cancel"  
+                                     iconPos="#{langBean.styleFloat}"
+                                     styleClass="commandButton"
+                                     immediate="true" 
+                                     style="float:#{langBean.styleFloat}" 
+                                     actionListener="#{sessionBean.resetData()}"
+                                     action="add_edit_student"/> 
+                </h:panelGrid>
+             </p:panel>
             </h:form>
-      
+
         </ui:decorate>         
     </h:body>
 </html>

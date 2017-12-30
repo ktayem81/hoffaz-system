@@ -6,7 +6,7 @@
 package beans.hoffaz;
 
 import daos.hoffaz.AddDivisionDao;
-import daos.hoffaz.AddClassLevelDao;
+import daos.hoffaz.ClassLevelDao;
 
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -25,7 +25,7 @@ public class AddDivsionBean {
      private int semester_id;
     private String year;
     private final AddDivisionDao adddivisionDao = new AddDivisionDao();
-    private final AddClassLevelDao addclasslevelDao = new AddClassLevelDao();
+    private final ClassLevelDao addclasslevelDao = new ClassLevelDao();
     // private final AddClassDao addclassDao = new AddClassDao();
     public int getSemester_id() {
         return semester_id;
