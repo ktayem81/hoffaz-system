@@ -9,6 +9,7 @@ import daos.hoffaz.AddBranchDao;
 import daos.hoffaz.ProvinceDao;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -28,7 +29,7 @@ public class AddBranchBean implements Serializable{
      * Creates a new instance of AddBranchBean
      */
     private final AddBranchDao addBranchDao = new AddBranchDao();
-    private final ProvinceDao provinceyDao = new ProvinceDao();
+    private final ProvinceDao provinceDao = new ProvinceDao();
     private ArrayList<Province> province_List=new ArrayList<Province>();
     private ArrayList<Branch> branches;
     private Branch selectedBranch;
@@ -38,7 +39,12 @@ public class AddBranchBean implements Serializable{
     @Inject 
     SessionBean sessionBean;
     
-
+    @PostConstruct
+    public void init() {
+        
+    }
+    
+    
     public ArrayList<Branch> getBranches() {
         return branches;
     }
@@ -169,6 +175,7 @@ public class AddBranchBean implements Serializable{
 
         
     }
+    
     public void onRowSelect(SelectEvent branch) {
         FacesMessage msg = new FacesMessage("student Selected", ((branch) branch.getObject()).getFirstName());
         FacesContext.getCurrentInstance().addMessage(null, msg);

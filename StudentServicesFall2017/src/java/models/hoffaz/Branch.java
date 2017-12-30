@@ -15,14 +15,14 @@ public class Branch implements Serializable{
     
    private int branch_Id;
    private String branch_Name;
-   private String Province;
+   private int Province;
    private String description;
    private String phone;
 
     public Branch() {
     }
 
-    public Branch(int branch_Id, String branch_Name, String Province, String description, String phone) {
+    public Branch(int branch_Id, String branch_Name, int Province, String description, String phone) {
         this.branch_Id = branch_Id;
         this.branch_Name = branch_Name;
         this.Province = Province;
@@ -40,11 +40,11 @@ public class Branch implements Serializable{
         return branch_Id;
     }
 
-    public String getProvince() {
+    public int getProvince() {
         return Province;
     }
 
-    public void setProvince(String Province) {
+    public void setProvince(int Province) {
         this.Province = Province;
     }
 
