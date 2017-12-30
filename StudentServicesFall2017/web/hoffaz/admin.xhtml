@@ -11,6 +11,12 @@
                        actionListener="#{sessionBean.setMenuIndex(2)}"
                        action="/hoffaz/admin/Branch.xhtml">
     </p:commandButton>
+    <p:commandButton   value="#{msgs.manage_branch}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/admin/manage_branch.xhtml">
+    </p:commandButton>
     <p:commandButton   value="#{msgs.add_place}"  
                        styleClass="ribbonButton" 
                        style="float:#{langBean.styleFloat};"
@@ -23,6 +29,7 @@
                        actionListener="#{sessionBean.setMenuIndex(2)}"
                        action="/hoffaz/admin/center.xhtml">
                </p:commandButton> 
+    
     <p:commandButton   value="#{msgs.add_trip}"  
                        styleClass="ribbonButton" 
                        style="float:#{langBean.styleFloat};"
