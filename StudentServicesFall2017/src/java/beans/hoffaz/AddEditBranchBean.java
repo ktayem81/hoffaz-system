@@ -5,7 +5,6 @@
  */
 package beans.hoffaz;
 
-
 import daos.hoffaz.BranchDao;
 import daos.hoffaz.GovernorateDao;
 import java.io.Serializable;
@@ -25,15 +24,15 @@ import models.hoffaz.Governorate;
  */
 @Named(value = "addEditBranchBean")
 @ViewScoped
-public class AddEditBranchBean implements Serializable{
+public class AddEditBranchBean implements Serializable {
 
     /**
      * Creates a new instance of AddEditBranchBean
      */
     private final BranchDao branchDao = new BranchDao();
     private final GovernorateDao governorateDao = new GovernorateDao();
-    private ArrayList<Governorate> governorateList=new ArrayList<Governorate>();
-       
+    private ArrayList<Governorate> governorateList = new ArrayList<Governorate>();
+
     private int branchId;
     private String branchName;
     private String description;
@@ -41,8 +40,7 @@ public class AddEditBranchBean implements Serializable{
     private int governorateId;
     private String governorateDesc;
 
-    
-    @Inject 
+    @Inject
     SessionBean sessionBean;
 
     public ArrayList<Governorate> getGovernorateList() {
@@ -108,12 +106,10 @@ public class AddEditBranchBean implements Serializable{
     public void setSessionBean(SessionBean sessionBean) {
         this.sessionBean = sessionBean;
     }
-    
-    
-    
+
     @PostConstruct
     public void init() {
-        
+
         branchId = sessionBean.getSelectedItemId();
 
         try {
@@ -121,30 +117,27 @@ public class AddEditBranchBean implements Serializable{
                 //get selected branch fro DB
                 Branch branch = branchDao.getBranch(branchId);
 
-                this.branchId=branch.getBranchId();
-       this.branchName=branch.getBranchName();
-       this.description=branch.getDescription();
-       this.phone=branch.getPhone();
-       this.governorateId=branch.getGovernorateId();
-       this.governorateDesc=branch.getGovernorateDesc();
+                this.branchId = branch.getBranchId();
+                this.branchName = branch.getBranchName();
+                this.description = branch.getDescription();
+                this.phone = branch.getPhone();
+                this.governorateId = branch.getGovernorateId();
+                this.governorateDesc = branch.getGovernorateDesc();
 
             }
-            
+
             governorateList = governorateDao.getGovernorateList();
 
         } catch (Exception ex) {
             Logger.getLogger(AddEditClassDefBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
-    
-   
+
     public void saveBranch() {
-        
-        
+
         Branch branch = new Branch();
-        
+
         try {
             branch.setBranchId(branchId);
             branch.setBranchName(branchName);
@@ -152,23 +145,22 @@ public class AddEditBranchBean implements Serializable{
             branch.setGovernorateDesc(governorateDesc);
             branch.setGovernorateId(governorateId);
             branch.setPhone(phone);
-             
+
             if (sessionBean.getSelectedItemId() > 0) {
-                
+
                 branchDao.updateBranch(branch);
             } else {
-                
+
                 branchDao.insertBranch(branch);
             }
-            
+
         } catch (Exception ex) {
             Logger.getLogger(AddEditBranchBean.class.getName()).log(Level.SEVERE, null, ex);
             sessionBean.navigate("/hoffaz/sql_exception.xhtml");
         }
-        
-        sessionBean.navigate("/hoffaz/admin/manage_branch.xhtml");
-            
-        }
 
+        sessionBean.navigate("/hoffaz/admin/manage_branch.xhtml");
+
+    }
 
 }

@@ -119,7 +119,7 @@ public class BranchDao extends ConnectionDao {
                     + "    DESCRIPTION=?,"
                     + "    GOVERNORATE_ID=?,"
                     + "    PHONE=?"
-                    + "WHERE BRANCHID=?";
+                    + "    WHERE BRANCHID=?";
             
             PreparedStatement ps = conn.prepareStatement(sql);
             
@@ -159,7 +159,7 @@ public class BranchDao extends ConnectionDao {
             Branch branch = null;
             Connection conn = getConnection();
 
-            String sql = "SELECT B.BRANCHID,B.BRANCHNAME,B.DESCRIPTION,B.GOVERNORATE_ID,G.DESCRIPTION,B.PHONE "
+            String sql = "SELECT B.BRANCHID,B.BRANCHNAME,B.DESCRIPTION,B.GOVERNORATE_ID,G.DESCRIPTION AS GOVER_DESC,B.PHONE "
                     + "FROM BRANCH B "
                     + "LEFT JOIN GOVERNORATE G  ON B.GOVERNORATE_ID=G.GOVERNORATEID "
                     + "WHERE B.BRANCHID=?";
