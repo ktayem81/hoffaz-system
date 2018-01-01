@@ -21,47 +21,46 @@
                          direction:#{langBean.dir};margin-top:10px; font-size:10pt">
                             <h:panelGrid id="pay_donate"
                                  style="float: #{langBean.styleFloat};text-align: match-parent" 
-                                 columns="2" 
-                                 
-                                 dir="#{langBean.dir}">  
-                        <p:outputLabel value="#{msgs.donate_en}:"/>
-                        <p:outputLabel/> <p:outputLabel/> <p:outputLabel/> 
+                                 columns="3"
+                                 dir="#{langBean.dir}"> 
+                                
                         <p:outputLabel value="#{msgs.amount_en}:" for="amount_donate"/>
                         <p:inputText id="amount_donate"
                                      style="width:170px"                                    
                                       required="true"
                                       requiredMessage="#{msgs.required_msg}"
-                                     value="#{addDonateBean.amount}"
+                                      value="#{addEditDonateBean.donateAmount}"
                                      >                                     
                         </p:inputText>
                         
                         <h:message for="amount_donate" styleClass="errorMsg"/>
-                        <p:outputLabel/> 
+                        
+                       
                         <p:outputLabel value="#{msgs.donater_en}:" for="donater"/>
                         <p:inputText id="donater"
                                      style="width:170px"
                                       required="true"
                                       requiredMessage="#{msgs.required_msg}"
-                                     value="#{addDonateBean.donatername}"
+                                      value="#{addEditDonateBean.donaterName}"
                                      >                                     
                         </p:inputText>
                         
                         <h:message for="donater" styleClass="errorMsg"/>
-                           <p:outputLabel/>                                                          
+                                                                                   
                 <p:commandButton value="#{msgs.save}"
                                  styleClass="commandButton"
                                  icon="ui-icon-disk"
                                  iconPos="#{langBean.styleFloat}"
                                  ajax="false"
                                  style="float:#{langBean.styleFloat}"                                                                   
-                                 actionListener="#{addDonateBean.saveDonate()}" />
+                                 actionListener="#{addEditDonateBean.saveDonate()}" />
                 <p:commandButton value="#{msgs.cancel}"
                                  icon="ui-icon-cancel"  
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  immediate="true" 
                                  style="float:#{langBean.styleFloat}"                                 
-                                 action="add_donate"  />                                   
+                                 action="/hoffaz/sql_exception.xhtml"  />                                   
             </h:panelGrid>
                 </p:panel>
             </h:form>
