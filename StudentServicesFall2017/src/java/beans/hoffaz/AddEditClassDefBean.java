@@ -7,6 +7,7 @@ package beans.hoffaz;
 
 import daos.hoffaz.ClassDefDao;
 import daos.hoffaz.ClassGradeDao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -24,7 +25,7 @@ import models.hoffaz.ClassGrade;
  */
 @Named(value = "addEditClassDefBean")
 @ViewScoped
-public class AddEditClassDefBean {
+public class AddEditClassDefBean implements Serializable{
     
     private final ClassDefDao classDefDao = new ClassDefDao();
     private final ClassGradeDao classGradeDao = new ClassGradeDao();

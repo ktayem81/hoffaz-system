@@ -26,7 +26,7 @@ public class NationalityDao extends ConnectionDao{
             Connection conn = getConnection();
         
         try {   
-            String sql = "SELECT * FROM NATIONALITY";
+            String sql = "SELECT * FROM NATIONALITY ORDER BY NATIONALITY";
             
             PreparedStatement ps = conn.prepareStatement(sql);            
             

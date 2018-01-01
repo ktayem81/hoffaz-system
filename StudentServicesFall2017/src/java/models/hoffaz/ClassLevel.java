@@ -26,13 +26,13 @@ public class ClassLevel {
     private String classDefDesc;
     private int levelId;
     private String levelName;
-    private String description;
+    private String levelDesc;
+    private Date insertDate;
     private int insertEmployeeId;
     private String insertHostIp;    
-    private Date insertDate;      
-    private String insertHostOS;    
-    private int updatEmployeeId; 
-    private Date updateDate;      
+    private String insertHostOS; 
+    private Date updateDate; 
+    private int updatEmployeeId;      
     private String updateHostIp;    
     private String updateHostOS;
     
@@ -144,12 +144,12 @@ public class ClassLevel {
         this.levelName = levelName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLevelDesc() {
+        return levelDesc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLevelDesc(String levelDesc) {
+        this.levelDesc = levelDesc;
     }
 
     public int getInsertEmployeeId() {

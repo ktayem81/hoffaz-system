@@ -25,13 +25,13 @@ import org.primefaces.event.SelectEvent;
  */
 @Named(value = "manageClassDefsBean")
 @ViewScoped
-public class ManageClassDefsBean implements Serializable{
-    
+public class ManageClassDefsBean implements Serializable {
+
     private ClassDef selectedClassDef;
     private final ClassDefDao classDefDao = new ClassDefDao();
-    private ArrayList<ClassDef> classDefs; 
-    
-    @Inject 
+    private ArrayList<ClassDef> classDefs;
+
+    @Inject
     private SessionBean sessionBean;
 
     /**
@@ -39,11 +39,11 @@ public class ManageClassDefsBean implements Serializable{
      */
     public ManageClassDefsBean() {
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         try {
-            this.classDefs = classDefDao.buildClassDef(sessionBean.getBranchId(),sessionBean.getCenterId());
+            this.classDefs = classDefDao.buildClassDef(sessionBean.getBranchId(), sessionBean.getCenterId());
         } catch (Exception ex) {
             Logger.getLogger(ManageClassDefsBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -72,24 +72,23 @@ public class ManageClassDefsBean implements Serializable{
     public void setSessionBean(SessionBean sessionBean) {
         this.sessionBean = sessionBean;
     }
-    
-    public void saveSelectedItemId(){
+
+    public void saveSelectedItemId() {
         sessionBean.setSelectedclassID(selectedClassDef.getClassID());
     }
-    
+
     public void onRowSelect(SelectEvent classDef) {
         FacesMessage msg = new FacesMessage("ClassDef Selected", ((ClassDef) classDef.getObject()).getClassName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void deleteSelectedClassDef(){
+    public void deleteSelectedClassDef() {
         try {
             classDefDao.deleteClassDef(sessionBean.getBranchId(), sessionBean.getCenterId(), selectedClassDef.getClassID());
-            
+
         } catch (Exception ex) {
             Logger.getLogger(ManageClassDefsBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
 }

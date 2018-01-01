@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>#{msgs.level_name_en}</title>
+    </h:head>
+
+    <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml"> 
+
+            <h:form id="add_level_class">            
+                <p:messages id="msgs" closable="true" globalOnly="true"/>
+
+                <p:panel header="#{msgs.add_level_class_en}"                            
+                         style="min-height:300px; 
+                         direction:#{langBean.dir};margin-top:10px; font-size:10pt">
+
+                    <h:panelGrid id="add"
+                                 style="float: #{langBean.styleFloat};text-align: right" 
+                                 columns="3" 
+                                 dir="#{langBean.dir}">  
+
+                        <p:outputLabel value="#{msgs.class_name_en}:" for="class_name"/>
+                        <p:selectOneMenu value="#{addEditClassLevelBean.classID}"
+                                         id="class_name"
+                                         style="width:170px; float:#{langBean.styleFloat} direction:#{langBean.dir}"
+                                         required="true" panelStyle="float:#{langBean.styleFloat}"                                                                                  
+                                         requiredMessage=" #{msgs.required_msg}">
+                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                          itemValue=""/>
+                            <f:selectItems var="class"
+                                           value="#{addEditClassLevelBean.classDefList}" 
+                                           itemLabel="#{class.className}"
+                                           itemValue="#{class.classID}"/>                             
+                        </p:selectOneMenu>
+                        <h:message for="class_name" styleClass="errorMsg"/>
+
+
+                        <p:outputLabel value="#{msgs.level_name_en}:" for="level_name"/>
+                        <p:inputText id="level_name"
+                                     style="width:170px"
+                                     value="#{addEditClassLevelBean.levelName}"                                      
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage="#{msgs.required_msg}">
+                        </p:inputText>
+                        <h:message for="level_name" styleClass="errorMsg"/>
+                        
+                        <p:outputLabel value="#{msgs.note_en}:" for="note"/>
+                        <p:inputTextarea id="note"
+                                         value="#{addEditClassLevelBean.levelDesc}"
+                                         style="width:170px"
+                                         required="true"
+                                         maxlength="512"
+                                         requiredMessage=" #{msgs.required_msg}"
+
+                                         >
+                        </p:inputTextarea>
+                        <h:message for="note" styleClass="errorMsg"/>
+
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:commandButton value="#{msgs.save}"
+                                 styleClass="commandButton"
+                                 icon="ui-icon-disk"
+                                 iconPos="#{langBean.styleFloat}"
+                                 ajax="false"
+                                 style="float:#{langBean.styleFloat}"                                                                   
+                                 actionListener="#{addEditClassLevelBean.saveClassLevel()}" />
+                <p:commandButton value="#{msgs.cancel}"
+                                 icon="ui-icon-cancel"  
+                                 iconPos="#{langBean.styleFloat}"
+                                 styleClass="commandButton"
+                                 immediate="true" 
+                                 style="float:#{langBean.styleFloat}"                                 
+                                 action="/hoffaz/registrar/manage_class_level.xhtml"  />                                   
+            </h:form>
+
+
+        </ui:decorate>         
+    </h:body>
+</html>
+

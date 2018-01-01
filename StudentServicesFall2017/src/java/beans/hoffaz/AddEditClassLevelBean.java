@@ -6,6 +6,8 @@
 package beans.hoffaz;
 
 import daos.hoffaz.ClassDefDao;
+import daos.hoffaz.ClassLevelDao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -15,8 +17,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import models.hoffaz.ClassDef;
-
-
+import models.hoffaz.ClassLevel;
 
 /**
  *
@@ -24,16 +25,17 @@ import models.hoffaz.ClassDef;
  */
 @Named(value = "addEditClassLevelBean")
 @ViewScoped
-public class AddEditClassLevelBean {
+public class AddEditClassLevelBean implements Serializable{
 
     /**
      * Creates a new instance of AddLevelClassBean
      */
     private final ClassLevelDao classLevelDao = new ClassLevelDao();
-    
+    private final ClassDefDao classDefDao = new ClassDefDao();
+
     private ArrayList<ClassDef> classDefList = new ArrayList<>();
-   
-   private int branchId;
+
+    private int branchId;
     private String branchName;
     private int centerId;
     private String centerName;
@@ -46,22 +48,216 @@ public class AddEditClassLevelBean {
     private String classDefDesc;
     private int levelId;
     private String levelName;
-    private String description;
+    private String levelDesc;
+    private Date insertDate;
     private int insertEmployeeId;
-    private String insertHostIp;    
-    private Date insertDate;      
-    private String insertHostOS;    
-    private int updatEmployeeId; 
-    private Date updateDate;      
-    private String updateHostIp;    
+    private String insertHostIp;
+    private String insertHostOS;
+    private Date updateDate;
+    private int updatEmployeeId;
+    private String updateHostIp;
     private String updateHostOS;
-    
+
     @Inject
     private SessionBean sessionBean;
-    
+
     public AddEditClassLevelBean() {
     }
+
+    public ArrayList<ClassDef> getClassDefList() {
+        return classDefList;
+    }
+
+    public void setClassDefList(ArrayList<ClassDef> classDefList) {
+        this.classDefList = classDefList;
+    }
+
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public int getCenterId() {
+        return centerId;
+    }
+
+    public void setCenterId(int centerId) {
+        this.centerId = centerId;
+    }
+
+    public String getCenterName() {
+        return centerName;
+    }
+
+    public void setCenterName(String centerName) {
+        this.centerName = centerName;
+    }
+
+    public int getClassID() {
+        return classID;
+    }
+
+    public void setClassID(int classID) {
+        this.classID = classID;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public int getGradeIdFrom() {
+        return gradeIdFrom;
+    }
+
+    public void setGradeIdFrom(int gradeIdFrom) {
+        this.gradeIdFrom = gradeIdFrom;
+    }
+
+    public String getGradeIdFromDesc() {
+        return gradeIdFromDesc;
+    }
+
+    public void setGradeIdFromDesc(String gradeIdFromDesc) {
+        this.gradeIdFromDesc = gradeIdFromDesc;
+    }
+
+    public int getGradeIdTo() {
+        return gradeIdTo;
+    }
+
+    public void setGradeIdTo(int gradeIdTo) {
+        this.gradeIdTo = gradeIdTo;
+    }
+
+    public String getGradeIdToDesc() {
+        return gradeIdToDesc;
+    }
+
+    public void setGradeIdToDesc(String gradeIdToDesc) {
+        this.gradeIdToDesc = gradeIdToDesc;
+    }
+
+    public String getClassDefDesc() {
+        return classDefDesc;
+    }
+
+    public void setClassDefDesc(String classDefDesc) {
+        this.classDefDesc = classDefDesc;
+    }
+
+    public int getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(int levelId) {
+        this.levelId = levelId;
+    }
+
+    public String getLevelName() {
+        return levelName;
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+
+    public String getLevelDesc() {
+        return levelDesc;
+    }
+
+    public void setLevelDesc(String levelDesc) {
+        this.levelDesc = levelDesc;
+    }
+
+    public Date getInsertDate() {
+        return insertDate;
+    }
+
+    public void setInsertDate(Date insertDate) {
+        this.insertDate = insertDate;
+    }
+
+    public int getInsertEmployeeId() {
+        return insertEmployeeId;
+    }
+
+    public void setInsertEmployeeId(int insertEmployeeId) {
+        this.insertEmployeeId = insertEmployeeId;
+    }
+
+    public String getInsertHostIp() {
+        return insertHostIp;
+    }
+
+    public void setInsertHostIp(String insertHostIp) {
+        this.insertHostIp = insertHostIp;
+    }
+
+    public String getInsertHostOS() {
+        return insertHostOS;
+    }
+
+    public void setInsertHostOS(String insertHostOS) {
+        this.insertHostOS = insertHostOS;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public int getUpdatEmployeeId() {
+        return updatEmployeeId;
+    }
+
+    public void setUpdatEmployeeId(int updatEmployeeId) {
+        this.updatEmployeeId = updatEmployeeId;
+    }
+
+    public String getUpdateHostIp() {
+        return updateHostIp;
+    }
+
+    public void setUpdateHostIp(String updateHostIp) {
+        this.updateHostIp = updateHostIp;
+    }
+
+    public String getUpdateHostOS() {
+        return updateHostOS;
+    }
+
+    public void setUpdateHostOS(String updateHostOS) {
+        this.updateHostOS = updateHostOS;
+    }
+
+    public SessionBean getSessionBean() {
+        return sessionBean;
+    }
+
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
+    }
     
+    
+
     @PostConstruct
     public void init() {
 
@@ -69,81 +265,85 @@ public class AddEditClassLevelBean {
         centerId = sessionBean.getCenterId();
         insertEmployeeId = Integer.parseInt(sessionBean.getUsername());
 
-        classLevelId = sessionBean.getSelectedclassID();
+        levelId = sessionBean.getSelectedItemId();
 
         try {
-            if (classID > 0) {
-                ClassDef classDef = classDefDao.getClassDef(branchId, centerId, classID);
+            if (levelId > 0) {
+                ClassLevel classLevel = classLevelDao.getClassLevel(branchId, centerId, classID, levelId);
 
-                this.classID = classDef.getClassID();
-                this.className = classDef.getClassName();
-                this.gradeIdFrom = classDef.getGradeIdFrom();
-                this.gradeIdFromDesc = classDef.getGradeIdFromDesc();
-                this.gradeIdTo = classDef.getGradeIdTo();
-                this.gradeIdToDesc = classDef.getGradeIdToDesc();
-                this.classDefDesc = classDef.getClassDefDesc();
-                this.branchId = classDef.getBranchId();
-                this.branchName = classDef.getBranchName();
-                this.centerId = classDef.getCenterId();
-                this.centerName = classDef.getCenterName();
-                this.insertEmployeeId = classDef.getInsertEmployeeId();
-                this.insertHostIp = classDef.getInsertHostIp();
-                this.insertDate = classDef.getInsertDate();
-                this.insertHostOS = classDef.getInsertHostOS();
-                this.updatEmployeeId = classDef.getUpdatEmployeeId();
-                this.updateDate = classDef.getUpdateDate();
-                this.updateHostIp = classDef.getUpdateHostIp();
-                this.updateHostOS = classDef.getUpdateHostOS();
+                this.branchId = classLevel.getBranchId();
+                this.branchName = classLevel.getBranchName();
+                this.centerId = classLevel.getCenterId();
+                this.centerName = classLevel.getCenterName();
+                this.classID = classLevel.getClassID();
+                this.className = classLevel.getClassName();
+                this.gradeIdFrom = classLevel.getGradeIdFrom();
+                this.gradeIdFromDesc = classLevel.getGradeIdFromDesc();
+                this.gradeIdTo = classLevel.getGradeIdTo();
+                this.gradeIdToDesc = classLevel.getGradeIdToDesc();
+                this.classDefDesc = classLevel.getClassDefDesc();
+                this.levelId = classLevel.getLevelId();
+                this.levelName = classLevel.getLevelName();
+                this.levelDesc = classLevel.getLevelDesc();
+                this.insertDate = classLevel.getInsertDate();
+                this.insertEmployeeId = classLevel.getInsertEmployeeId();
+                this.insertHostIp = classLevel.getInsertHostIp();
+                this.insertHostOS = classLevel.getInsertHostOS();
+                this.updateDate = classLevel.getUpdateDate();
+                this.updatEmployeeId = classLevel.getUpdatEmployeeId();
+                this.updateHostIp = classLevel.getUpdateHostIp();
+                this.updateHostOS = classLevel.getUpdateHostOS();
 
             }
-            
-            classGradeList = classGradeDao.getClassGradeList();
+
+            classDefList = classDefDao.buildClassDef(branchId, centerId);
 
         } catch (Exception ex) {
             Logger.getLogger(AddEditClassDefBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    
-    
-    public void saveClassDef() {
+    public void saveClassLevel() {
 
         int employeeId = Integer.parseInt(sessionBean.getUsername());
 
-        ClassDef classDef = new ClassDef();
+        //ClassDef classDef = new ClassDef();
+        ClassLevel classLevel = new ClassLevel();
 
         try {
 
-            classDef.setClassID(classID);
-            classDef.setClassName(className);
-            classDef.setGradeIdFrom(gradeIdFrom);
-            classDef.setGradeIdFromDesc(gradeIdFromDesc);
-            classDef.setGradeIdTo(gradeIdTo);
-            classDef.setGradeIdToDesc(gradeIdToDesc);
-            classDef.setClassDefDesc(classDefDesc);
+            classLevel.setClassID(classID);
+            classLevel.setClassName(className);
+            classLevel.setGradeIdFrom(gradeIdFrom);
+            classLevel.setGradeIdFromDesc(gradeIdFromDesc);
+            classLevel.setGradeIdTo(gradeIdTo);
+            classLevel.setGradeIdToDesc(gradeIdToDesc);
+            classLevel.setClassDefDesc(classDefDesc);
 
-            classDef.setBranchId(branchId);
-            classDef.setCenterId(centerId);
+            classLevel.setLevelId(levelId);
+            classLevel.setLevelName(levelName);
+            classLevel.setLevelDesc(levelDesc);
+
+            classLevel.setBranchId(branchId);
+            classLevel.setCenterId(centerId);
 
             if (sessionBean.getSelectedclassID() > 0) {
-                classDef.setUpdatEmployeeId(employeeId);
-                classDef.setUpdateDate(updateDate);
-                classDef.setUpdateHostIp(sessionBean.getRemoteAddress());
-                classDef.setUpdateHostOS(sessionBean.getRemoteHost());
-                classDefDao.updateClassDef(classDef);
+                classLevel.setUpdatEmployeeId(employeeId);
+                classLevel.setUpdateDate(updateDate);
+                classLevel.setUpdateHostIp(sessionBean.getRemoteAddress());
+                classLevel.setUpdateHostOS(sessionBean.getRemoteHost());
+                classLevelDao.updateClassLevel(classLevel);
             } else {
-                classDef.setInsertEmployeeId(employeeId);
-                classDef.setInsertDate(insertDate);
-                classDef.setInsertHostIp(sessionBean.getRemoteAddress());
-                classDef.setInsertHostOS(sessionBean.getRemoteHost());
-                classDefDao.insertClassDef(classDef);
+                classLevel.setInsertEmployeeId(employeeId);
+                classLevel.setInsertDate(insertDate);
+                classLevel.setInsertHostIp(sessionBean.getRemoteAddress());
+                classLevel.setInsertHostOS(sessionBean.getRemoteHost());
+                classLevelDao.insertClassLevel(classLevel);
             }
 
             //sessionBean.setClassDef(classDef);
-
             //sessionBean.navigate("/hoffaz/registrar/studentreport");
-            
-            sessionBean.navigate("/hoffaz/registrar/manage_class_def.xhtml");
+            sessionBean.navigate("/hoffaz/registrar/manage_class_level.xhtml");
 
         } catch (Exception ex) {
             Logger.getLogger(ClassDefDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -152,6 +352,4 @@ public class AddEditClassLevelBean {
 
     }
 
-
-    
 }

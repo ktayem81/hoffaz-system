@@ -6,111 +6,111 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>#{msgs.class_name}</title>
+        <title>#{msgs.class_name_en}</title>
     </h:head>
     <h:body>
-          <ui:decorate template="/app_templates/app_template.xhtml"> 
-    <h:form id="manage_class_def_form">  
-        
-        
-       <p:dataTable id="manage_class_def_table"
-                    styleClass="dataTable"
-                    var="class"
-                    value="#{manageClassDefsBean.classDefs}"                    
-                    selection="#{manageClassDefsBean.selectedClassDef}"
-                    rowKey="#{class.classID}"                    
-                    rows="10"     
-                    rowsPerPageTemplate="5,10,20"
-                    dir="#{langBean.dir}"
-                    emptyMessage="#{msgs.no_class_def}"
-                    paginator="true"
-                    paginatorPosition="top" 
-                    paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
-                     >
-					 
-					   
-            <f:facet name="header" id="header">
-                #{msgs.class_name}
-            </f:facet>   
-            
-           <p:ajax event="rowSelectRadio"
-                   update=":manage_class_def_form:manage_class_def_table"/>
-           
-            <p:column selectionMode="single" style="width:5%;text-align:center;"/>
-
-            <p:column headerText="#{msgs.class_number}"
-                      style="width:20%;"
-                      filterBy="#{class.classID}"
-                      filterMatchMode="contains"
-                      sortBy="#{class.classID}">                    
-                <h:outputText value="#{class.classID}"/>  
-            </p:column>
-            
-            <p:column headerText="#{msgs.class_name}"
-                      style="width:20%"
-                      filterBy="#{class.className}"
-                      filterMatchMode="contains"
-                      sortBy="#{class.className}">                    
-                <h:outputText value="#{class.className}"/>  
-            </p:column>
-            
-            <p:column headerText="#{msgs.from}"
-                      style="width:20%"
-                      filterBy="#{class.gradeIdFrom}"
-                      filterMatchMode="contains"
-                      sortBy="#{class.gradeIdFrom}">                    
-                <h:outputText value="#{class.gradeIdFromDesc}"/>  
-            </p:column>
-            
-            <p:column headerText="#{msgs.to}"
-                      style="width:20%"
-                      filterBy="#{class.gradeIdTo}"
-                      filterMatchMode="contains"
-                      sortBy="#{class.gradeIdTo}">                    
-                <h:outputText value="#{class.gradeIdToDesc}"/>  
-            </p:column>
-            
-            <p:column headerText="#{msgs.description}"
-                      style="width:20%">
-                      <h:outputText value="#{class.classDefDesc}"/>  
-            </p:column>
-           
-            <f:facet name="footer">
-                <p:toolbar style="border: none">
-                    <p:toolbarGroup align="#{languageBean.screenLeft}">
-                        <p:commandButton value="#{msgs.delete}"
-                                         icon="ui-icon-minus"                                  
-                                         iconPos="#{langBean.styleFloat}"
-                                         styleClass="commandButton"
-                                         style="float:#{langBean.styleFloat}"
-                                         update="@form"
-                                         disabled="#{manageClassDefsBean.selectedClassDef==null}" 
-                                         onclick="return confirm('#{msgs.confirm_delete_class_def}?');"
-                                         actionListener="#{manageClassDefsBean.deleteSelectedClassDef()}"
-                                         action="/hoffaz/registrar/manage_class_def.xhtml" />
-                        <p:commandButton value="#{msgs.edit}"
-                                         icon="ui-icon-pencil"                                  
-                                         iconPos="#{langBean.styleFloat}"
-                                         styleClass="commandButton"
-                                         style="float:#{langBean.styleFloat}"                                                                                                
-                                         disabled="#{manageClassDefsBean.selectedClassDef==null}"                                                 
-                                         actionListener="#{manageClassDefsBean.saveSelectedItemId()}"
-                                         action="/hoffaz/registrar/add_edit_class_def" />
-                    </p:toolbarGroup>
-                </p:toolbar>
-            </f:facet>
+        <ui:decorate template="/app_templates/app_template.xhtml"> 
+            <h:form id="manage_class_def_form">  
 
 
-        </p:dataTable>
+                <p:dataTable id="manage_class_def_table"
+                             styleClass="dataTable"
+                             var="class"
+                             value="#{manageClassDefsBean.classDefs}"                    
+                             selection="#{manageClassDefsBean.selectedClassDef}"
+                             rowKey="#{class.classID}"                    
+                             rows="10"     
+                             rowsPerPageTemplate="5,10,20"
+                             dir="#{langBean.dir}"
+                             emptyMessage="#{msgs.no_class_def}"
+                             paginator="true"
+                             paginatorPosition="top" 
+                             paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
+                             >
 
-        <p:commandButton value="#{msgs.add}"
-                         icon="ui-icon-plus"                                  
-                         iconPos="#{langBean.styleFloat}"
-                         styleClass="commandButton"
-                         style="float:#{langBean.styleFloat}" 
-                         actionListener="#{sessionBean.setSelectedclassID(-1)}"
-                         action="/hoffaz/registrar/add_edit_class_def" />                
-    </h:form>
+
+                    <f:facet name="header" id="header">
+                        #{msgs.class_name_en}
+                    </f:facet>   
+
+                    <p:ajax event="rowSelectRadio"
+                            update=":manage_class_def_form:manage_class_def_table"/>
+
+                    <p:column selectionMode="single" style="width:5%;text-align:center;"/>
+
+                    <p:column headerText="#{msgs.class_number_en}"
+                              style="width:20%;"
+                              filterBy="#{class.classID}"
+                              filterMatchMode="contains"
+                              sortBy="#{class.classID}">                    
+                        <h:outputText value="#{class.classID}"/>  
+                    </p:column>
+
+                    <p:column headerText="#{msgs.class_name_en}"
+                              style="width:20%"
+                              filterBy="#{class.className}"
+                              filterMatchMode="contains"
+                              sortBy="#{class.className}">                    
+                        <h:outputText value="#{class.className}"/>  
+                    </p:column>
+
+                    <p:column headerText="#{msgs.from}"
+                              style="width:20%"
+                              filterBy="#{class.gradeIdFrom}"
+                              filterMatchMode="contains"
+                              sortBy="#{class.gradeIdFrom}">                    
+                        <h:outputText value="#{class.gradeIdFromDesc}"/>  
+                    </p:column>
+
+                    <p:column headerText="#{msgs.to}"
+                              style="width:20%"
+                              filterBy="#{class.gradeIdTo}"
+                              filterMatchMode="contains"
+                              sortBy="#{class.gradeIdTo}">                    
+                        <h:outputText value="#{class.gradeIdToDesc}"/>  
+                    </p:column>
+
+                    <p:column headerText="#{msgs.description}"
+                              style="width:20%">
+                        <h:outputText value="#{class.classDefDesc}"/>  
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <p:toolbar style="border: none">
+                            <p:toolbarGroup align="#{languageBean.screenLeft}">
+                                <p:commandButton value="#{msgs.delete}"
+                                                 icon="ui-icon-minus"                                  
+                                                 iconPos="#{langBean.styleFloat}"
+                                                 styleClass="commandButton"
+                                                 style="float:#{langBean.styleFloat}"
+                                                 update="@form"
+                                                 disabled="#{manageClassDefsBean.selectedClassDef==null}" 
+                                                 onclick="return confirm('#{msgs.confirm_delete_class_def}?');"
+                                                 actionListener="#{manageClassDefsBean.deleteSelectedClassDef()}"
+                                                 action="/hoffaz/registrar/manage_class_def.xhtml" />
+                                <p:commandButton value="#{msgs.edit}"
+                                                 icon="ui-icon-pencil"                                  
+                                                 iconPos="#{langBean.styleFloat}"
+                                                 styleClass="commandButton"
+                                                 style="float:#{langBean.styleFloat}"                                                                                                
+                                                 disabled="#{manageClassDefsBean.selectedClassDef==null}"                                                 
+                                                 actionListener="#{manageClassDefsBean.saveSelectedItemId()}"
+                                                 action="/hoffaz/registrar/add_edit_class_def" />
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+
+
+                </p:dataTable>
+
+                <p:commandButton value="#{msgs.add}"
+                                 icon="ui-icon-plus"                                  
+                                 iconPos="#{langBean.styleFloat}"
+                                 styleClass="commandButton"
+                                 style="float:#{langBean.styleFloat}" 
+                                 actionListener="#{sessionBean.setSelectedclassID(-1)}"
+                                 action="/hoffaz/registrar/add_edit_class_def" />                
+            </h:form>
 
         </ui:decorate>   
     </h:body>
