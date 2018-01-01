@@ -24,7 +24,7 @@
                         <p:outputLabel value="#{msgs.center_name}:" for="center_name"/>
                         <p:inputText id="center_name"
                                      style="width:600px"
-                                     value=""                                      
+                                     value="#{addEditCenterBean.centerName}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
@@ -34,32 +34,24 @@
                        
 
                         <p:outputLabel value="#{msgs.branch_name}:" for="branch_name"/>
-                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                        <p:selectOneMenu value="#{addEditCenterBean.branchId}"
                                          id="branch_name"
                                          required="true"                                                                                  
                                          requiredMessage=" #{msgs.required_msg}">
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
-                            <f:selectItems var="type"
-                                           value="#{addEditEventBean.eventTypes}" 
-                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
-                                           itemValue="#{type.typeId}"/>                             
+                            <f:selectItems var="bra"
+                                           value="#{addEditCenterBean.branchList}" 
+                                           itemLabel="#{bra.branchName}"
+                                           itemValue="#{bra.branchId}"/>                             
                         </p:selectOneMenu>
                         <h:message for="brach_name" styleClass="errorMsg"/>                    
 
-                        <p:outputLabel value="#{msgs.center_num}:" for="center_num"/>
-                        <p:inputText id="center_num"
-                                     value="#{addEditEventBean.placeEn}"
-                                     style="width:600px"
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage=" #{msgs.required_msg}">
-                        </p:inputText> 
-                        <h:message for="center_num" styleClass="errorMsg"/>
+                        
 
                         <p:outputLabel value="#{msgs.tele}:" for="tele"/>
                         <p:inputText id="tele"
-                                     value="#{addEditEventBean.placeAr}"
+                                     value="#{addEditCenterBean.phone}"
                                      style="width:600px"
                                      required="true"
                                      maxlength="512"
@@ -69,7 +61,7 @@
 
                         <p:outputLabel value="#{msgs.comments}:" for="comments"/>
                         <p:inputText id="comments"
-                                     value="#{addEditEventBean.placeAr}"
+                                     value="#{addEditCenterBean.description}"
                                      style="width:600px"
                                      required="true"
                                      maxlength="512"
@@ -87,14 +79,14 @@
                                  iconPos="#{langBean.styleFloat}"
                                  ajax="false"
                                  style="float:#{langBean.styleFloat}"                                                                   
-                                 actionListener="#{addEditEventBean.saveEvent()}" />
+                                 actionListener="#{addEditCenterBean.saveCenter()}" />
                 <p:commandButton value="#{msgs.cancel}"
                                  icon="ui-icon-cancel"  
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  immediate="true" 
                                  style="float:#{langBean.styleFloat}"                                 
-                                 action="manage_events"  />                                   
+                                 action="/hoffaz/admin/add_edit_center.xhtml"  />                                   
             </h:form>
         
 </ui:decorate>         

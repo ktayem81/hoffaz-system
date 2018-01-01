@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+               <ui:decorate template="/app_templates/app_template.xhtml"> 
+              
+    <h:form id="manage_center_form">  
+        
+        
+       <p:dataTable id="manage_center_table"
+                    styleClass="dataTable"
+                    var="center"
+                    value="#{manageCeneterBean.centers}"                    
+                    selection="#{manageCeneterBean.selectedCenter}"
+                    rowKey="#{center.centerId}"                    
+                    rows="10"     
+                    rowsPerPageTemplate="5,10,20"
+                    dir="#{langBean.dir}"
+                    emptyMessage="#{msgs.no_centers}"
+                    paginator="true"
+                    paginatorPosition="top" 
+                    paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
+                     >
+					 
+					   
+            <f:facet name="header" id="header">
+                #{msgs.center_info}
+            </f:facet>   
+            
+           <p:ajax event="rowSelectRadio"
+                   update=":manage_center_form:manage_center_table"/>
+           
+            <p:column selectionMode="single" style="width:5%; text-align:center;"/>
+
+            <p:column headerText="#{msgs.center_num}"
+                      style="width:20%;"
+                      filterBy="#{center.centerId}"
+                      filterMatchMode="contains"
+                      sortBy="#{center.centerId}">                    
+                <h:outputText value="#{center.centerId}"/>  
+            </p:column>
+            
+            <p:column headerText="#{msgs.center_name}"
+                      style="width:20%;"
+                      filterBy="#{center.centerName}"
+                      filterMatchMode="contains"
+                      sortBy="#{center.centerName}">                    
+                <h:outputText value="#{center.centerName}"/>  
+            </p:column>
+            
+            <p:column headerText="#{msgs.branch_name}"
+                      style="width:20%"
+                      filterBy="#{center.branchDesc}"
+                      filterMatchMode="contains"
+                      sortBy="#{center.branchId}">                    
+                <h:outputText value="#{center.branchDesc}"/>  
+            </p:column>
+           
+            <p:column headerText="#{msgs.tele}"
+                      style="width:20%">                    
+                <h:outputText value="#{center.phone}"/>  
+            </p:column>
+           
+            <f:facet name="footer">
+                <p:toolbar style="border: none">
+                    <p:toolbarGroup align="#{languageBean.screenLeft}">
+                        <p:commandButton value="#{msgs.delete}"
+                                         icon="ui-icon-minus"                                  
+                                         iconPos="#{langBean.styleFloat}"
+                                         styleClass="commandButton"
+                                         style="float:#{langBean.styleFloat}"
+                                         update="@form"
+                                         disabled="#{manageCenterBean.selectedCenter==null}" 
+                                         onclick="return confirm('#{msgs.confirm_delete_center}?');"
+                                         actionListener="#{manageCenterBean.deleteSelectedCenter()}"
+                                         action="/hoffaz/admin/manage_center.xhtml" />
+                        
+                        <p:commandButton value="#{msgs.edit}"
+                                         icon="ui-icon-pencil"                                  
+                                         iconPos="#{langBean.styleFloat}"
+                                         styleClass="commandButton"
+                                         style="float:#{langBean.styleFloat}"                                                                                                
+                                         disabled="#{manageCenterBean.selectedCenter==null}"                                                 
+                                         actionListener="#{manageCenterBean.saveSelectedItemId()}"
+                                         action="/hoffaz/admin/add_edit_center.xhtml" />
+                    </p:toolbarGroup>
+                </p:toolbar>
+            </f:facet>
+
+
+        </p:dataTable>
+
+        <p:commandButton value="#{msgs.add}"
+                         icon="ui-icon-plus"                                  
+                         iconPos="#{langBean.styleFloat}"
+                         styleClass="commandButton"
+                         style="float:#{langBean.styleFloat}" 
+                         actionListener="#{sessionBean.setSelectedItemId(-1)}"
+                         action="/hoffaz/admin/add_edit_center.xhtml" />                
+    </h:form>
+
+        </ui:decorate>
+    </h:body>
+</html>
+

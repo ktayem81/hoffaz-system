@@ -129,7 +129,7 @@ public class AddEditBranchBean implements Serializable {
             governorateList = governorateDao.getGovernorateList();
 
         } catch (Exception ex) {
-            Logger.getLogger(AddEditClassDefBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddEditBranchBean.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

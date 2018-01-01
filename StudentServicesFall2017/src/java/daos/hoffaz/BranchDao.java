@@ -18,6 +18,32 @@ import models.hoffaz.Branch;
  * @author khaled
  */
 public class BranchDao extends ConnectionDao {
+    public ArrayList<Branch> branchList() throws Exception {
+        
+            ArrayList<Branch> branchList = new ArrayList<>();
+                        
+            Connection conn = getConnection();
+        
+        try {   
+            String sql = "SELECT B.BRANCHID,B.BRANCHNAME FROM BRANCH B";
+            
+            PreparedStatement ps = conn.prepareStatement(sql);            
+            
+            ResultSet rs = ps.executeQuery();           
+
+            while (rs.next()) {
+                branchList.add(populateBranch(rs)); 
+            }
+
+            rs.close();
+            ps.close();
+            
+            return branchList;  
+            
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
 
     public ArrayList<Branch> buildBranches()
             throws Exception {
