@@ -25,13 +25,14 @@ public class LangBean implements Serializable {
         dir = "rtl";            
         styleFloat= "right";
         linkLabel = "انجليزي";
-        /*locale = "en";
+        /*
+        locale = "en";
         lang = "en";        
         dir = "ltr";        
         styleFloat= "left";
         linkLabel = "Arabic";
-        isEnglish = true;*/
-        
+        isEnglish = true;
+        */
     }
     
     public String getLocale() {

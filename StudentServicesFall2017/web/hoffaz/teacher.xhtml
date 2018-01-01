@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"> 
+
+    <p:commandButton   value="#{msgs.grades_en}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                     action="teacher/studentgrades.xhtml">      
+    </p:commandButton>
+    
+     <p:commandButton   value="#{msgs.attendence_en}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                     action="teacher/studentattendence.xhtml">      
+    </p:commandButton>
+
+</ui:composition>

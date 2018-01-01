@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>#{msgs.payments_en}</title>
+    </h:head>
+
+    <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml"> 
+            <h:form id="fees"> 
+                <p:messages id="msgs" closable="true" globalOnly="true"/>
+
+                <p:panel header="#{msgs.fees_en}"                            
+                         style="min-height:300px; 
+                         direction:#{langBean.dir};margin-top:10px; font-size:10pt">
+                    <h:panelGrid id="pay_fees"
+                                 style="float: #{langBean.styleFloat};text-align: match-parent" 
+                                 columns="2"                                  
+                                 dir="#{langBean.dir}">                          
+                        <p:outputLabel value="#{msgs.student_name_en}/#{msgs.student_number_en}:" for="student_n"/>
+                        <p:inputText id="student_n"
+                                     style="width:170px"
+                                     value="#{addEditEventBean.nameEn}"                                    
+                                     >                                     
+                        </p:inputText>
+                        <h:message for="student_n" styleClass="errorMsg"/>
+                        <p:commandButton                    
+                            styleClass="searchButton"
+                            icon="ui-icon-search"
+                            iconPos="#{langBean.styleFloat}"
+                            ajax="false"
+                            style="float:#{langBean.styleFloat}"                                                                   
+                            actionListener="#{addEditEventBean.saveEvent()}" />
+
+
+
+
+                        <p:outputLabel/> <p:outputLabel/> <p:outputLabel/> 
+                        <p:outputLabel/> <p:outputLabel/> <p:outputLabel/> 
+                        <p:outputLabel value="#{msgs.student_name_en}:" for="student_name"/>
+                        <p:inputText id="student_name"
+                                     style="width:170px"
+                                     value="#{addEditEventBean.nameEn}"
+                                     readonly="true">                                     
+                        </p:inputText>                        
+                        <h:message for="student_name" styleClass="errorMsg"/>
+
+                        <p:outputLabel/> 
+                        <p:outputLabel value="#{msgs.semester_number_en}:" for="semester_number"/>                        
+                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                                         id="semester_number"
+                                         style="width:150px"
+                                         required="true"                                                                                  
+                                         requiredMessage=" #{msgs.required_msg}">
+                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                          itemValue=""/>
+                            <f:selectItems var="type"
+                                           value="#{addEditEventBean.eventTypes}" 
+                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
+                                           itemValue="#{type.typeId}"/>                             
+                        </p:selectOneMenu>
+                        <h:message for="semester_number" styleClass="errorMsg"/> 
+
+                        <p:outputLabel/> 
+                        <p:outputLabel value="#{msgs.account_en}:" for="account_fees"/>
+                        <p:inputText id="account_fees"
+                                     style="width:170px"
+                                     value="#{addEditEventBean.nameEn}"
+                                     readonly="true">                                     
+                        </p:inputText>
+                        <h:message for="account_fees" styleClass="errorMsg"/>
+
+                        <p:outputLabel/>                        
+                        <p:outputLabel value="#{msgs.amount_en}:" for="amount_fees"/>
+                        <p:inputText id="amount_fees"
+                                     style="width:170px"
+                                     value="#{addEditEventBean.nameEn}"
+                                     >                                     
+                        </p:inputText> 
+                        <h:message for="amount_fees" styleClass="errorMsg"/>
+
+                        <p:outputLabel/> 
+                        <p:commandButton value="#{msgs.save}"
+                                         styleClass="commandButton"
+                                         icon="ui-icon-disk"
+                                         iconPos="#{langBean.styleFloat}"
+                                         ajax="false"
+                                         style="float:#{langBean.styleFloat}"                                                                   
+                                         actionListener="#{addEditEventBean.saveEvent()}" />
+                        <p:commandButton value="#{msgs.cancel}"
+                                         icon="ui-icon-cancel"  
+                                         iconPos="#{langBean.styleFloat}"
+                                         styleClass="commandButton"
+                                         immediate="true" 
+                                         style="float:#{langBean.styleFloat}"                                 
+                                         action="manage_events"  />                                   
+
+                    </h:panelGrid>                  
+                </p:panel>>
+
+
+            </h:form> 
+
+      </ui:decorate>         
+    </h:body>
+</html>

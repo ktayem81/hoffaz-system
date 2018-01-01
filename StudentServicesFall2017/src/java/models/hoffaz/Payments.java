@@ -18,14 +18,14 @@ private int type;
 private int std_Id;
 private int month;
 private int year;
-Timestamp date;
+private Timestamp date;
 private int amount;
 private int insert_Employee_Id;
 private int inserthost_Ip;
-Timestamp insert_Date;
+private Timestamp insert_Date;
 private String insert_Host_Os;
 private int updat_Employee_Id;
-Timestamp update_Date;
+private Timestamp update_Date;
 private String update_HostIp;
 private String update_Host_Os;
 
