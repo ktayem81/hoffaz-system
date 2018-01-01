@@ -89,7 +89,8 @@ public class AddEditCenterBean implements Serializable {
     public void setBranchDesc(String branchDesc) {
         this.branchDesc = branchDesc;
     }
-
+@Inject
+    SessionBean sessionBean;
     public SessionBean getSessionBean() {
         return sessionBean;
     }
@@ -100,8 +101,7 @@ public class AddEditCenterBean implements Serializable {
     private int branchId;
     private String branchDesc;
 
-    @Inject
-    SessionBean sessionBean;
+    
     public AddEditCenterBean() {
     }
     @PostConstruct
