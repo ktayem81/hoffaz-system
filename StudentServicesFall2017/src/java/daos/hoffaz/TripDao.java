@@ -35,8 +35,8 @@ public class TripDao extends ConnectionDao{
                     + " ORDER BY T.TRIPID";
 
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                // ps.setInt(1, branchId);
-                // ps.setInt(2, centerId);
+                 ps.setInt(1, branchId);
+                 ps.setInt(2, centerId);
 
                 ResultSet rs = ps.executeQuery();
 
