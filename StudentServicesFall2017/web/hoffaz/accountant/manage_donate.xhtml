@@ -12,13 +12,12 @@
 
     <h:body>
         <ui:decorate template="/app_templates/app_template.xhtml"> 
-            <h:form id="manage_donates_form">  
-
-
+            <h:form id="manage_donates_form"> 
+                
                 <p:dataTable id="manage_donates_table"
                              styleClass="dataTable"
                              var="donate"
-                             value="#{addDonateBean.donates}"                                      
+                             value="#{manageDonateBean.donates}"                                      
                              rows="10"     
                              rowsPerPageTemplate="5,10,20"
                              dir="#{langBean.dir}"
@@ -32,29 +31,43 @@
                     <f:facet name="header" id="header">
                         #{msgs.donate_en}
                     </f:facet>   
+
                     <p:ajax event="rowSelectRadio"
                             update=":manage_donates_form:manage_donates_table"/>
+
                     <p:column headerText="#{msgs.number_en}"
                               style="width:15%;"
-                              filterBy="#{donate.donateid}"
+                              filterBy="#{donate.donateId}"
                               filterMatchMode="contains"
-                              sortBy="#{donate.donateid}">                    
-                        <h:outputText value="#{donate.donateid}"/>  
+                              sortBy="#{donate.donateId}">                    
+                        <h:outputText value="#{donate.donateId}"/>  
                     </p:column>
 
                     <p:column headerText="#{msgs.name}"
                               style="width:60%"
-                              filterBy="#{donate.donatername}"
+                              filterBy="#{donate.donaterName}"
                               filterMatchMode="contains"
-                              sortBy="#{donate.donatername}">                    
-                        <h:outputText value="#{donate.donatername}"/>  
+                              sortBy="#{donate.donaterName}">                    
+                        <h:outputText value="#{donate.donaterName}"/>  
                     </p:column>
+                    
+                    <p:column headerText="#{msgs.date}"
+                              style="width:60%"
+                              filterBy="#{donate.insertDate}"
+                              filterMatchMode="contains"
+                              sortBy="#{donate.insertDate}">                    
+                        <h:outputText value="#{donate.insertDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>  
+                    </p:column>
+                    
+                    
                     <p:column headerText="#{msgs.amount_en}"
                               style="width:25%"
-                              filterBy="#{donate.amount}"
+                              filterBy="#{donate.donateAmount}"
                               filterMatchMode="contains"
-                              sortBy="#{donate.amount}">                    
-                        <h:outputText value="#{donate.amount}"/>  
+                              sortBy="#{donate.donateAmount}">                    
+                        <h:outputText value="#{donate.donateAmount}"/>  
                     </p:column>
 
 
@@ -72,7 +85,7 @@
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  style="float:#{langBean.styleFloat}" 
-                                 action="add_donate.xhtml" />                
+                                 action="/hoffaz/Accountant/add_edit_donate.xhtml" />                
             </h:form>
 
         </ui:decorate>         
