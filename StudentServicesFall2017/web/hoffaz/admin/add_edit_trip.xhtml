@@ -22,57 +22,24 @@
                                  columns="3"                              
                                  dir="#{langBean.dir}">
                         
-                        <p:outputLabel value="#{msgs.branch_name}:" for="branch_name"/>
-                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
-                                         id="branch_name"
-                                         required="true"                                                                                  
-                                         requiredMessage=" #{msgs.required_msg}">
-                            <f:selectItem itemLabel="#{msgs.select_one}"
-                                          itemValue=""/>
-                            <f:selectItems var="type"
-                                           value="#{addEditEventBean.eventTypes}" 
-                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
-                                           itemValue="#{type.typeId}"/>                             
-                        </p:selectOneMenu>
-                        <h:message for="branch_name" styleClass="errorMsg"/> 
-                        <p:outputLabel value="#{msgs.center_name}:" for="center_name"/>
-                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
-                                         id="center_name"
-                                         required="true"                                                                                  
-                                         requiredMessage=" #{msgs.required_msg}">
-                            <f:selectItem itemLabel="#{msgs.select_one}"
-                                          itemValue=""/>
-                            <f:selectItems var="type"
-                                           value="#{addEditEventBean.eventTypes}" 
-                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
-                                           itemValue="#{type.typeId}"/>                             
-                        </p:selectOneMenu>
-                        <h:message for="center_name" styleClass="errorMsg"/> 
+                        
+                       
                         
                         <p:outputLabel value="#{msgs.trip_name}:" for="trip_name"/>
                         <p:inputText id="trip_name"
                                      style="width:300px"
-                                     value=""                                      
+                                     value="#{addEditTripBean.tripDescription}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
                         </p:inputText>
                         <h:message for="trip_name" styleClass="errorMsg"/>
                         
-                        <p:outputLabel value="#{msgs.trip_num}:" for="trip_num"/>
-                        <p:inputText id="trip_num"
-                                     style="width:300px"
-                                     value=""                                      
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage="#{msgs.required_msg}">
-                        </p:inputText>
-                        <h:message for="trip_num" styleClass="errorMsg"/>
-
+                       
                        
 
                         <p:outputLabel value="#{msgs.trip_driver}:" for="trip_driver"/>
-                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                        <p:selectOneMenu value="#{addEditTripBean.tripId}"
                                          id="trip_driver"
                                          required="true"                                                                                  
                                          requiredMessage=" #{msgs.required_msg}">
@@ -101,14 +68,14 @@
                                  iconPos="#{langBean.styleFloat}"
                                  ajax="false"
                                  style="float:#{langBean.styleFloat}"                                                                   
-                                 actionListener="#{addEditEventBean.saveEvent()}" />
+                                 actionListener="#{addEditTripBean.saveTrip()}" />
                 <p:commandButton value="#{msgs.cancel}"
                                  icon="ui-icon-cancel"  
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  immediate="true" 
                                  style="float:#{langBean.styleFloat}"                                 
-                                 action="manage_events"  />                                   
+                                 action="/hoffaz/admin/add_edit_trip.xhtml"  />                                   
             </h:form>
        
     

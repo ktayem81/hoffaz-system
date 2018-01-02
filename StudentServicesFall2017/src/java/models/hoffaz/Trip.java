@@ -12,10 +12,57 @@ package models.hoffaz;
 public class Trip {
     
     private int branchId; 
+    private String branchName;
     private int centerId; 
+    private String centerName;
     private int tripId; 
     private String tripDescription; 
     private int employeeId;
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public String getCenterName() {
+        return centerName;
+    }
+
+    public void setCenterName(String centerName) {
+        this.centerName = centerName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public String getThirdName() {
+        return thirdName;
+    }
+
+    public void setThirdName(String thirdName) {
+        this.thirdName = thirdName;
+    }
+    private String firstName;
+    private String secondName;
+    private String thirdName;
+    
+    
 
     public Trip() {
     }

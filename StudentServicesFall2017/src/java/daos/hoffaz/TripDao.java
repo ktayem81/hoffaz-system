@@ -18,7 +18,7 @@ import models.hoffaz.Trip;
  * @author khaled
  */
 public class TripDao extends ConnectionDao{
-       public ArrayList<Trip> buildLines(int branchId, int centerId)
+       public ArrayList<Trip> buildTrips(int branchId, int centerId)
             throws Exception {
 
         ArrayList<Trip> TripList = new ArrayList<>();
@@ -42,7 +42,7 @@ public class TripDao extends ConnectionDao{
 
                 while (rs.next()) {
                     
-                    TripList.add(populateNationality(rs));
+                    TripList.add(populateTrip(rs));
                 }
 
                 rs.close();
@@ -71,7 +71,7 @@ public class TripDao extends ConnectionDao{
             ResultSet rs = ps.executeQuery();           
 
             while (rs.next()) {
-                tripList.add(populateNationality(rs)); 
+                tripList.add(populateTrip(rs)); 
             }
 
             rs.close();
@@ -84,13 +84,18 @@ public class TripDao extends ConnectionDao{
         }
     }
     
-  private Trip populateNationality(ResultSet rs) throws SQLException {
+  private Trip populateTrip(ResultSet rs) throws SQLException {
       
         Trip trip = new Trip();
         
         trip.setBranchId(rs.getInt("BRANCHID"));
+        trip.setBranchName(rs.getString("BRANCHNAME"));
         trip.setCenterId(rs.getInt("CENTERID"));
+        trip.setCenterName(rs.getString("CENTERNAME"));
         trip.setEmployeeId(rs.getInt("EMPLOYEEID"));
+        trip.setFirstName(rs.getString("FIRSTNAME"));
+        trip.setSecondName(rs.getString("SECONDNAME"));
+        trip.setThirdName(rs.getString("THIRDNAME"));
         trip.setTripId(rs.getInt("TRIPID"));
         trip.setTripDescription(rs.getString("TRIPDESCRIPTION"));
         
@@ -187,6 +192,38 @@ public class TripDao extends ConnectionDao{
             ps.executeUpdate();
 
             ps.close();
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+     public Trip getTrip(int branchId, int centerId, int tripId) throws Exception {
+        try {   
+            Trip trip = null;
+            Connection conn = getConnection();
+            
+                    
+            String sql = "SELECT T.BRANCHID,B.BRANCHNAME,T.CENTERID,C.CENTERNAME,T.TRIPID,T.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,T.TRIPDESCRIPTION "
+                    + " FROM TRIP T "
+                    + " LEFT JOIN BRANCH B ON  T.BRANCHID=B.BRANCHID "
+                    + " LEFT JOIN CENTER C ON  T.BRANCHID=C.BRANCHID AND T.CENTERID=C.CENTERID "
+                    + " LEFT JOIN EMPLOYEES E ON  T.BRANCHID=E.BRANCHID AND T.CENTERID=E.CENTERID AND T.EMPLOYEEID=E.EMPLOYEEID "
+                    + " WHERE T.BRANCHID=? AND T.CENTERID=? AND T.TRIPID=?";
+            
+            PreparedStatement ps = conn.prepareStatement(sql);            
+            ps.setInt(1, branchId);
+            ps.setInt(2, centerId);
+            ps.setInt(3, tripId);
+            
+            ResultSet rs = ps.executeQuery();           
+
+            while (rs.next())  
+                trip = populateTrip(rs);
+            
+
+            rs.close();
+            ps.close();
+            
+            return trip;            
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }

@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml"> 
+              
+    <h:form id="manage_trip_form">  
+        
+        
+       <p:dataTable id="manage_trip_table"
+                    styleClass="dataTable"
+                    var="trip"
+                    value="#{manageTripBean.trips}"                    
+                    selection="#{manageTripBean.selectedTrip}"
+                    rowKey="#{trip.tripId}"                    
+                    rows="10"     
+                    rowsPerPageTemplate="5,10,20"
+                    dir="#{langBean.dir}"
+                    emptyMessage="#{msgs.no_trips}"
+                    paginator="true"
+                    paginatorPosition="top" 
+                    paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
+                     >
+					 
+					   
+            <f:facet name="header" id="header">
+                #{msgs.trip_info}
+            </f:facet>   
+            
+           <p:ajax event="rowSelectRadio"
+                   update=":manage_trip_form:manage_trip_table"/>
+           
+            <p:column selectionMode="single" style="width:5%; text-align:center;"/>
+
+            <p:column headerText="#{msgs.trip_num}"
+                      style="width:20%;"
+                      filterBy="#{trip.tripId}"
+                      filterMatchMode="contains"
+                      sortBy="#{trip.tripId}">                    
+                <h:outputText value="#{trip.tripId}"/>  
+            </p:column>
+            
+            <p:column headerText="#{msgs.trip_name}"
+                      style="width:20%;"
+                      filterBy="#{trip.tripDescription}"
+                      filterMatchMode="contains"
+                      sortBy="#{trip.tripDescription}">                    
+                <h:outputText value="#{trip.tripDescription}"/>  
+            </p:column>
+            
+            <p:column headerText="#{msgs.trip_driver}"
+                      style="width:20%"
+                      filterBy="#{trip.employeeId}"
+                      filterMatchMode="contains"
+                      sortBy="#{trip.employeeId}">                    
+                <h:outputText value="#{trip.firstName}"/>  
+            </p:column>
+           
+            
+           
+            <f:facet name="footer">
+                <p:toolbar style="border: none">
+                    <p:toolbarGroup align="#{languageBean.screenLeft}">
+                        <p:commandButton value="#{msgs.delete}"
+                                         icon="ui-icon-minus"                                  
+                                         iconPos="#{langBean.styleFloat}"
+                                         styleClass="commandButton"
+                                         style="float:#{langBean.styleFloat}"
+                                         update="@form"
+                                         disabled="#{manageTripBean.selectedTrip==null}" 
+                                         onclick="return confirm('#{msgs.confirm_delete_trip}?');"
+                                         actionListener="#{manageTripBean.deleteSelectedTrip()}"
+                                         action="/hoffaz/admin/manage_trip.xhtml" />
+                        
+                        <p:commandButton value="#{msgs.edit}"
+                                         icon="ui-icon-pencil"                                  
+                                         iconPos="#{langBean.styleFloat}"
+                                         styleClass="commandButton"
+                                         style="float:#{langBean.styleFloat}"                                                                                                
+                                         disabled="#{manageTripBean.selectedTrip==null}"                                                 
+                                         actionListener="#{manageTripBean.saveSelectedItemId()}"
+                                         action="/hoffaz/admin/add_edit_trip.xhtml" />
+                    </p:toolbarGroup>
+                </p:toolbar>
+            </f:facet>
+
+
+        </p:dataTable>
+
+        <p:commandButton value="#{msgs.add}"
+                         icon="ui-icon-plus"                                  
+                         iconPos="#{langBean.styleFloat}"
+                         styleClass="commandButton"
+                         style="float:#{langBean.styleFloat}" 
+                         actionListener="#{sessionBean.setSelectedItemId(-1)}"
+                         action="/hoffaz/admin/add_edit_trip.xhtml"/>                
+    </h:form>
+
+        </ui:decorate>
+    </h:body>
+</html>
+
