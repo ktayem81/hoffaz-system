@@ -300,4 +300,35 @@ public class StudentsDao extends ConnectionDao {
             throw new SQLException(e.getMessage());
         }
     }
+      
+    public boolean checkNationalId(int branchId, int centerId, int natId) throws Exception {
+
+        try {
+            int nationalCount = 0;
+            Connection conn = getConnection();
+
+            String sql = "SELECT COUNT(*) AS NATID"
+                    + " FROM STUDENTS S "
+                    + " WHERE S.BRANCHID=? AND S.CENTERID=? AND S.NATIONALITYNUMBER=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, branchId);
+            ps.setInt(2, centerId);
+            ps.setInt(3, natId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                nationalCount = rs.getInt("NATID");
+            }
+
+            rs.close();
+            ps.close();
+
+            return nationalCount > 0;
+
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
 }

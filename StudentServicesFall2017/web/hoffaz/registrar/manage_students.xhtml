@@ -30,10 +30,29 @@
                     paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
                      >
 					 
-					   
-            <f:facet name="header" id="header">
-                #{msgs.student}
-            </f:facet>   
+	
+           
+           <f:facet name="header" id="header">
+            <h:commandLink>
+                <p:graphicImage name="/icons/excel.png" width="24"/>
+                <p:dataExporter type="xls" target="manage_student_table" fileName="studens" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/icons/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="manage_student_table" fileName="studens"/>
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/icons/csv.png" width="24"/>
+                <p:dataExporter type="csv" target="manage_student_table" fileName="studens" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/icons/xml.png" width="24"/>
+                <p:dataExporter type="xml" target="manage_student_table" fileName="studens" />
+            </h:commandLink>
+        </f:facet>
             
            <p:ajax event="rowSelectRadio"
                    update=":manage_student_form:manage_student_table"/>

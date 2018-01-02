@@ -122,8 +122,8 @@ public class TripDao extends ConnectionDao{
         }
 
         String sql = "INSERT INTO TRIP T "
-                + "       (T.TRIPID,T.EMPLOYEEID,T.TRIPDESCRIPTION) "
-                + "           VALUES ((SELECT NVL(MAX(TRIPID),0)+1 AS tripId FROM TRIP WHERE BRANCHID=? AND CENTERID=?),?,?) ";
+                + "       (T.BRANCHID, T.CENTERID,T.TRIPID,T.EMPLOYEEID,T.TRIPDESCRIPTION) "
+                + "           VALUES (?,?,?,?,?) ";
 
         PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -131,8 +131,11 @@ public class TripDao extends ConnectionDao{
             
 
            
-            ps.setInt(1, trip.getEmployeeId());
-            ps.setString(2, trip.getTripDescription());
+            ps.setInt(1, trip.getBranchId());
+            ps.setInt(2, trip.getCenterId());
+            ps.setInt(3, trip.getTripId());
+            ps.setInt(4, trip.getEmployeeId());
+            ps.setString(5, trip.getTripDescription());
 
             ps.executeUpdate();
 

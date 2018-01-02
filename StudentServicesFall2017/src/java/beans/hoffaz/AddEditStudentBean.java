@@ -10,12 +10,17 @@ import daos.hoffaz.NationalityDao;
 import daos.hoffaz.TripDao;
 import daos.hoffaz.TripDetailDao;
 import java.io.Serializable;
+import static java.rmi.server.LogStream.log;
 import java.util.Date;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -439,6 +444,58 @@ public class AddEditStudentBean implements Serializable{
         }
     }
     
+    public void validateNationalNumber(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+         
+        int natId = (int) value; 
+        boolean check=false; 
+        
+        try {
+            check = studentDao.checkNationalId(sessionBean.getBranchId(), sessionBean.getCenterId(), natId);
+        } catch (Exception ex) {
+            Logger.getLogger(AddEditStudentBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        String msgE = "حقل اجباري؟ ";
+        String msgU = " الرقم الوطني مكرر يرجى التأكد منه!";
+        if(natId==0){
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, msgE, msgE));
+        
+        }
+        else if (check) {
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, msgU, msgU));
+        }
+    }
+    
+    public void validateTripId(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+             
+        String msgE = "حقل اجباري؟ ";
+        int tripIdv = (int) value;
+        
+        if(tripIdv==0){
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, msgE, msgE));
+        }
+        
+    }
+    
+    public void validateStopId(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+             
+        String msgE = "حقل اجباري؟ ";
+        int stopIdv = (int) value;
+        
+        if(stopIdv==0){
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, msgE, msgE));
+        }
+    }
+    
+    public void resetTransportation()  {
+        if(!transportation){
+       this.tripId=0;
+       this.stopId=0;
+        }
+    }
+
+
+    
     public void saveStudent() {
         
         int employeeId = Integer.parseInt(sessionBean.getUsername());
@@ -478,7 +535,6 @@ public class AddEditStudentBean implements Serializable{
                 student.setInsertHostOS(sessionBean.getRemoteHost());
                 studentDao.insertStudent(student);
             }
-            
             
             sessionBean.setStudent(student);
             

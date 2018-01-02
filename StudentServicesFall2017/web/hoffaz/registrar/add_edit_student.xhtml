@@ -90,9 +90,11 @@
                     <p:outputLabel value="#{msgs.nationalty_id_en}:" for="nationalty_id"/>
                     <p:inputText id="nationalty_id"
                                  style="width:170px"
-                                 value="#{addEditStudentBean.nationalityNumber}"                                      
-                                 required="true"
-                                 requiredMessage="#{msgs.required_msg}">
+                                 value="#{addEditStudentBean.nationalityNumber}" 
+                                 required="true" 
+                                 requiredMessage="#{msgs.required_msg}"
+                                 validator="#{addEditStudentBean.validateNationalNumber}"
+                                 >
                     </p:inputText>
                     <h:message for="nationalty_id" styleClass="errorMsg"/> 
                     <p:outputLabel/><p:outputLabel/>                        
@@ -180,19 +182,21 @@
                     <p:selectBooleanCheckbox id="line_checkbox"
                                              value="#{addEditStudentBean.transportation}" 
                                              style="float:#{langBean.styleFloat}">
+                        <p:ajax event="change" update="@form" listener="#{addEditStudentBean.resetTransportation}"/>
                     </p:selectBooleanCheckbox>
-                    <h:message for="line_checkbox" styleClass="errorMsg"/>
-
-                    <p:outputLabel/><p:outputLabel/>
+                    
+                    <p:outputLabel/><p:outputLabel/><p:outputLabel/>
 
                     <p:outputLabel value="#{msgs.transportation_line_en}:" for="transportation_line"/>
 
                     <p:selectOneMenu value="#{addEditStudentBean.tripId}"
                                      id="transportation_line"
-                                     style="width:170px; float:#{langBean.styleFloat}; text-align:#{langBean.styleFloat};">
-                        <p:ajax listener="#{addEditStudentBean.onTripIdChange}" update="stop_area" />
+                                     style="width:170px; float:#{langBean.styleFloat}; text-align:#{langBean.styleFloat};"
+                                     disabled="#{addEditStudentBean.transportation==false}"
+                                     validator="#{addEditStudentBean.validateTripId}">
+                        <p:ajax update="transportation_line,stop_area" listener="#{addEditStudentBean.onTripIdChange}"/>
                         <f:selectItem itemLabel="#{msgs.select_line}" 
-                                      itemValue=""/>
+                                      itemValue="0"/>
                         <f:selectItems var="trip"
                                        value="#{addEditStudentBean.tripList}" 
                                        itemLabel="#{trip.tripDescription}"
@@ -206,9 +210,11 @@
 
                     <p:selectOneMenu value="#{addEditStudentBean.stopId}"
                                      id="stop_area"
-                                     style="width:170px; float:#{langBean.styleFloat}">
+                                     style="width:170px; float:#{langBean.styleFloat}"
+                                     disabled="#{addEditStudentBean.transportation==false}"
+                                     validator="#{addEditStudentBean.validateStopId}">
                         <f:selectItem itemLabel="#{msgs.select_stop}"
-                                      itemValue=""/>
+                                      itemValue="0"/>
                         <f:selectItems var="tripDetail"
                                        value="#{addEditStudentBean.tripDetailList}" 
                                        itemLabel="#{tripDetail.stopDescription}"
