@@ -143,7 +143,8 @@ public class StudentsDao extends ConnectionDao {
             java.util.Date date = new java.util.Date();
             long t = date.getTime();
             java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(t);
-           
+            student.setInsertDate(sqlTimestamp);
+            
             ps.setInt(1, student.getBranchId());
             ps.setInt(2, student.getCenterId());
             ps.setString(3, student.getFirstName());
@@ -162,9 +163,9 @@ public class StudentsDao extends ConnectionDao {
             ps.setInt(16, student.getTripId());
             ps.setInt(17, student.getStopId());
             ps.setString(18, student.getAddressDetails());
-            ps.setBoolean(19, student.getTransportation());
+            ps.setBoolean(19, student.isTransportation());
             ps.setInt(20, student.getInsertEmployeeId());
-            ps.setTimestamp(21, sqlTimestamp);
+            ps.setTimestamp(21, student.getInsertDate());
             ps.setString(22, student.getInsertHostIp());
             ps.setString(23, student.getInsertHostOS());
             //ps.setInt      (24, student.getUpdatEmployeeId());
@@ -214,6 +215,7 @@ public class StudentsDao extends ConnectionDao {
             java.util.Date date = new java.util.Date();
             long t = date.getTime();
             java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(t);
+            student.setUpdateDate(sqlTimestamp);
             
             ps.setString(1, student.getFirstName());
             ps.setString(2, student.getSecondName());
@@ -229,9 +231,9 @@ public class StudentsDao extends ConnectionDao {
             ps.setInt(12, student.getTripId());
             ps.setInt(13, student.getStopId());
             ps.setString(14, student.getAddressDetails());
-            ps.setInt(15, (student.getTransportation()==true?1:0));
+            ps.setInt(15, (student.isTransportation()==true?1:0));
             ps.setInt(16, student.getUpdatEmployeeId());
-            ps.setTimestamp(17, sqlTimestamp);
+            ps.setTimestamp(17, student.getUpdateDate());
             ps.setString(18, student.getUpdateHostIp());
             ps.setString(19, student.getUpdateHostOS());
             ps.setInt(20, student.getStudentId());

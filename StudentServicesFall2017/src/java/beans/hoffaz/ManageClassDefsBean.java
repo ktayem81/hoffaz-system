@@ -74,7 +74,7 @@ public class ManageClassDefsBean implements Serializable {
     }
 
     public void saveSelectedItemId() {
-        sessionBean.setSelectedclassID(selectedClassDef.getClassID());
+        sessionBean.setSelectedItemId(selectedClassDef.getClassID());
     }
 
     public void onRowSelect(SelectEvent classDef) {

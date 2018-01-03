@@ -5,6 +5,7 @@
  */
 package models.hoffaz;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -40,43 +41,14 @@ public class Student {
     private String transportationDesc; 
     private int insertEmployeeId;
     private String insertHostIp;    
-    private Date insertDate;      
+    private Timestamp insertDate;      
     private String insertHostOS;    
     private int updatEmployeeId; 
-    private Date updateDate;      
+    private Timestamp updateDate;      
     private String updateHostIp;    
     private String updateHostOS;
 
     public Student() {
-    }
-
-    public Student(int studentId, String firstName, String secondName, String thirdName, String familyName, Date birthDate, int sexId, Date dateOfJoin, int nationalityId, int nationalityNumber, int phone, int whatsup, int branchId, int centerId, int tripId, int stopId, String addressDetails, boolean transportation, int insertEmployeeId, String insertHostIp, Date insertDate, String insertHostOS, int updatEmployeeId, Date updateDate, String updateHostIp, String updateHostOS) {
-        this.studentId = studentId;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.thirdName = thirdName;
-        this.familyName = familyName;
-        this.birthDate = birthDate;
-        this.sexId = sexId;
-        this.dateOfJoin = dateOfJoin;
-        this.nationality = nationalityId;
-        this.nationalityNumber = nationalityNumber;
-        this.phone = phone;
-        this.whatsup = whatsup;
-        this.branchId = branchId;
-        this.centerId = centerId;
-        this.tripId = tripId;
-        this.stopId = stopId;
-        this.addressDetails = addressDetails;
-        this.transportation = transportation;
-        this.insertEmployeeId = insertEmployeeId;
-        this.insertHostIp = insertHostIp;
-        this.insertDate = insertDate;
-        this.insertHostOS = insertHostOS;
-        this.updatEmployeeId = updatEmployeeId;
-        this.updateDate = updateDate;
-        this.updateHostIp = updateHostIp;
-        this.updateHostOS = updateHostOS;
     }
 
     public int getStudentId() {
@@ -155,8 +127,8 @@ public class Student {
         return nationality;
     }
 
-    public void setNationality(int nationalityId) {
-        this.nationality = nationalityId;
+    public void setNationality(int nationality) {
+        this.nationality = nationality;
     }
 
     public String getNationalityDesc() {
@@ -263,7 +235,7 @@ public class Student {
         this.addressDetails = addressDetails;
     }
 
-    public boolean getTransportation() {
+    public boolean isTransportation() {
         return transportation;
     }
 
@@ -295,11 +267,11 @@ public class Student {
         this.insertHostIp = insertHostIp;
     }
 
-    public Date getInsertDate() {
+    public Timestamp getInsertDate() {
         return insertDate;
     }
 
-    public void setInsertDate(Date insertDate) {
+    public void setInsertDate(Timestamp insertDate) {
         this.insertDate = insertDate;
     }
 
@@ -319,11 +291,11 @@ public class Student {
         this.updatEmployeeId = updatEmployeeId;
     }
 
-    public Date getUpdateDate() {
+    public Timestamp getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
     }
 
@@ -342,6 +314,7 @@ public class Student {
     public void setUpdateHostOS(String updateHostOS) {
         this.updateHostOS = updateHostOS;
     }
+
     
     
 }

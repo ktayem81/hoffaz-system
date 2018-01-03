@@ -105,7 +105,7 @@ public class ManageClassLevelsBean implements Serializable{
     }
 
     public void saveSelectedItemId() {
-        sessionBean.setSelectedclassID(selectedClassLevel.getLevelId());
+        sessionBean.setSelectedItemId(selectedClassLevel.getLevelId());
     }
 
     public void onRowSelect(SelectEvent classLevel) {

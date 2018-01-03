@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{msgs.semester_desc_en}</title>
+    </h:head>
+    <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml"> 
+
+            <h:form id="add_semester">            
+                <p:messages id="msgs" closable="true" globalOnly="true"/>
+
+                <p:panel header="#{msgs.add_semester_en}"                            
+                         style="min-height:300px; 
+                         direction:#{langBean.dir};margin-top:10px; font-size:10pt">
+                    <h:panelGrid id="add"
+                                 style="float: #{langBean.styleFloat};text-align: right" 
+                                 columns="3" 
+
+                                 dir="#{langBean.dir}">  
+                        
+                        <p:outputLabel value="#{msgs.semester_desc_en}:" for="semester_id"/>
+                                 
+                        <p:selectOneMenu value="#{addEditSemesterBean.semesterId}"
+                                     id="semester_id"
+                                     style="width:170px; float:#{langBean.styleFloat} direction:#{langBean.dir}"
+                                     required="true" panelStyle="float:#{langBean.styleFloat}"                                                                                  
+                                     requiredMessage=" #{msgs.required_msg}">
+                        <f:selectItem itemLabel="#{msgs.select_one}"
+                                      itemValue=""/>
+                        <f:selectItems var="semesterDef"
+                                       value="#{addEditSemesterBean.semesterDefList}" 
+                                       itemLabel="#{semesterDef.semesterDesc}"
+                                       itemValue="#{semesterDef.semesterId}"/>                             
+                    </p:selectOneMenu>
+                        <h:message for="semester_id" styleClass="errorMsg"/>
+
+
+                        <p:outputLabel value="#{msgs.year_en}:" for="semester_year"/>
+                        <p:inputText id="semester_year"
+                                     style="width:170px"
+                                     value="#{addEditSemesterBean.semesterYear}"                                      
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage="#{msgs.required_msg}">
+                        </p:inputText>
+                        <h:message for="semester_year" styleClass="errorMsg"/>
+
+                        <p:outputLabel value="#{msgs.from}:" for="semester_begin"/>
+                        <p:calendar id="semester_begin"
+                                    value="#{addEditSemesterBean.semesterBegin}"
+                                    showOn="button"
+                                    dir="#{langBean.dir}"
+                                    pattern="dd-MM-yyyy" 
+                                    navigator="true"
+                                    required="true" 
+
+                                    requiredMessage=" #{msgs.required_msg}"
+                                    style="width:170px;"/> 
+                        <h:message for="semester_begin" styleClass="errorMsg"/>
+
+                        <p:outputLabel value="#{msgs.to}:" for="semester_end"/>
+                        <p:calendar id="semester_end"
+                                    value="#{addEditSemesterBean.semesterEnd}"
+                                    showOn="button"
+                                    dir="#{langBean.dir}"
+                                    pattern="dd-MM-yyyy" 
+                                    navigator="true"
+                                    required="true" 
+
+                                    requiredMessage=" #{msgs.required_msg}"
+                                    style="width:170px;"/> 
+                        
+                        <h:message for="semester_end" styleClass="errorMsg"/>
+                        
+                        <p:outputLabel value="#{msgs.description}:" for="semester_desc"/>
+                        <p:inputText id="semester_desc"
+                                     style="width:170px"
+                                     value="#{addEditSemesterBean.semesterDesc}">
+                        </p:inputText>
+                        <h:message for="semester_desc" styleClass="errorMsg"/>
+
+
+                    </h:panelGrid>
+
+
+                </p:panel>
+
+                <p:commandButton value="#{msgs.save}"
+                                 styleClass="commandButton"
+                                 icon="ui-icon-disk"
+                                 iconPos="#{langBean.styleFloat}"
+                                 ajax="false"
+                                 style="float:#{langBean.styleFloat}"                                                                   
+                                 actionListener="#{addEditSemesterBean.saveSemester()}" />
+                <p:commandButton value="#{msgs.cancel}"
+                                 icon="ui-icon-cancel"  
+                                 iconPos="#{langBean.styleFloat}"
+                                 styleClass="commandButton"
+                                 immediate="true" 
+                                 style="float:#{langBean.styleFloat}"                                 
+                                 action="/hoffaz/registrar/manage_semesters.xhtml"  />                                   
+            </h:form>
+
+        </ui:decorate>
+    </h:body>
+</html>
+
+

@@ -28,6 +28,7 @@ import org.primefaces.event.SelectEvent;
 public class ManageStudentsBean implements Serializable {
 
     private Student selectedStudent;
+    
     private final StudentsDao studentsDao = new StudentsDao();
     private ArrayList<Student> students;
 
@@ -78,7 +79,7 @@ public class ManageStudentsBean implements Serializable {
     }
 
     public void saveSelectedStudentId() {
-        sessionBean.setSelectedStudentId(selectedStudent.getStudentId());
+        sessionBean.setSelectedItemId(selectedStudent.getStudentId());
     }
 
     public void onRowSelect(SelectEvent student) {

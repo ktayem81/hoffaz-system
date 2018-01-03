@@ -236,7 +236,7 @@ public class AddEditClassDefBean implements Serializable{
         centerId = sessionBean.getCenterId();
         insertEmployeeId = Integer.parseInt(sessionBean.getUsername());
 
-        classID = sessionBean.getSelectedclassID();
+        classID = sessionBean.getSelectedItemId();
 
         try {
             if (classID > 0) {
@@ -292,7 +292,7 @@ public class AddEditClassDefBean implements Serializable{
             classDef.setBranchId(branchId);
             classDef.setCenterId(centerId);
 
-            if (sessionBean.getSelectedclassID() > 0) {
+            if (sessionBean.getSelectedItemId() > 0) {
                 classDef.setUpdatEmployeeId(employeeId);
                 classDef.setUpdateDate(updateDate);
                 classDef.setUpdateHostIp(sessionBean.getRemoteAddress());

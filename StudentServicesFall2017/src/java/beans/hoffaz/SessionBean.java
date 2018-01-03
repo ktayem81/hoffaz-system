@@ -8,6 +8,7 @@ import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import models.hoffaz.Semester;
 import models.hoffaz.Student;
 
 /**
@@ -35,8 +36,8 @@ public class SessionBean implements Serializable {
     private String remoteHost;
     
     private Student student;
-    private int selectedStudentId;
-    private int selectedclassID;
+    private Semester selectedSemester;
+    //private int selectedStudentId;
 
     public String getRoleDescription() {
         return roleDescription;
@@ -141,25 +142,17 @@ public class SessionBean implements Serializable {
         this.student = student;
     }
 
-    public int getSelectedStudentId() {
-        return selectedStudentId;
+    public Semester getSelectedSemester() {
+        return selectedSemester;
     }
 
-    public void setSelectedStudentId(int selectedStudentId) {
-        this.selectedStudentId = selectedStudentId;
+    public void setSelectedSemester(Semester selectedSemester) {
+        this.selectedSemester = selectedSemester;
     }
 
-    public int getSelectedclassID() {
-        return selectedclassID;
-    }
-
-    public void setSelectedclassID(int selectedclassID) {
-        this.selectedclassID = selectedclassID;
-    }
-    
-    
     
 
+        
     public void login() throws Exception {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         boolean success = false;
@@ -249,8 +242,6 @@ public class SessionBean implements Serializable {
     public void resetData(){
       this.student = null;
       this.selectedItemId=0;
-      this.selectedStudentId=0;
-      this.selectedStudentId=0;
     }
 
     public void navigate(String url) {

@@ -327,7 +327,7 @@ public class AddEditClassLevelBean implements Serializable{
             classLevel.setBranchId(branchId);
             classLevel.setCenterId(centerId);
 
-            if (sessionBean.getSelectedclassID() > 0) {
+            if (sessionBean.getSelectedItemId() > 0) {
                 classLevel.setUpdatEmployeeId(employeeId);
                 classLevel.setUpdateDate(updateDate);
                 classLevel.setUpdateHostIp(sessionBean.getRemoteAddress());

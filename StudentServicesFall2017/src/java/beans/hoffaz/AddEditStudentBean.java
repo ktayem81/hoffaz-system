@@ -10,7 +10,7 @@ import daos.hoffaz.NationalityDao;
 import daos.hoffaz.TripDao;
 import daos.hoffaz.TripDetailDao;
 import java.io.Serializable;
-import static java.rmi.server.LogStream.log;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import java.util.ArrayList;
@@ -73,10 +73,10 @@ public class AddEditStudentBean implements Serializable{
     private String transportationDesc; 
     private int insertEmployeeId;
     private String insertHostIp;    
-    private Date insertDate;      
+    private Timestamp insertDate;      
     private String insertHostOS;    
     private int updatEmployeeId; 
-    private Date updateDate;      
+    private Timestamp updateDate;      
     private String updateHostIp;    
     private String updateHostOS;
 
@@ -301,11 +301,11 @@ public class AddEditStudentBean implements Serializable{
         this.insertHostIp = insertHostIp;
     }
 
-    public Date getInsertDate() {
+    public Timestamp getInsertDate() {
         return insertDate;
     }
 
-    public void setInsertDate(Date insertDate) {
+    public void setInsertDate(Timestamp insertDate) {
         this.insertDate = insertDate;
     }
 
@@ -325,11 +325,11 @@ public class AddEditStudentBean implements Serializable{
         this.updatEmployeeId = updatEmployeeId;
     }
 
-    public Date getUpdateDate() {
+    public Timestamp getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
     }
 
@@ -388,7 +388,7 @@ public class AddEditStudentBean implements Serializable{
         centerId = sessionBean.getCenterId();
         insertEmployeeId = Integer.parseInt(sessionBean.getUsername());
 
-        studentId = sessionBean.getSelectedStudentId();
+        studentId = sessionBean.getSelectedItemId();
 
         try {
             if (studentId > 0) {
@@ -416,7 +416,7 @@ public class AddEditStudentBean implements Serializable{
                 this.stopId = student.getStopId();
                 this.stopDesc = student.getStopDesc();
                 this.addressDetails = student.getAddressDetails();
-                this.transportation = student.getTransportation();
+                this.transportation = student.isTransportation();
                 this.transportationDesc = student.getTransportationDesc();
                 this.insertEmployeeId = student.getInsertEmployeeId();
                 this.insertHostIp = student.getInsertHostIp();
@@ -461,7 +461,7 @@ public class AddEditStudentBean implements Serializable{
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, msgE, msgE));
         
         }
-        else if (check) {
+        else if (check && studentId == 0) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, msgU, msgU));
         }
     }
@@ -522,7 +522,7 @@ public class AddEditStudentBean implements Serializable{
             student.setAddressDetails(addressDetails);
             student.setTransportation(transportation);
        
-            if (sessionBean.getSelectedStudentId() > 0) {
+            if (sessionBean.getSelectedItemId() > 0) {
                 student.setUpdatEmployeeId(employeeId);
                 student.setUpdateDate(updateDate);
                 student.setUpdateHostIp(sessionBean.getRemoteAddress());
