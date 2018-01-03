@@ -62,7 +62,13 @@ public class TripDao extends ConnectionDao{
             Connection conn = getConnection();
         
         try {   
-            String sql = "SELECT * FROM TRIP WHERE BRANCHID=? AND CENTERID=?";
+            String sql = "SELECT T.BRANCHID,B.BRANCHNAME,T.CENTERID,C.CENTERNAME,T.TRIPID,T.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,T.TRIPDESCRIPTION "
+                    + " FROM TRIP T "
+                    + " LEFT JOIN BRANCH B ON  T.BRANCHID=B.BRANCHID "
+                    + " LEFT JOIN CENTER C ON  T.BRANCHID=C.BRANCHID AND T.CENTERID=C.CENTERID "
+                    + " LEFT JOIN EMPLOYEES E ON  T.BRANCHID=E.BRANCHID AND T.CENTERID=E.CENTERID AND T.EMPLOYEEID=E.EMPLOYEEID "
+                    + " WHERE T.BRANCHID=? AND T.CENTERID=?"
+                    + " ORDER BY T.TRIPID";
             
             PreparedStatement ps = conn.prepareStatement(sql);            
             

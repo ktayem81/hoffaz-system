@@ -20,52 +20,11 @@ public class Trip implements Serializable {
     private int tripId; 
     private String tripDescription; 
     private int employeeId;
-
-    public String getBranchName() {
-        return branchName;
-    }
-
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
-    }
-
-    public String getCenterName() {
-        return centerName;
-    }
-
-    public void setCenterName(String centerName) {
-        this.centerName = centerName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public String getThirdName() {
-        return thirdName;
-    }
-
-    public void setThirdName(String thirdName) {
-        this.thirdName = thirdName;
-    }
     private String firstName;
     private String secondName;
     private String thirdName;
+    private String familyName;
     
-    
-
     public Trip() {
     }
 
@@ -77,12 +36,28 @@ public class Trip implements Serializable {
         this.branchId = branchId;
     }
 
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
     public int getCenterId() {
         return centerId;
     }
 
     public void setCenterId(int centerId) {
         this.centerId = centerId;
+    }
+
+    public String getCenterName() {
+        return centerName;
+    }
+
+    public void setCenterName(String centerName) {
+        this.centerName = centerName;
     }
 
     public int getTripId() {
@@ -108,6 +83,40 @@ public class Trip implements Serializable {
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public String getThirdName() {
+        return thirdName;
+    }
+
+    public void setThirdName(String thirdName) {
+        this.thirdName = thirdName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+  
     
     
 }

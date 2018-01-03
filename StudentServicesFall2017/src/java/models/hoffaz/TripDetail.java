@@ -11,40 +11,17 @@ import java.io.Serializable;
  *
  * @author khaled
  */
-public class TripDetail implements Serializable{
-    
-    private int branchId; 
-    private String branchDesc;
+public class TripDetail implements Serializable {
 
-    public String getBranchDesc() {
-        return branchDesc;
-    }
-
-    public void setBranchDesc(String branchDesc) {
-        this.branchDesc = branchDesc;
-    }
-
-    public String getCenterDesc() {
-        return centerDesc;
-    }
-
-    public void setCenterDesc(String centerDesc) {
-        this.centerDesc = centerDesc;
-    }
+    private int branchId;
+    private String branchName;
     private int centerId;
-    private String centerDesc;
+    private String centerName;
+    private int tripId;
+    private String tripDesc;
     private int stopId;
     private String stopDescription;
-    private int tripId; 
-    private String tripDesc;
 
-    public String getTripDesc() {
-        return tripDesc;
-    }
-
-    public void setTripDesc(String tripDesc) {
-        this.tripDesc = tripDesc;
-    }
     public TripDetail() {
     }
 
@@ -56,6 +33,14 @@ public class TripDetail implements Serializable{
         this.branchId = branchId;
     }
 
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
     public int getCenterId() {
         return centerId;
     }
@@ -64,12 +49,28 @@ public class TripDetail implements Serializable{
         this.centerId = centerId;
     }
 
+    public String getCenterName() {
+        return centerName;
+    }
+
+    public void setCenterName(String centerName) {
+        this.centerName = centerName;
+    }
+
     public int getTripId() {
         return tripId;
     }
 
     public void setTripId(int tripId) {
         this.tripId = tripId;
+    }
+
+    public String getTripDesc() {
+        return tripDesc;
+    }
+
+    public void setTripDesc(String tripDesc) {
+        this.tripDesc = tripDesc;
     }
 
     public int getStopId() {
@@ -87,7 +88,5 @@ public class TripDetail implements Serializable{
     public void setStopDescription(String stopDescription) {
         this.stopDescription = stopDescription;
     }
-    
-    
-    
+
 }

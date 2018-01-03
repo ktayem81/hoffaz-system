@@ -489,8 +489,15 @@ public class AddEditStudentBean implements Serializable{
     
     public void resetTransportation()  {
         if(!transportation){
-       this.tripId=0;
-       this.stopId=0;
+                this.tripId=0;
+                this.stopId=0;
+            }
+        
+        try {
+            tripList = tripDao.getTripList(sessionBean.getBranchId(), sessionBean.getCenterId());
+            
+        } catch (Exception ex) {
+            Logger.getLogger(AddEditStudentBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

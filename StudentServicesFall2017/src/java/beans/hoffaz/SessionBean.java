@@ -37,7 +37,6 @@ public class SessionBean implements Serializable {
     
     private Student student;
     private Semester selectedSemester;
-    //private int selectedStudentId;
 
     public String getRoleDescription() {
         return roleDescription;

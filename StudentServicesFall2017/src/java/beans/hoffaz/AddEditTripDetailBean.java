@@ -173,9 +173,9 @@ public class AddEditTripDetailBean {
                 TripDetail tripDetail = tripDetailDao.getTripDetail(branchId, centerId, stopId);
                
                 this.branchId = tripDetail.getBranchId();
-                this.branchDesc = tripDetail.getBranchDesc();
+                this.branchDesc = tripDetail.getBranchName();
                 this.centerId = tripDetail.getCenterId();
-                this.centerDesc = tripDetail.getCenterDesc();
+                this.centerDesc = tripDetail.getCenterName();
                 this.tripId=tripDetail.getTripId();
                 this.tripDesc=tripDetail.getTripDesc();
                 this.stopId=tripDetail.getStopId();

@@ -60,7 +60,12 @@ public class TripDetailDao extends ConnectionDao{
             Connection conn = getConnection();
         
         try {   
-            String sql = "SELECT * FROM TRIPDETAIL WHERE BRANCHID=? AND CENTERID=? AND TRIPID=?";
+            String sql = "SELECT T.BRANCHID,B.BRANCHNAME,T.CENTERID,C.CENTERNAME,T.TRIPID,TR.TRIPDESCRIPTION,T.STOPID,T.STOPDESCRIPTION FROM TRIPDETAIL T "
+                    + " LEFT JOIN BRANCH B ON T.BRANCHID=B.BRANCHID "
+                    + " LEFT JOIN CENTER C ON T.CENTERID=C.CENTERID "
+                    + " LEFT JOIN TRIP TR ON T.TRIPID=TR.TRIPID "
+                    + " WHERE T.BRANCHID=? AND T.CENTERID=? AND T.TRIPID=?"
+                    + " ORDER BY T.TRIPID,T.STOPID ";
             
             PreparedStatement ps = conn.prepareStatement(sql);            
             
@@ -90,9 +95,9 @@ public class TripDetailDao extends ConnectionDao{
         TripDetail tripDetail = new TripDetail();
         
         tripDetail.setBranchId(rs.getInt("BRANCHID"));
-        tripDetail.setBranchDesc(rs.getString("BRANCHNAME"));
+        tripDetail.setBranchName(rs.getString("BRANCHNAME"));
         tripDetail.setCenterId(rs.getInt("CENTERID"));
-        tripDetail.setCenterDesc(rs.getString("CENTERNAME"));
+        tripDetail.setCenterName(rs.getString("CENTERNAME"));
         tripDetail.setTripId(rs.getByte("TRIPID"));
         tripDetail.setTripDesc(rs.getString("TRIPDESCRIPTION"));
         tripDetail.setStopId(rs.getInt("STOPID"));
@@ -132,9 +137,6 @@ public class TripDetailDao extends ConnectionDao{
         PreparedStatement ps = conn.prepareStatement(sql);
 
         try {
-            
-
-           
             ps.setInt(1, tripDetail.getBranchId());
             ps.setInt(2, tripDetail.getCenterId());
             ps.setInt(3, tripDetail.getTripId());

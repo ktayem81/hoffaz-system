@@ -182,7 +182,7 @@
                     <p:selectBooleanCheckbox id="line_checkbox"
                                              value="#{addEditStudentBean.transportation}" 
                                              style="float:#{langBean.styleFloat}">
-                        <p:ajax event="change" update="@form" listener="#{addEditStudentBean.resetTransportation}"/>
+                        <p:ajax event="change" update="line_checkbox,transportation_line,stop_area" listener="#{addEditStudentBean.resetTransportation}"/>
                     </p:selectBooleanCheckbox>
                     
                     <p:outputLabel/><p:outputLabel/><p:outputLabel/>
@@ -240,7 +240,7 @@
                                      immediate="true" 
                                      style="float:#{langBean.styleFloat}" 
                                      actionListener="#{sessionBean.resetData()}"
-                                     action="add_edit_student"/> 
+                                     action="/hoffaz/registrar/manage_students.xhtml"/> 
                 </h:panelGrid>
              </p:panel>
             </h:form>
