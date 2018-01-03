@@ -5,11 +5,13 @@
  */
 package models.hoffaz;
 
+import java.io.Serializable;
+
 /**
  *
  * @author khaled
  */
-public class Trip {
+public class Trip implements Serializable {
     
     private int branchId; 
     private String branchName;

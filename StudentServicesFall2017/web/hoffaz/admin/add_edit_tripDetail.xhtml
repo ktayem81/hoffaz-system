@@ -24,7 +24,7 @@
                         <p:outputLabel value="#{msgs.place_name}:" for="place_name"/>
                         <p:inputText id="place_name"
                                      style="width:200px"
-                                     value=""                                      
+                                     value="#{addEditTripDetailBean.stopDescription}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
@@ -34,32 +34,21 @@
                        
 
                         <p:outputLabel value="#{msgs.line_name}:" for="line_name"/>
-                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                        <p:selectOneMenu value="#{addEditTripDetailBean.tripId}"
                                          id="line_name"
                                          required="true"                                                                                  
                                          requiredMessage=" #{msgs.required_msg}">
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
                             <f:selectItems var="type"
-                                           value="#{addEditEventBean.eventTypes}" 
-                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
-                                           itemValue="#{type.typeId}"/>                             
+                                           value="#{addEditTripDetailBean.tripList}" 
+                                           itemLabel="#{type.tripDescription}"
+                                           itemValue="#{type.tripId}"/>                             
                         </p:selectOneMenu>
                         <h:message for="line_name" styleClass="errorMsg"/>                    
 
-                        <p:outputLabel value="#{msgs.place_num}:" for="place_num"/>
-                        <p:inputText id="place_num"
-                                     value="#{addEditEventBean.placeEn}"
-                                     style="width:200px"
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage=" #{msgs.required_msg}">
-                        </p:inputText> 
-                        <h:message for="place_num" styleClass="errorMsg"/>
-
-                                                             
-
-                                               
+                        
+                                           
                     </h:panelGrid>
                 </p:panel>
 
@@ -69,14 +58,14 @@
                                  iconPos="#{langBean.styleFloat}"
                                  ajax="false"
                                  style="float:#{langBean.styleFloat}"                                                                   
-                                 actionListener="#{addEditEventBean.saveEvent()}" />
+                                 actionListener="#{addEditTripDetailBean.saveTripDetail()}" />
                 <p:commandButton value="#{msgs.cancel}"
                                  icon="ui-icon-cancel"  
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  immediate="true" 
                                  style="float:#{langBean.styleFloat}"                                 
-                                 action="manage_events"  />                                   
+                                 action="/hoffaz/admin/add_edit_tripDetail.xhtml"  />                                   
             </h:form>
        
 </ui:decorate>         

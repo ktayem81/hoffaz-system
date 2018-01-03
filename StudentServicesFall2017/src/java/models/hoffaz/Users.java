@@ -10,13 +10,13 @@ package models.hoffaz;
  * @author eng_ayman
  */
 public class Users {
-    private int employee_Id;
+private int employee_Id;
 private String user_Name;
 private String password;
- private int password_Hash;
+private int password_Hash;
 private String salt;
 private String hash_Function;
- private int lock;
+private int lock;
 
     public Users() {
     }

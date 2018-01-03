@@ -5,18 +5,46 @@
  */
 package models.hoffaz;
 
+import java.io.Serializable;
+
 /**
  *
  * @author khaled
  */
-public class TripDetail {
+public class TripDetail implements Serializable{
     
     private int branchId; 
-    private int centerId; 
-    private int tripId; 
+    private String branchDesc;
+
+    public String getBranchDesc() {
+        return branchDesc;
+    }
+
+    public void setBranchDesc(String branchDesc) {
+        this.branchDesc = branchDesc;
+    }
+
+    public String getCenterDesc() {
+        return centerDesc;
+    }
+
+    public void setCenterDesc(String centerDesc) {
+        this.centerDesc = centerDesc;
+    }
+    private int centerId;
+    private String centerDesc;
     private int stopId;
     private String stopDescription;
+    private int tripId; 
+    private String tripDesc;
 
+    public String getTripDesc() {
+        return tripDesc;
+    }
+
+    public void setTripDesc(String tripDesc) {
+        this.tripDesc = tripDesc;
+    }
     public TripDetail() {
     }
 
