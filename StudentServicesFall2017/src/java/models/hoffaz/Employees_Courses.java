@@ -5,40 +5,31 @@
  */
 package models.hoffaz;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  *
  * @author eng_ayman
  */
-public class Employees_Courses {
-   private int employee_Id;
+public class Employees_Courses implements Serializable{
+   private int employeeId;
    private int courseId;
    private Timestamp date;
    private int duration;
    private String description;
-   private String took_Place_In;
-   private String certficat_Number;
+   private String place;
+   private String certficatNumber;
 
     public Employees_Courses() {
     }
 
-    public Employees_Courses(int employee_Id, int courseId, Timestamp date, int duration, String description, String took_Place_In, String certficat_Number) {
-        this.employee_Id = employee_Id;
-        this.courseId = courseId;
-        this.date = date;
-        this.duration = duration;
-        this.description = description;
-        this.took_Place_In = took_Place_In;
-        this.certficat_Number = certficat_Number;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public int getEmployee_Id() {
-        return employee_Id;
-    }
-
-    public void setEmployee_Id(int employee_Id) {
-        this.employee_Id = employee_Id;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public int getCourseId() {
@@ -73,22 +64,23 @@ public class Employees_Courses {
         this.description = description;
     }
 
-    public String getTook_Place_In() {
-        return took_Place_In;
+    public String getPlace() {
+        return place;
     }
 
-    public void setTook_Place_In(String took_Place_In) {
-        this.took_Place_In = took_Place_In;
+    public void setPlace(String place) {
+        this.place = place;
     }
 
-    public String getCertficat_Number() {
-        return certficat_Number;
+    public String getCertficatNumber() {
+        return certficatNumber;
     }
 
-    public void setCertficat_Number(String certficat_Number) {
-        this.certficat_Number = certficat_Number;
+    public void setCertficatNumber(String certficatNumber) {
+        this.certficatNumber = certficatNumber;
     }
 
+   
 
     
 }
