@@ -75,25 +75,25 @@
                                            itemLabel="#{branch.branchName}"
                                            itemValue="#{branch.branchId}"/>                             
                         </p:selectOneMenu>
-                        <h:message for="branch_name" styleClass="errorMsg"/> 
+                        <h:message for="center_name" styleClass="errorMsg"/> 
                         <p:outputLabel value="#{msgs.center_name}:" for="center_name"/>
-                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                        <p:selectOneMenu value="#{addEditEmployeesBean.centerId}"
                                          id="center_name"
                                          required="true"                                                                                  
                                          requiredMessage=" #{msgs.required_msg}">
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
-                            <f:selectItems var="type"
-                                           value="#{addEditEventBean.eventTypes}" 
-                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
-                                           itemValue="#{type.typeId}"/>                             
+                            <f:selectItems var="center"
+                                           value="#{addEditEmployeesBean.centerList}" 
+                                           itemLabel="#{center.centerName}"
+                                           itemValue="#{center.centerId}"/>                             
                         </p:selectOneMenu>
                         <h:message for="center_name" styleClass="errorMsg"/> 
                         
 
                        <p:outputLabel value="#{msgs.tele}:" for="tele"/>
                         <p:inputText id="tele"
-                                     value="#{addEditEventBean.placeAr}"
+                                     value="#{addEditEmployeesBean.phone}"
                                      style="width:200px"
                                      required="true"
                                      maxlength="512"
@@ -102,7 +102,7 @@
                         <h:message for="tele" styleClass="errorMsg"/>
                         <p:outputLabel value="#{msgs.whatsapp}:" for="whatsapp"/>
                         <p:inputText id="whatsapp"
-                                     value="#{addEditEventBean.placeAr}"
+                                     value="#{addEditEmployeesBean.whatsup}"
                                      style="width:200px"
                                      required="true"
                                      maxlength="512"
@@ -112,7 +112,7 @@
 
                         <p:outputLabel value="#{msgs.address}:" for="address"/>
                         <p:inputTextarea id="address"
-                                     value="#{addEditEventBean.placeAr}"
+                                         value="#{addEditEmployeesBean.addressDetials}"
                                      style="width:200px"
                                      required="true"
                                      maxlength="512"
@@ -121,38 +121,42 @@
                         <h:message for="address" styleClass="errorMsg"/>           
 
                         <p:outputLabel value="#{msgs.Nationality}:" for="Nationality"/>
-                        <p:selectOneMenu value="#{addEditEventBean.eventTypeId}"
+                        <p:selectOneMenu value="#{addEditEmployeesBean.nationality}"
                                          id="Nationality"
                                          required="true"                                                                                  
                                          requiredMessage=" #{msgs.required_msg}">
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
-                            <f:selectItems var="type"
-                                           value="#{addEditEventBean.eventTypes}" 
-                                           itemLabel="#{langBean.isEnglish?type.nameEn:type.nameAr}"
-                                           itemValue="#{type.typeId}"/>                             
+                            <f:selectItems var="na"
+                                           value="#{addEditEmployeesBean.nationalityList}" 
+                                           itemLabel="#{na.nationalityDesc}"
+                                           itemValue="#{na.nationality}"/>                             
                         </p:selectOneMenu>
                         <h:message for="Nationality" styleClass="errorMsg"/> 
                         
 
-                        <p:outputLabel value="#{msgs.user_num}:" for="user_num"/>
-                        <p:inputText id="user_num"
+                        <p:outputLabel value="#{msgs.nationalty_id_en}:" for="nationalty_id_en"/>
+                        <p:inputTextarea id="nationalty_id_en"
+                                         value="#{addEditEmployeesBean.nationalityId}"
                                      style="width:200px"
-                                     value=""                                      
                                      required="true"
                                      maxlength="512"
-                                     requiredMessage="#{msgs.required_msg}">
-                        </p:inputText>
-                        <h:message for="user_num" styleClass="errorMsg"/>
+                                     requiredMessage=" #{msgs.required_msg}">
+                        </p:inputTextarea>
+                        <h:message for="nationalityId" styleClass="errorMsg"/> 
                         <p:outputLabel value="#{msgs.user_roll}:" for="user_roll"/>
-                        <p:inputText id="user_roll"
-                                     style="width:200px"
-                                     value=""                                      
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage="#{msgs.required_msg}">
-                        </p:inputText>
-                        <h:message for="user_roll" styleClass="errorMsg"/>
+                        <p:selectOneMenu value="#{addEditEmployeesBean.employeeCategoryId}"
+                                         id="user_roll"
+                                         required="true"                                                                                  
+                                         requiredMessage=" #{msgs.required_msg}">
+                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                          itemValue=""/>
+                            <f:selectItems var="ec"
+                                           value="#{addEditEmployeesBean.employeescategoriesList}" 
+                                           itemLabel="#{ec.category_Description}"
+                                           itemValue="#{ec.employee_Category_Id}"/>                             
+                        </p:selectOneMenu>
+                        <h:message for="Nationality" styleClass="errorMsg"/> 
                         <p:outputLabel value="#{msgs.salary}:" for="salary"/>
                         <p:inputText id="salary"
                                      style="width:300px"
@@ -163,7 +167,7 @@
                         </p:inputText>
                         <h:message for="salary" styleClass="errorMsg"/>
 
-                        <p:outputLabel value="#{msgs.coursenum}:" for="coursenum"/>
+<!--                        <p:outputLabel value="#{msgs.coursenum}:" for="coursenum"/>
                         <p:inputText id="coursenum"
                                      style="width:200px"
                                      value=""                                      
@@ -232,7 +236,7 @@
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
                         </p:inputTextarea>
-                        <h:message for="comments" styleClass="errorMsg"/>
+                        <h:message for="comments" styleClass="errorMsg"/>-->
 
 
                                                
@@ -245,14 +249,14 @@
                                  iconPos="#{langBean.styleFloat}"
                                  ajax="false"
                                  style="float:#{langBean.styleFloat}"                                                                   
-                                 actionListener="#{addEditEventBean.saveEvent()}" />
+                                 actionListener="#{addEditEmployeesBean.saveEmployee()}" />
                 <p:commandButton value="#{msgs.cancel}"
                                  icon="ui-icon-cancel"  
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  immediate="true" 
                                  style="float:#{langBean.styleFloat}"                                 
-                                 action="manage_events"  />                                   
+                                 action="/hoffaz/admin/add_edit_employees.xhtml"  />                                   
             </h:form>
         
     </ui:decorate>         
