@@ -34,7 +34,8 @@
                                  value="#{addEditStudentBean.firstName}"                                      
                                  required="true"
                                  maxlength="512"
-                                 requiredMessage="#{msgs.required_msg}">
+                                 requiredMessage="#{msgs.required_msg}"
+                                 disabled="#{!addEditStudentBean.allowEdit}">
                     </p:inputText>
 
 
@@ -43,7 +44,8 @@
                                  value="#{addEditStudentBean.secondName}"                                      
                                  required="true"
                                  maxlength="512"
-                                 requiredMessage="#{msgs.required_msg}">
+                                 requiredMessage="#{msgs.required_msg}"
+                                 disabled="#{!addEditStudentBean.allowEdit}">
                     </p:inputText>
 
 
@@ -52,7 +54,8 @@
                                  value="#{addEditStudentBean.thirdName}"                                      
                                  required="true"
                                  maxlength="512"
-                                 requiredMessage="#{msgs.required_msg}">
+                                 requiredMessage="#{msgs.required_msg}"
+                                 disabled="#{!addEditStudentBean.allowEdit}">
                     </p:inputText>
 
 
@@ -61,7 +64,8 @@
                                  value="#{addEditStudentBean.familyName}"                                      
                                  required="true"
                                  maxlength="512"
-                                 requiredMessage="#{msgs.required_msg}">
+                                 requiredMessage="#{msgs.required_msg}"
+                                 disabled="#{!addEditStudentBean.allowEdit}">
                     </p:inputText>
 
                     <p:outputLabel/>
@@ -76,7 +80,8 @@
                                      id="student_nationalty"
                                      style="width:170px; float:#{langBean.styleFloat} direction:#{langBean.dir}"
                                      required="true" panelStyle="float:#{langBean.styleFloat}"                                                                                  
-                                     requiredMessage=" #{msgs.required_msg}">
+                                     requiredMessage=" #{msgs.required_msg}"
+                                     disabled="#{!addEditStudentBean.allowEdit}">
                         <f:selectItem itemLabel="#{msgs.select_one}"
                                       itemValue=""/>
                         <f:selectItems var="nationality"
@@ -94,7 +99,7 @@
                                  required="true" 
                                  requiredMessage="#{msgs.required_msg}"
                                  validator="#{addEditStudentBean.validateNationalNumber}"
-                                 >
+                                 disabled="#{!addEditStudentBean.allowEdit}">
                     </p:inputText>
                     <h:message for="nationalty_id" styleClass="errorMsg"/> 
                     <p:outputLabel/><p:outputLabel/>                        
@@ -102,7 +107,8 @@
 
                     <p:outputLabel value="#{msgs.sex}:" for="sex_checkbox"/>
                     <p:selectOneRadio id="sex_checkbox" value="#{addEditStudentBean.sexId}" 
-                                      required="true" requiredMessage=" #{msgs.required_msg}">
+                                      required="true" requiredMessage=" #{msgs.required_msg}"
+                                      disabled="#{!addEditStudentBean.allowEdit}">
                         <f:selectItem itemLabel="#{msgs.male}" itemValue="1"  />
                         <f:selectItem itemLabel="#{msgs.female}" itemValue="2" />
                     </p:selectOneRadio>
@@ -118,9 +124,9 @@
                                 pattern="dd-MM-yyyy" 
                                 navigator="true"
                                 required="true" 
-                               
                                 requiredMessage=" #{msgs.required_msg}"
-                                style="width:170px;"/> 
+                                style="width:170px;"
+                                disabled="#{!addEditStudentBean.allowEdit}"/> 
                     <h:message for="birhtdate" styleClass="errorMsg"/>
                     <p:outputLabel/><p:outputLabel/>
 
@@ -133,9 +139,9 @@
                                 pattern="dd-MM-yyyy" 
                                 navigator="true"
                                 required="true" 
-                                
                                 requiredMessage=" #{msgs.required_msg}"
-                                style="width:170px;"/> 
+                                style="width:170px;"
+                                disabled="#{!addEditStudentBean.allowEdit}"/> 
                     <h:message for="date_of_join" styleClass="errorMsg"/> 
 
                     <p:outputLabel/><p:outputLabel/>
@@ -224,7 +230,16 @@
 
 
                     <p:outputLabel/><p:outputLabel/>
+                    
+                    <p:outputLabel value="#{msgs.edit} الاسم:" for="edit_checkbox"/>
+                    <p:selectBooleanCheckbox id="edit_checkbox"
+                                             value="#{addEditStudentBean.allowEdit}" 
+                                             style="float:#{langBean.styleFloat}">
+                        <p:ajax event="change" update="@form"/>
+                    </p:selectBooleanCheckbox>
+                     
                     <p:outputLabel/>
+                    
                     <p:commandButton value="#{msgs.save}"
                                      styleClass="commandButton"
                                      icon="ui-icon-disk"
@@ -241,6 +256,8 @@
                                      style="float:#{langBean.styleFloat}" 
                                      actionListener="#{sessionBean.resetData()}"
                                      action="/hoffaz/registrar/manage_students.xhtml"/> 
+                                   
+                   
                 </h:panelGrid>
              </p:panel>
             </h:form>

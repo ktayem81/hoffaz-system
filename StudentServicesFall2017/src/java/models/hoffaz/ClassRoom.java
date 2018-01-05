@@ -6,24 +6,31 @@
 package models.hoffaz;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  *
- * @author khaled
+ * @author eng_ayman
  */
-public class Semester {
+public class ClassRoom {
 
     private int branchId;
     private String branchName;
     private int centerId;
     private String centerName;
+    private int classId;
+    private String className;
+    private int levelId;
+    private String levelName;
     private int semesterId;
     private String semesterIdLookUp;
     private int semesterYear;
-    private String semesterDesc;
-    private Date semesterBegin;
-    private Date semesterEnd;
+    private int classRoomId;
+    private int teacherEmployeeId;
+    private String firstName;
+    private String secondName;
+    private String thirdName;
+    private String familyName;
+    private double cost;
     private int insertEmployeeId;
     private String insertHostIp;
     private Timestamp insertDate;
@@ -33,7 +40,7 @@ public class Semester {
     private String updateHostIp;
     private String updateHostOS;
 
-    public Semester() {
+    public ClassRoom() {
     }
 
     public int getBranchId() {
@@ -68,6 +75,38 @@ public class Semester {
         this.centerName = centerName;
     }
 
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public int getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(int levelId) {
+        this.levelId = levelId;
+    }
+
+    public String getLevelName() {
+        return levelName;
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+
     public int getSemesterId() {
         return semesterId;
     }
@@ -83,7 +122,7 @@ public class Semester {
     public void setSemesterIdLookUp(String semesterIdLookUp) {
         this.semesterIdLookUp = semesterIdLookUp;
     }
-        
+
     public int getSemesterYear() {
         return semesterYear;
     }
@@ -92,28 +131,60 @@ public class Semester {
         this.semesterYear = semesterYear;
     }
 
-    public String getSemesterDesc() {
-        return semesterDesc;
+    public int getClassRoomId() {
+        return classRoomId;
     }
 
-    public void setSemesterDesc(String semesterDesc) {
-        this.semesterDesc = semesterDesc;
+    public void setClassRoomId(int classRoomId) {
+        this.classRoomId = classRoomId;
     }
 
-    public Date getSemesterBegin() {
-        return semesterBegin;
+    public int getTeacherEmployeeId() {
+        return teacherEmployeeId;
     }
 
-    public void setSemesterBegin(Date semesterBegin) {
-        this.semesterBegin = semesterBegin;
+    public void setTeacherEmployeeId(int teacherEmployeeId) {
+        this.teacherEmployeeId = teacherEmployeeId;
     }
 
-    public Date getSemesterEnd() {
-        return semesterEnd;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setSemesterEnd(Date semesterEnd) {
-        this.semesterEnd = semesterEnd;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public String getThirdName() {
+        return thirdName;
+    }
+
+    public void setThirdName(String thirdName) {
+        this.thirdName = thirdName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public int getInsertEmployeeId() {
@@ -180,5 +251,5 @@ public class Semester {
         this.updateHostOS = updateHostOS;
     }
 
-
+    
 }

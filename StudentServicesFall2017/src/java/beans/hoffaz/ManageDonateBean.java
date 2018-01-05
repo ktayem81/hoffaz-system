@@ -6,6 +6,7 @@
 package beans.hoffaz;
 
 import daos.hoffaz.DonateDao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,7 @@ import models.hoffaz.Donate;
  */
 @Named(value = "manageDonateBean")
 @ViewScoped
-public class ManageDonateBean {
+public class ManageDonateBean  implements Serializable{
     
     private final DonateDao donateDao = new DonateDao();
     private ArrayList<Donate> donates;

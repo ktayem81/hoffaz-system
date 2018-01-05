@@ -26,6 +26,7 @@ import models.hoffaz.Center;
 @Named(value = "addEditCenterBean")
 @ViewScoped
 public class AddEditCenterBean implements Serializable {
+    
     private final CenterDao centerDao = new CenterDao();
     private final BranchDao branchDao = new BranchDao();
     private ArrayList<Branch> branchList = new ArrayList<Branch>();

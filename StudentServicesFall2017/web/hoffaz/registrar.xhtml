@@ -38,6 +38,13 @@
                        action="/hoffaz/registrar/manage_semesters.xhtml">
     </p:commandButton> 
     
+    <p:commandButton   value="#{msgs.add_class_room}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                       action="/hoffaz/registrar/manage_class_room.xhtml">
+    </p:commandButton> 
+    
     <p:commandButton   value="#{msgs.enrollment_student}"  
                        styleClass="ribbonButton" 
                        style="float:#{langBean.styleFloat};"

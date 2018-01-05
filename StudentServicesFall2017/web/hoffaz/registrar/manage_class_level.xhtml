@@ -16,9 +16,8 @@
                         <p:selectOneMenu value="#{manageClassLevelsBean.classID}"
                                          id="class_name"
                                          style="width:170px; float:#{langBean.styleFloat}; direction:#{langBean.dir}"
-                                         required="true" panelStyle="float:#{langBean.styleFloat}"                                                                                  
-                                         requiredMessage=" #{msgs.required_msg}">
-                            <p:ajax listener="#{manageClassLevelsBean.init()}" update=":manage_class_level_form:manage_class_level_table"/>
+                                         panelStyle="float:#{langBean.styleFloat}">
+                            <p:ajax listener="#{manageClassLevelsBean.updateClassRoomFilter()}" update=":manage_class_level_form:manage_class_level_table"/>
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
                             <f:selectItems var="class" 
@@ -53,7 +52,13 @@
 
                     <p:column selectionMode="single" style="width:5%;text-align:center;"/>
 
-                   
+                    <p:column headerText="#{msgs.class_name_en}"
+                              style="width:20%;"
+                              filterBy="#{level.classID}"
+                              filterMatchMode="contains"
+                              sortBy="#{level.classID}">                    
+                        <h:outputText value="#{level.classID}-#{level.className}"/>  
+                    </p:column>
                     
                     <p:column headerText="#{msgs.level_number_en}"
                               style="width:20%;"

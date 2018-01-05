@@ -7,6 +7,7 @@ package beans.hoffaz;
 
 
 import daos.hoffaz.CenterDao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +26,7 @@ import org.primefaces.event.SelectEvent;
  */
 @Named(value = "manageCenterBean")
 @ViewScoped
-public class ManageCenterBean {
+public class ManageCenterBean  implements Serializable{
     private Center selectedCenter;
     private ArrayList<Center> centers;
     private final CenterDao centerDao = new CenterDao();

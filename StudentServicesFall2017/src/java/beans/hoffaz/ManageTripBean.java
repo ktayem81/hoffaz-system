@@ -6,6 +6,7 @@
 package beans.hoffaz;
 
 import daos.hoffaz.TripDao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +25,7 @@ import org.primefaces.event.SelectEvent;
  */
 @Named(value = "manageTripBean")
 @ViewScoped
-public class ManageTripBean {
+public class ManageTripBean  implements Serializable{
 
     /**
      * Creates a new instance of ManageTripBean

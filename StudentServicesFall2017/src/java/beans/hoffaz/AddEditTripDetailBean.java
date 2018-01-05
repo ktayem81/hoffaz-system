@@ -9,6 +9,7 @@ import daos.hoffaz.BranchDao;
 import daos.hoffaz.CenterDao;
 import daos.hoffaz.TripDao;
 import daos.hoffaz.TripDetailDao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,7 @@ import models.hoffaz.TripDetail;
  */
 @Named(value = "addEditTripDetailBean")
 @ViewScoped
-public class AddEditTripDetailBean {
+public class AddEditTripDetailBean  implements Serializable{
 
     /**
      * Creates a new instance of AddEditTripdetailBean

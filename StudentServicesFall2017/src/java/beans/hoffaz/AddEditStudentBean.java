@@ -35,7 +35,7 @@ import models.hoffaz.TripDetail;
  */
 @Named(value = "addEditStudentBean")
 @ViewScoped
-public class AddEditStudentBean implements Serializable{
+public class AddEditStudentBean implements Serializable {
     
     private final StudentsDao studentDao = new StudentsDao();
     private final NationalityDao nationalityDao = new NationalityDao();
@@ -45,6 +45,8 @@ public class AddEditStudentBean implements Serializable{
     private ArrayList<Nationality> nationalityList = new ArrayList<>();
     private ArrayList<Trip> tripList = new ArrayList<>();
     private ArrayList<TripDetail> tripDetailList = new ArrayList<>();
+    
+    private boolean allowEdit;
     
     private int studentId;
     private String firstName;
@@ -70,311 +72,325 @@ public class AddEditStudentBean implements Serializable{
     private String stopDesc;
     private String addressDetails;
     private boolean transportation;
-    private String transportationDesc; 
+    private String transportationDesc;    
     private int insertEmployeeId;
     private String insertHostIp;    
-    private Timestamp insertDate;      
+    private Timestamp insertDate;    
     private String insertHostOS;    
-    private int updatEmployeeId; 
-    private Timestamp updateDate;      
+    private int updatEmployeeId;    
+    private Timestamp updateDate;    
     private String updateHostIp;    
     private String updateHostOS;
-
+    
     @Inject
     private SessionBean sessionBean;
     
-    
-        
     public int getStudentId() {
         return studentId;
     }
-
+    
     public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
-
+    
     public String getFirstName() {
         return firstName;
     }
-
+    
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
+    
     public String getSecondName() {
         return secondName;
     }
-
+    
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
-
+    
     public String getThirdName() {
         return thirdName;
     }
-
+    
     public void setThirdName(String thirdName) {
         this.thirdName = thirdName;
     }
-
+    
     public String getFamilyName() {
         return familyName;
     }
-
+    
     public void setFamilyName(String familyName) {
         this.familyName = familyName;
     }
-
+    
     public Date getBirthDate() {
         return birthDate;
     }
-
+    
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-
+    
     public int getSexId() {
         return sexId;
     }
-
+    
     public void setSexId(int sexId) {
         this.sexId = sexId;
     }
-
+    
     public String getSexDescription() {
         return sexDescription;
     }
-
+    
     public void setSexDescription(String sexDescription) {
         this.sexDescription = sexDescription;
     }
-
+    
     public Date getDateOfJoin() {
         return dateOfJoin;
     }
-
+    
     public void setDateOfJoin(Date dateOfJoin) {
         this.dateOfJoin = dateOfJoin;
     }
-
+    
     public int getNationality() {
         return nationality;
     }
-
+    
     public void setNationality(int nationalityId) {
         this.nationality = nationalityId;
     }
-
+    
     public String getNationalityDesc() {
         return nationalityDesc;
     }
-
+    
     public void setNationalityDesc(String nationalityDesc) {
         this.nationalityDesc = nationalityDesc;
     }
-
+    
     public int getNationalityNumber() {
         return nationalityNumber;
     }
-
+    
     public void setNationalityNumber(int nationalityNumber) {
         this.nationalityNumber = nationalityNumber;
     }
-
+    
     public int getPhone() {
         return phone;
     }
-
+    
     public void setPhone(int phone) {
         this.phone = phone;
     }
-
+    
     public int getWhatsup() {
         return whatsup;
     }
-
+    
     public void setWhatsup(int whatsup) {
         this.whatsup = whatsup;
     }
-
+    
     public int getBranchId() {
         return branchId;
     }
-
+    
     public void setBranchId(int branchId) {
         this.branchId = branchId;
     }
-
+    
     public String getBranchName() {
         return branchName;
     }
-
+    
     public void setBranchName(String branchName) {
         this.branchName = branchName;
     }
-
+    
     public int getCenterId() {
         return centerId;
     }
-
+    
     public void setCenterId(int centerId) {
         this.centerId = centerId;
     }
-
+    
     public String getCenterName() {
         return centerName;
     }
-
+    
     public void setCenterName(String centerName) {
         this.centerName = centerName;
     }
-
+    
     public int getTripId() {
         return tripId;
     }
-
+    
     public void setTripId(int tripId) {
         this.tripId = tripId;
     }
-
+    
     public String getTripDesc() {
         return tripDesc;
     }
-
+    
     public void setTripDesc(String tripDesc) {
         this.tripDesc = tripDesc;
     }
-
+    
     public int getStopId() {
         return stopId;
     }
-
+    
     public void setStopId(int stopId) {
         this.stopId = stopId;
     }
-
+    
     public String getStopDesc() {
         return stopDesc;
     }
-
+    
     public void setStopDesc(String stopDesc) {
         this.stopDesc = stopDesc;
     }
-
+    
     public String getAddressDetails() {
         return addressDetails;
     }
-
+    
     public void setAddressDetails(String addressDetails) {
         this.addressDetails = addressDetails;
     }
-
+    
     public boolean getTransportation() {
         return transportation;
     }
-
+    
     public void setTransportation(boolean transportation) {
         this.transportation = transportation;
     }
-
+    
     public String getTransportationDesc() {
         return transportationDesc;
     }
-
+    
     public void setTransportationDesc(String transportationDesc) {
         this.transportationDesc = transportationDesc;
     }
-
+    
     public int getInsertEmployeeId() {
         return insertEmployeeId;
     }
-
+    
     public void setInsertEmployeeId(int insertEmployeeId) {
         this.insertEmployeeId = insertEmployeeId;
     }
-
+    
     public String getInsertHostIp() {
         return insertHostIp;
     }
-
+    
     public void setInsertHostIp(String insertHostIp) {
         this.insertHostIp = insertHostIp;
     }
-
+    
     public Timestamp getInsertDate() {
         return insertDate;
     }
-
+    
     public void setInsertDate(Timestamp insertDate) {
         this.insertDate = insertDate;
     }
-
+    
     public String getInsertHostOS() {
         return insertHostOS;
     }
-
+    
     public void setInsertHostOS(String insertHostOS) {
         this.insertHostOS = insertHostOS;
     }
-
+    
     public int getUpdatEmployeeId() {
         return updatEmployeeId;
     }
-
+    
     public void setUpdatEmployeeId(int updatEmployeeId) {
         this.updatEmployeeId = updatEmployeeId;
     }
-
+    
     public Timestamp getUpdateDate() {
         return updateDate;
     }
-
+    
     public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
     }
-
+    
     public String getUpdateHostIp() {
         return updateHostIp;
     }
-
+    
     public void setUpdateHostIp(String updateHostIp) {
         this.updateHostIp = updateHostIp;
     }
-
+    
     public String getUpdateHostOS() {
         return updateHostOS;
     }
-
+    
     public void setUpdateHostOS(String updateHostOS) {
         this.updateHostOS = updateHostOS;
     }
-
+    
     public ArrayList<Nationality> getNationalityList() {
         return nationalityList;
     }
-
+    
     public void setNationalityList(ArrayList<Nationality> nationalityList) {
         this.nationalityList = nationalityList;
     }
-
+    
     public ArrayList<Trip> getTripList() {
         return tripList;
     }
-
+    
     public void setTripList(ArrayList<Trip> tripList) {
         this.tripList = tripList;
     }
-
+    
     public ArrayList<TripDetail> getTripDetailList() {
         return tripDetailList;
     }
-
+    
     public void setTripDetailList(ArrayList<TripDetail> tripDetailList) {
         this.tripDetailList = tripDetailList;
     }
+
+    public boolean isAllowEdit() {
+        return allowEdit;
+    }
+
+    public void setAllowEdit(boolean allowEdit) {
+        this.allowEdit = allowEdit;
+    }
+
+    public SessionBean getSessionBean() {
+        return sessionBean;
+    }
+
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
+    }
     
     
-    
+
     /**
      * Creates a new instance of AddStudentBean
      */
@@ -383,13 +399,15 @@ public class AddEditStudentBean implements Serializable{
     
     @PostConstruct
     public void init() {
-
+        
         branchId = sessionBean.getBranchId();
         centerId = sessionBean.getCenterId();
         insertEmployeeId = Integer.parseInt(sessionBean.getUsername());
-
+        
         studentId = sessionBean.getSelectedItemId();
-
+        
+        allowEdit = sessionBean.getSelectedItemId()<0;
+        
         try {
             if (studentId > 0) {
                 Student student = studentDao.getStudent(branchId, centerId, studentId);
@@ -426,16 +444,16 @@ public class AddEditStudentBean implements Serializable{
                 this.updateDate = student.getUpdateDate();
                 this.updateHostIp = student.getUpdateHostIp();
                 this.updateHostOS = student.getUpdateHostOS();
-
+                
             }
             nationalityList = nationalityDao.getNationalityList();
             tripList = tripDao.getTripList(branchId, centerId);
-
+            
         } catch (Exception ex) {
             Logger.getLogger(AddEditStudentBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public void onTripIdChange() {
         try {
             tripDetailList = tripDetailDao.getTripList(sessionBean.getBranchId(), sessionBean.getCenterId(), this.tripId);
@@ -445,53 +463,52 @@ public class AddEditStudentBean implements Serializable{
     }
     
     public void validateNationalNumber(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-         
-        int natId = (int) value; 
-        boolean check=false; 
+        
+        int natId = (int) value;        
+        boolean check = false;        
         
         try {
             check = studentDao.checkNationalId(sessionBean.getBranchId(), sessionBean.getCenterId(), natId);
         } catch (Exception ex) {
             Logger.getLogger(AddEditStudentBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+        
         String msgE = "حقل اجباري؟ ";
         String msgU = " الرقم الوطني مكرر يرجى التأكد منه!";
-        if(natId==0){
+        if (natId == 0) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, msgE, msgE));
-        
-        }
-        else if (check && studentId == 0) {
+            
+        } else if (check && studentId == 0) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, msgU, msgU));
         }
     }
     
     public void validateTripId(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-             
+        
         String msgE = "حقل اجباري؟ ";
         int tripIdv = (int) value;
         
-        if(tripIdv==0){
+        if (tripIdv == 0) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, msgE, msgE));
         }
         
     }
     
     public void validateStopId(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-             
+        
         String msgE = "حقل اجباري؟ ";
         int stopIdv = (int) value;
         
-        if(stopIdv==0){
+        if (stopIdv == 0) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, msgE, msgE));
         }
     }
     
-    public void resetTransportation()  {
-        if(!transportation){
-                this.tripId=0;
-                this.stopId=0;
-            }
+    public void resetTransportation() {
+        if (!transportation) {
+            this.tripId = 0;
+            this.stopId = 0;
+        }
         
         try {
             tripList = tripDao.getTripList(sessionBean.getBranchId(), sessionBean.getCenterId());
@@ -500,13 +517,11 @@ public class AddEditStudentBean implements Serializable{
             Logger.getLogger(AddEditStudentBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-
     
     public void saveStudent() {
         
         int employeeId = Integer.parseInt(sessionBean.getUsername());
-       
+        
         Student student = new Student();
         
         try {
@@ -528,7 +543,7 @@ public class AddEditStudentBean implements Serializable{
             student.setStopId(stopId);
             student.setAddressDetails(addressDetails);
             student.setTransportation(transportation);
-       
+            
             if (sessionBean.getSelectedItemId() > 0) {
                 student.setUpdatEmployeeId(employeeId);
                 student.setUpdateDate(updateDate);
@@ -551,7 +566,7 @@ public class AddEditStudentBean implements Serializable{
             Logger.getLogger(StudentsDao.class.getName()).log(Level.SEVERE, null, ex);
             sessionBean.navigate("/hoffaz/sql_exception.xhtml");
         }
-
-        
     }
+    
+    
 }

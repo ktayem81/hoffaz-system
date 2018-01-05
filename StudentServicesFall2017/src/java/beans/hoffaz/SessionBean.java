@@ -8,6 +8,7 @@ import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import models.hoffaz.ClassRoom;
 import models.hoffaz.Semester;
 import models.hoffaz.Student;
 
@@ -37,6 +38,7 @@ public class SessionBean implements Serializable {
     
     private Student student;
     private Semester selectedSemester;
+    private ClassRoom selectedClassRoom;
 
     public String getRoleDescription() {
         return roleDescription;
@@ -149,9 +151,15 @@ public class SessionBean implements Serializable {
         this.selectedSemester = selectedSemester;
     }
 
-    
+    public ClassRoom getSelectedClassRoom() {
+        return selectedClassRoom;
+    }
 
-        
+    public void setSelectedClassRoom(ClassRoom selectedClassRoom) {
+        this.selectedClassRoom = selectedClassRoom;
+    }
+    
+            
     public void login() throws Exception {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         boolean success = false;
