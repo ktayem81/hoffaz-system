@@ -5,22 +5,26 @@
  */
 package daos.hoffaz;
 
+
+
 import daos.ConnectionDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import models.hoffaz.Center;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.hoffaz.Employees;
+
 
 /**
  *
- * @author khale
+ * @author khaled
  */
-public class EmployeesDao extends ConnectionDao{
+public class EmployeeDaoBackup extends ConnectionDao{
     
-     public ArrayList<Employees> buildEmployees(int branchId, int centerId)
+public ArrayList<Employees> buildEmployees(int branchId, int centerId)
             throws Exception {
 
         ArrayList<Employees> employeesList = new ArrayList<>();
@@ -55,7 +59,8 @@ public class EmployeesDao extends ConnectionDao{
             throw new SQLException(e.getMessage());
         }
     }
-     private Employees populateEmployees(ResultSet rs) throws SQLException {
+    
+private Employees populateEmployees(ResultSet rs) throws SQLException {
         Employees employee = new Employees();
         
         employee.setEmployeeId(rs.getInt("EMPLOYEEID"));
@@ -81,7 +86,46 @@ public class EmployeesDao extends ConnectionDao{
                 
         return employee;
     }
-       public void insertEmployee(Employees employee) throws Exception {
+
+
+          public ArrayList<Employees> getEmployees(int branchId, int centerId, int employeeCategoryId) {
+
+        ArrayList<Employees> employeesList = new ArrayList<>();
+        
+        try {
+            Connection conn = getConnection();
+
+            String sql = " SELECT EMPLOYEEID,FIRSTNAME,SECONDNAME,THIRDNAME,FAMILYNAME "
+                    + " FROM EMPLOYEES "
+                    + " WHERE BRANCHID=? AND CENTERID=? AND EMPLOYEECATEGORYID=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, branchId);
+            ps.setInt(2, centerId);
+            ps.setInt(3, employeeCategoryId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Employees employee = new Employees();
+                employee.setEmployeeId(rs.getInt("EMPLOYEEID"));
+                employee.setFirstName(rs.getString("FIRSTNAME"));
+                employee.setSecondName(rs.getString("SECONDNAME"));
+                employee.setThirdName(rs.getString("THIRDNAME"));
+                employee.setFamilyName(rs.getString("FAMILYNAME"));
+
+                employeesList.add(employee);
+            }
+
+            rs.close();
+        } catch (Exception ex) {
+            Logger.getLogger(EmployeesDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return employeesList;
+
+    }
+          
+           public void insertEmployee(Employees employee) throws Exception {
 
         Connection conn = getConnection();
 
@@ -145,7 +189,8 @@ public class EmployeesDao extends ConnectionDao{
             throw new SQLException(e.getMessage());
         }
     }
-       public void updateEmployee(Employees employee) throws Exception {
+           
+           public void updateEmployee(Employees employee) throws Exception {
         try {
             Connection conn = getConnection();
 
@@ -194,7 +239,9 @@ public class EmployeesDao extends ConnectionDao{
             throw new SQLException(e.getMessage());
         }
     }
-       public void deleteEmployee(int branchId, int centerId, int employeetId) throws Exception {
+           
+          
+     public void deleteEmployee(int branchId, int centerId, int employeetId) throws Exception {
         Connection conn = getConnection();
         
         try {
@@ -244,42 +291,8 @@ public class EmployeesDao extends ConnectionDao{
             throw new SQLException(e.getMessage());
         }
     }
-     
-    
-          public ArrayList<Employees> getEmployees(int branchId, int centerId, int employeeCategoryId) {
-
-        ArrayList<Employees> employeesList = new ArrayList<>();
-        
-        try {
-            Connection conn = getConnection();
-
-            String sql = " SELECT EMPLOYEEID,FIRSTNAME,SECONDNAME,THIRDNAME,FAMILYNAME "
-                    + " FROM EMPLOYEES "
-                    + " WHERE BRANCHID=? AND CENTERID=? AND EMPLOYEECATEGORYID=?";
-
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, branchId);
-            ps.setInt(2, centerId);
-            ps.setInt(3, employeeCategoryId);
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Employees employee = new Employees();
-                employee.setEmployeeId(rs.getInt("EMPLOYEEID"));
-                employee.setFirstName(rs.getString("FIRSTNAME"));
-                employee.setSecondName(rs.getString("SECONDNAME"));
-                employee.setThirdName(rs.getString("THIRDNAME"));
-                employee.setFamilyName(rs.getString("FAMILYNAME"));
-
-                employeesList.add(employee);
-            }
-
-            rs.close();
-        } catch (Exception ex) {
-            Logger.getLogger(EmployeesDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return employeesList;
-
-    }
+           
+      
+           
 }
+
