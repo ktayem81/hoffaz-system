@@ -54,7 +54,7 @@ public class ManageClassLevelsBean implements Serializable{
     public void init() {
         try {
             //build table
-            classLevels = classLevelDao.buildClassLevel(sessionBean.getBranchId(), sessionBean.getCenterId(), classID);
+            classLevels = classLevelDao.buildClassLevel(sessionBean.getBranchId(), sessionBean.getCenterId());
             //get class list
             classDefList = classDefDao.buildClassDef(sessionBean.getBranchId(), sessionBean.getCenterId());
             
@@ -121,4 +121,13 @@ public class ManageClassLevelsBean implements Serializable{
             Logger.getLogger(ManageClassLevelsBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+     public void updateClassRoomFilter(){
+    try {    
+            classLevels = classLevelDao.getClassLevelfilter(sessionBean.getBranchId(), sessionBean.getCenterId(), classID);
+        } catch (Exception ex) {
+            Logger.getLogger(AddEditClassRoomBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

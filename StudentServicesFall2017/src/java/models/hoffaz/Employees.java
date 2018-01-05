@@ -5,11 +5,13 @@
  */
 package models.hoffaz;
 
+import java.io.Serializable;
+
 /**
  *
  * @author eng_ayman
  */
-public class Employees {
+public class Employees implements Serializable{
 private int employeeId;
 private String firstName;
 private String secondName;

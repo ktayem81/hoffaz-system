@@ -18,8 +18,7 @@ import models.hoffaz.Semester;
  *
  * @author khale
  */
-public class SemesterDao extends ConnectionDao{
-    
+public class SemesterDao extends ConnectionDao{    
     
     public ArrayList<Semester> buildSemesters(int branchId, int centerId)
             throws Exception {
@@ -35,7 +34,7 @@ public class SemesterDao extends ConnectionDao{
                        + " LEFT JOIN BRANCH B ON  S.BRANCHID=B.BRANCHID "
                        + " LEFT JOIN CENTER C ON  S.BRANCHID=C.BRANCHID AND S.CENTERID=C.CENTERID "
                        + " WHERE S.BRANCHID=? AND S.CENTERID=? "
-                       + " ORDER BY S.SEMESTER_ID,S.SEMESTER_YEAR";
+                       + " ORDER BY S.SEMESTER_YEAR DESC, S.SEMESTER_ID";
 
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setInt(1, branchId);
@@ -79,6 +78,7 @@ public class SemesterDao extends ConnectionDao{
         semester.setUpdateDate(rs.getTimestamp("UPDATEDATE"));
         semester.setUpdateHostIp(rs.getString("UPDATEHOSTIP"));
         semester.setUpdateHostOS(rs.getString("UPDATEHOSTOS"));
+        
                 
         return semester;
     }
@@ -211,6 +211,72 @@ public class SemesterDao extends ConnectionDao{
         }
     }
       
+       public ArrayList getSemesterYearList(int branchId, int centerId)
+       throws Exception {
+           ArrayList yearList = new ArrayList();
+
+        try {
+            Connection conn = getConnection();
+
+            String sql = "SELECT DISTINCT S.SEMESTER_YEAR "
+                       + " FROM SEMESTERS S "
+                       + " WHERE S.BRANCHID=? AND S.CENTERID=? "
+                       + " ORDER BY S.SEMESTER_YEAR DESC";
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setInt(1, branchId);
+                ps.setInt(2, centerId);
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    yearList.add(rs.getInt("SEMESTER_YEAR"));
+                }
+
+                rs.close();
+            }
+
+            return yearList;
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
     
+    }
+       
+       public ArrayList<Semester> getSemesterIdList(int branchId, int centerId, int semesterYear)
+       throws Exception {
+           ArrayList<Semester> semesterList = new ArrayList<>();
+
+        try {
+            Connection conn = getConnection();
+
+            String sql = "SELECT S.BRANCHID,B.BRANCHNAME,S.CENTERID,C.CENTERNAME,S.SEMESTER_ID,SD.SEMESTER_DESC AS LOOKUP,S.SEMESTER_YEAR,S.SEMESTER_DESC,S.SEMESTER_BEGIN,S.SEMESTER_END,S.INSERTEMPLOYEEID,S.INSERTDATE,S.INSERTHOSTIP,S.INSERTHOSTOS,S.UPDATEMPLOYEEID,S.UPDATEDATE,S.UPDATEHOSTIP,S.UPDATEHOSTOS "
+                       + " FROM SEMESTERS S "
+                       + " LEFT JOIN SEMESTER_DEF SD ON  S.SEMESTER_ID=SD.SEMESTER_ID "
+                       + " LEFT JOIN BRANCH B ON  S.BRANCHID=B.BRANCHID "
+                       + " LEFT JOIN CENTER C ON  S.BRANCHID=C.BRANCHID AND S.CENTERID=C.CENTERID "
+                       + " WHERE S.BRANCHID=? AND S.CENTERID=? AND S.SEMESTER_YEAR=? "
+                       + " ORDER BY S.SEMESTER_YEAR DESC, S.SEMESTER_ID";
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setInt(1, branchId);
+                ps.setInt(2, centerId);
+                ps.setInt(3, semesterYear);
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    semesterList.add(populateSemester(rs));
+                }
+
+                rs.close();
+            }
+
+            return semesterList;
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+
        
 }

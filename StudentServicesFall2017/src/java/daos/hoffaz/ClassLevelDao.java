@@ -19,7 +19,7 @@ import models.hoffaz.ClassLevel;
  */
 public class ClassLevelDao extends ConnectionDao {
 
-    public ArrayList<ClassLevel> buildClassLevel(int branchId, int centerId, int classID)
+    public ArrayList<ClassLevel> buildClassLevel(int branchId, int centerId)
             throws Exception {
 
         ArrayList<ClassLevel> classLevelList = new ArrayList<>();
@@ -34,13 +34,12 @@ public class ClassLevelDao extends ConnectionDao {
                     + "  LEFT JOIN CLASS_GRADE CGT ON  CD.GRADE_ID_TO=CGT.GRADE_ID "
                     + "  LEFT JOIN BRANCH B ON  CLV.BRANCHID=B.BRANCHID "
                     + "  LEFT JOIN CENTER C ON  CLV.BRANCHID=C.BRANCHID AND CLV.CENTERID=C.CENTERID "
-                    + "  WHERE CLV.BRANCHID=? AND CLV.CENTERID=? AND CLV.CLASS_ID=? "
+                    + "  WHERE CLV.BRANCHID=? AND CLV.CENTERID=? "
                     + "  ORDER BY CLV.BRANCHID, CLV.CENTERID, CLV.CLASS_ID, CLV.LEVEL_ID ";
 
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setInt(1, branchId);
                 ps.setInt(2, centerId);
-                ps.setInt(3, classID);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -249,6 +248,44 @@ public class ClassLevelDao extends ConnectionDao {
             ps.close();
 
             return classLevel;
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+    
+    public ArrayList<ClassLevel> getClassLevelfilter(int branchId, int centerId, int classID)
+            throws Exception {
+
+        ArrayList<ClassLevel> classLevelList = new ArrayList<>();
+
+        try {
+            Connection conn = getConnection();
+
+            String sql = "SELECT CLV.BRANCHID,B.BRANCHNAME,CLV.CENTERID,C.CENTERNAME,CLV.CLASS_ID,CD.CLASS_NAME,CD.CLASS_DEF_DESC,CD.GRADE_ID_FROM,CGF.GRADE_DESC AS GRADE_DESC_FROM,CD.GRADE_ID_TO,CGT.GRADE_DESC  AS GRADE_DESC_TO,CLV.LEVEL_ID,CLV.LEVEL_NAME,CLV.LEVEL_DESC,CLV.INSERTEMPLOYEEID,CLV.INSERTDATE,CLV.INSERTHOSTIP,CLV.INSERTHOSTOS,CLV.UPDATEMPLOYEEID,CLV.UPDATEDATE,CLV.UPDATEHOSTIP,CLV.UPDATEHOSTOS "
+                    + "  FROM CLASS_LEVEL CLV "
+                    + "  LEFT JOIN CLASS_DEF CD  ON CLV.CLASS_ID=CD.CLASS_ID "
+                    + "  LEFT JOIN CLASS_GRADE CGF ON  CD.GRADE_ID_FROM=CGF.GRADE_ID "
+                    + "  LEFT JOIN CLASS_GRADE CGT ON  CD.GRADE_ID_TO=CGT.GRADE_ID "
+                    + "  LEFT JOIN BRANCH B ON  CLV.BRANCHID=B.BRANCHID "
+                    + "  LEFT JOIN CENTER C ON  CLV.BRANCHID=C.BRANCHID AND CLV.CENTERID=C.CENTERID "
+                    + "  WHERE CLV.BRANCHID=? AND CLV.CENTERID=? AND CLV.CLASS_ID=? "
+                    + "  ORDER BY CLV.BRANCHID, CLV.CENTERID, CLV.CLASS_ID, CLV.LEVEL_ID ";
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setInt(1, branchId);
+                ps.setInt(2, centerId);
+                ps.setInt(3, classID);
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    classLevelList.add(populateclassLevel(rs));
+                }
+
+                rs.close();
+            }
+
+            return classLevelList;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }

@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{msgs.class_room}</title>
+    </h:head>
+    <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml"> 
+            <h:form id="manage_class_room_form">  
+                <h:panelGrid id="add"
+                                 style="float: #{langBean.styleFloat};text-align: right" 
+                                 columns="3" 
+                                 dir="#{langBean.dir}"> 
+                        
+                        <p:outputLabel value="#{msgs.semester_desc_en}:" for="semester_year"/>
+                        <p:selectOneMenu value="#{manageClassRoomBean.semesterYear}" 
+                                     id="semester_year"
+                                     style="width:170px; float:#{langBean.styleFloat} direction:#{langBean.dir}"
+                                     panelStyle="float:#{langBean.styleFloat}">
+                        <f:selectItem itemLabel="#{msgs.select_one}"
+                                      itemValue=""/>
+                        <f:selectItems var="semester_Year"
+                                       value="#{addEditClassRoomBean.semesterYearList}" 
+                                       itemLabel="#{semester_Year}"
+                                       itemValue="#{semester_Year}"/>
+                        <p:ajax update="semester_id" listener="#{manageClassRoomBean.updateSemesterIdList}" />
+                    </p:selectOneMenu>
+                         
+                        <p:selectOneMenu value="#{manageClassRoomBean.semesterId}" 
+                                     id="semester_id"
+                                     style="width:170px; float:#{langBean.styleFloat} direction:#{langBean.dir}"
+                                     panelStyle="float:#{langBean.styleFloat}">
+                            <p:ajax listener="#{manageClassRoomBean.updateClassRoomFilter()}" update=":manage_class_room_form:manage_class_room_table"/>
+                        <f:selectItem itemLabel="#{msgs.select_one}"
+                                      itemValue=""/>
+                        <f:selectItems var="semesterId"
+                                       value="#{manageClassRoomBean.semesterIdList}" 
+                                       itemLabel="#{semesterId.semesterIdLookUp}"
+                                       itemValue="#{semesterId.semesterId}"/>
+                    </p:selectOneMenu>
+                        <p:outputLabel/>
+                        <h:message for="semester_year" styleClass="errorMsg"/>
+                        <h:message for="semester_id" styleClass="errorMsg"/>
+                        
+                        </h:panelGrid>
+                        
+                <p:dataTable id="manage_class_room_table" 
+                             styleClass="dataTable"
+                             var="room"
+                             value="#{manageClassRoomBean.classRooms}"                    
+                             selection="#{manageClassRoomBean.selectedClassRoom}"
+                             rowKey="#{room.classRoomId}"                    
+                             rows="10"     
+                             rowsPerPageTemplate="5,10,20"
+                             dir="#{langBean.dir}"
+                             emptyMessage="#{msgs.no_class_room}"
+                             paginator="true"
+                             paginatorPosition="top" 
+                             paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
+                             >
+
+
+
+                    <f:facet name="header" id="header">
+                        #{msgs.class_room}
+                        <h:commandLink>
+                            <p:graphicImage name="/icons/excel.png" width="24" style="float: left;"/>
+                            <p:dataExporter type="xls" target="manage_class_room_table" fileName="class_room" encoding="UTF-8"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage name="/icons/pdf.png" width="24" style="float: left;"/>
+                            <p:dataExporter type="pdf" target="manage_class_room_table" fileName="class_room"  encoding="UTF-8"/>
+                        </h:commandLink>
+
+                    </f:facet>   
+                    
+                    <p:ajax event="rowSelectRadio"
+                            update=":manage_class_room_form:manage_class_room_table"/>
+
+                    <p:column selectionMode="single" style="width:5%;text-align:center;"/>
+
+                    <p:column headerText="#{msgs.semester_desc_en}"
+                              style="width:20%;"
+                              filterBy="#{room.semesterId}"
+                              filterMatchMode="contains"
+                              sortBy="#{room.semesterId}">                    
+                        <h:outputText value="#{room.semesterIdLookUp}"/>  
+                    </p:column>
+
+                    <p:column headerText="#{msgs.year_en}"
+                              style="width:20%"
+                              filterBy="#{room.semesterYear}"
+                              filterMatchMode="contains"
+                              sortBy="#{room.semesterYear}">                    
+                        <h:outputText value="#{room.semesterYear}"/>  
+                    </p:column>
+
+                    <p:column headerText="#{msgs.class_name_en}"
+                              style="width:20%"
+                              filterBy="#{room.classId}"
+                              filterMatchMode="contains"
+                              sortBy="#{room.classId}">                    
+                        <h:outputText value="#{room.className}"/>  
+                    </p:column>
+                    
+                    <p:column headerText="#{msgs.level_name_en}"
+                              style="width:20%"
+                              filterBy="#{room.levelId}"
+                              filterMatchMode="contains"
+                              sortBy="#{room.levelId}">                    
+                        <h:outputText value="#{room.levelName}"/>  
+                    </p:column>
+                    
+                    <p:column headerText="#{msgs.name}"
+                              style="width:20%">                    
+                        <h:outputText value="#{room.firstName} #{room.familyName}"/>  
+                    </p:column>
+
+                    <p:column headerText="#{msgs.level_cost_en}"
+                              style="width:15%" >                    
+                        <h:outputText value="#{room.cost}"/>
+                    </p:column>
+
+                    
+
+                    <f:facet name="footer">
+                        <p:toolbar style="border: none">
+                            <p:toolbarGroup align="#{languageBean.screenLeft}">
+                                <p:commandButton value="#{msgs.delete}"
+                                                 icon="ui-icon-minus"                                  
+                                                 iconPos="#{langBean.styleFloat}"
+                                                 styleClass="commandButton"
+                                                 style="float:#{langBean.styleFloat}"
+                                                 update="@form"
+                                                 disabled="#{manageClassRoomBean.selectedClassRoom==null}" 
+                                                 onclick="return confirm('#{msgs.confirm_delete_class_room}?');"
+                                                 actionListener="#{manageClassRoomBean.deleteSelectedClassRoom()}"
+                                                 action="/hoffaz/registrar/manage_class_room.xhtml" />
+                                <p:commandButton value="#{msgs.edit}"
+                                                 icon="ui-icon-pencil"                                  
+                                                 iconPos="#{langBean.styleFloat}"
+                                                 styleClass="commandButton"
+                                                 style="float:#{langBean.styleFloat}"                                                                                                
+                                                 disabled="#{manageClassRoomBean.selectedClassRoom==null}"                                                 
+                                                 actionListener="#{manageClassRoomBean.saveSelectedItemId()}"
+                                                 action="/hoffaz/registrar/add_edit_class_room.xhtml" />
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+                </p:dataTable>
+
+                <p:commandButton value="#{msgs.add}"
+                                 icon="ui-icon-plus"                                  
+                                 iconPos="#{langBean.styleFloat}"
+                                 styleClass="commandButton"
+                                 style="float:#{langBean.styleFloat}" 
+                                 actionListener="#{sessionBean.setSelectedItemId(-1)}"
+                                 action="/hoffaz/registrar/add_edit_class_room.xhtml" />                
+            </h:form>
+        </ui:decorate>
+    </h:body>
+</html>
+

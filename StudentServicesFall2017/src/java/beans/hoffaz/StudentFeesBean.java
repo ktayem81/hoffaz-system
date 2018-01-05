@@ -6,6 +6,7 @@
 package beans.hoffaz;
 
 import daos.hoffaz.StudentFeesDao;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -18,7 +19,7 @@ import models.hoffaz.Payments;
  */
 @Named(value = "studentFeesBean")
 @Dependent
-public class StudentFeesBean {
+public class StudentFeesBean  implements Serializable{
     private Payments selectedPayment;
 private ArrayList<Payments> payments;
 private final StudentFeesDao eventsDao = new StudentFeesDao();
