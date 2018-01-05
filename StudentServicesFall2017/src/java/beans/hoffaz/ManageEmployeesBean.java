@@ -25,7 +25,7 @@ import org.primefaces.event.SelectEvent;
  *
  * @author khale
  */
-@Named(value = "manageEmployees")
+@Named(value = "ManageEmployeesBean")
 @ViewScoped
 public class ManageEmployeesBean implements Serializable {
 

@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml"> 
+            <h:form id="manage_employee_form">  
+
+
+                <p:dataTable id="manage_employee_table" 
+                             styleClass="dataTable"
+                             var="employee"
+                             value="#{ManageEmployeesBean.employees}"                    
+                             selection="#{ManageEmployeesBean.selectedEmployee}"
+                             rowKey="#{employee.employeeId}"                    
+                             rows="10"     
+                             rowsPerPageTemplate="5,10,20"
+                             dir="#{langBean.dir}"
+                             emptyMessage="#{msgs.no_employees}"
+                             paginator="true"
+                             paginatorPosition="top" 
+                             paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
+                             >
+
+
+
+                    <f:facet name="header" id="header">
+                        #{msgs.employee_info}
+
+                        <h:commandLink>
+                            <p:graphicImage name="/icons/excel.png" width="24" style="float: left;"/>
+                            <p:dataExporter type="xls" target="manage_employee_table" fileName="employees" encoding="UTF-8"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage name="/icons/pdf.png" width="24" style="float: left;"/>
+                            <p:dataExporter type="pdf" target="manage_employee_table" fileName="employees"  encoding="UTF-8"/>
+                        </h:commandLink>
+                        
+                    </f:facet>   
+
+
+
+
+
+
+
+                    <p:ajax event="rowSelectRadio"
+                            update=":manage_employee_form:manage_employee_table"/>
+
+                    <p:column selectionMode="single" style="width:5%;text-align:center;"/>
+
+                    <p:column headerText="#{msgs.employee_num}"
+                              style="width:20%;"
+                              filterBy="#{employee.employeeId}"
+                              filterMatchMode="contains"
+                              sortBy="#{employee.employeeId}">                    
+                        <h:outputText value="#{employee.employeeId}"/>  
+                    </p:column>
+
+                    <p:column headerText="#{msgs.first_name}"
+                              style="width:20%"
+                              filterBy="#{employee.firstName}"
+                              filterMatchMode="contains"
+                              sortBy="#{employee.firstName}">                    
+                        <h:outputText value="#{employee.firstName}"/>  
+                    </p:column>
+                    <p:column headerText="#{msgs.sec_name}"
+                              style="width:20%"
+                              filterBy="#{employee.secondName}"
+                              filterMatchMode="contains"
+                              sortBy="#{employee.secondName}">                    
+                        <h:outputText value="#{employee.secondName}"/>  
+                    </p:column>
+                    <p:column headerText="#{msgs.third_name}"
+                              style="width:20%"
+                              filterBy="#{employee.thirdName}"
+                              filterMatchMode="contains"
+                              sortBy="#{employee.thirdName}">                    
+                        <h:outputText value="#{employee.thirdName}"/>  
+                    </p:column>
+                    <p:column headerText="#{msgs.family_name}"
+                              style="width:20%"
+                              filterBy="#{employee.familyName}"
+                              filterMatchMode="contains"
+                              sortBy="#{employee.familyName}">                    
+                        <h:outputText value="#{employee.familyName}"/>  
+                    </p:column>
+
+                    
+
+
+<!--                    <p:column headerText="#{msgs.Nationality}"
+                              style="width:20%"
+                              filterBy="#{employee.nationalityDesc}"
+                              filterMatchMode="contains"
+                              >                    
+                        <h:outputText value="#{employee.nationalityDesc}"/>  
+                    </p:column>
+
+                    <p:column headerText="#{msgs.nationalty_id_en}"
+                              style="width:20%"
+                              filterBy="#{employee.nationalityId}"
+                              filterMatchMode="contains"
+                              >                    
+                        <h:outputText value="#{employee.nationalityId}"/>  
+                    </p:column>
+
+                    <p:column headerText="#{msgs.employee_info}"
+                              style="width:15%"
+                              sortBy="#{employee.employeeCategoryDesc}">                    
+                        <h:outputText value="#{employee.employeeCategoryDesc}"/>  
+                    </p:column>-->
+
+
+
+                    <f:facet name="footer">
+                        <p:toolbar style="border: none">
+                            <p:toolbarGroup align="#{languageBean.screenLeft}">
+                                <p:commandButton value="#{msgs.delete}"
+                                                 icon="ui-icon-minus"                                  
+                                                 iconPos="#{langBean.styleFloat}"
+                                                 styleClass="commandButton"
+                                                 style="float:#{langBean.styleFloat}"
+                                                 update="@form"
+                                                 disabled="#{ManageEmployeesBean.selectedEmployee==null}" 
+                                                 onclick="return confirm('#{msgs.confirm_delete_student}?');"
+                                                 actionListener="#{ManageEmployeesBean.deleteSelectedEmployee()}"
+                                                 action="/hoffaz/registrar/manage_employees.xhtml" />
+                                <p:commandButton value="#{msgs.edit}"
+                                                 icon="ui-icon-pencil"                                  
+                                                 iconPos="#{langBean.styleFloat}"
+                                                 styleClass="commandButton"
+                                                 style="float:#{langBean.styleFloat}"                                                                                                
+                                                 disabled="#{ManageEmployeesBean.selectedEmployee==null}"                                                 
+                                                 actionListener="#{ManageEmployeesBean.saveSelectedItemId()}"
+                                                 action="add_edit_employees" />
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+
+
+                </p:dataTable>
+
+                <p:commandButton value="#{msgs.add}"
+                                 icon="ui-icon-plus"                                  
+                                 iconPos="#{langBean.styleFloat}"
+                                 styleClass="commandButton"
+                                 style="float:#{langBean.styleFloat}" 
+                                 actionListener="#{sessionBean.setSelectedItemId(-1)}"
+                                 action="/hoffaz/registrar/add_edit_employees" />                
+            </h:form>
+
+        </ui:decorate>   
+    </h:body>
+</html>
+
