@@ -10,95 +10,109 @@ package models.hoffaz;
  * @author eng_ayman
  */
 public class Employees {
-    private int employee_Id;
-private String first_Name;
-private String second_name;
-private String thirdname;
-private String family_name;
-private int branch_Id;
-private int center_Id;
+private int employeeId;
+private String firstName;
+private String secondName;
+private String thirdName;
+private String familyName;
+private int branchId;
+private String branchDesc;
+private int centerId;
+private String centerDesc;
 private int phone;
 private int whatsup;
-private String address_Detials;
+private String addressDetials;
+
+    
 private int nationality;
-private int nationality_Id;
-private int employee_Category_Id;
-private int salary;
+private String nationalityDesc;
+private int nationalityId;
+
+
+    public int getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(int nationality) {
+        this.nationality = nationality;
+    }
+    private int employeeCategoryId;
+    private String employeeCategoryDesc;
+    private int salary;
 
     public Employees() {
     }
 
-    public Employees(int employee_Id, String first_Name, String second_name, String thirdname, String family_name, int branch_Id, int center_Id, int phone, int whatsup, String address_Detials, int nationality, int nationality_Id, int employee_Category_Id, int salary) {
-        this.employee_Id = employee_Id;
-        this.first_Name = first_Name;
-        this.second_name = second_name;
-        this.thirdname = thirdname;
-        this.family_name = family_name;
-        this.branch_Id = branch_Id;
-        this.center_Id = center_Id;
-        this.phone = phone;
-        this.whatsup = whatsup;
-        this.address_Detials = address_Detials;
-        this.nationality = nationality;
-        this.nationality_Id = nationality_Id;
-        this.employee_Category_Id = employee_Category_Id;
-        this.salary = salary;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public int getEmployee_Id() {
-        return employee_Id;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public void setEmployee_Id(int employee_Id) {
-        this.employee_Id = employee_Id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getFirst_Name() {
-        return first_Name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setFirst_Name(String first_Name) {
-        this.first_Name = first_Name;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public String getSecond_name() {
-        return second_name;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
-    public void setSecond_name(String second_name) {
-        this.second_name = second_name;
+    public String getThirdName() {
+        return thirdName;
     }
 
-    public String getThirdname() {
-        return thirdname;
+    public void setThirdName(String thirdName) {
+        this.thirdName = thirdName;
     }
 
-    public void setThirdname(String thirdname) {
-        this.thirdname = thirdname;
+    public String getFamilyName() {
+        return familyName;
     }
 
-    public String getFamily_name() {
-        return family_name;
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
-    public void setFamily_name(String family_name) {
-        this.family_name = family_name;
+    public int getBranchId() {
+        return branchId;
     }
 
-    public int getBranch_Id() {
-        return branch_Id;
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
     }
 
-    public void setBranch_Id(int branch_Id) {
-        this.branch_Id = branch_Id;
+    public String getBranchDesc() {
+        return branchDesc;
     }
 
-    public int getCenter_Id() {
-        return center_Id;
+    public void setBranchDesc(String branchDesc) {
+        this.branchDesc = branchDesc;
     }
 
-    public void setCenter_Id(int center_Id) {
-        this.center_Id = center_Id;
+    public int getCenterId() {
+        return centerId;
+    }
+
+    public void setCenterId(int centerId) {
+        this.centerId = centerId;
+    }
+
+    public String getCenterDesc() {
+        return centerDesc;
+    }
+
+    public void setCenterDesc(String centerDesc) {
+        this.centerDesc = centerDesc;
     }
 
     public int getPhone() {
@@ -117,36 +131,44 @@ private int salary;
         this.whatsup = whatsup;
     }
 
-    public String getAddress_Detials() {
-        return address_Detials;
+    public String getAddressDetials() {
+        return addressDetials;
     }
 
-    public void setAddress_Detials(String address_Detials) {
-        this.address_Detials = address_Detials;
+    public void setAddressDetials(String addressDetials) {
+        this.addressDetials = addressDetials;
     }
 
-    public int getNationality() {
-        return nationality;
+    public String getNationalityDesc() {
+        return nationalityDesc;
     }
 
-    public void setNationality(int nationality) {
-        this.nationality = nationality;
+    public void setNationalityDesc(String nationalityDesc) {
+        this.nationalityDesc = nationalityDesc;
     }
 
-    public int getNationality_Id() {
-        return nationality_Id;
+    public int getNationalityId() {
+        return nationalityId;
     }
 
-    public void setNationality_Id(int nationality_Id) {
-        this.nationality_Id = nationality_Id;
+    public void setNationalityId(int nationalityId) {
+        this.nationalityId = nationalityId;
     }
 
-    public int getEmployee_Category_Id() {
-        return employee_Category_Id;
+    public int getEmployeeCategoryId() {
+        return employeeCategoryId;
     }
 
-    public void setEmployee_Category_Id(int employee_Category_Id) {
-        this.employee_Category_Id = employee_Category_Id;
+    public void setEmployeeCategoryId(int employeeCategoryId) {
+        this.employeeCategoryId = employeeCategoryId;
+    }
+
+    public String getEmployeeCategoryDesc() {
+        return employeeCategoryDesc;
+    }
+
+    public void setEmployeeCategoryDesc(String employeeCategoryDesc) {
+        this.employeeCategoryDesc = employeeCategoryDesc;
     }
 
     public int getSalary() {
@@ -156,5 +178,7 @@ private int salary;
     public void setSalary(int salary) {
         this.salary = salary;
     }
+    
+
     
 }

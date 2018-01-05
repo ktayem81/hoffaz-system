@@ -11,15 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import models.hoffaz.Center;
 import models.hoffaz.Employees;
 
 /**
  *
  * @author khale
  */
-public class EmployeesDao extends ConnectionDao{
-     public ArrayList<Employees> buildEmployees(int branchId, int centerId)
+public class em  extends ConnectionDao{
+    public ArrayList<Employees> buildEmployees(int branchId, int centerId)
             throws Exception {
 
         ArrayList<Employees> employeesList = new ArrayList<>();
@@ -243,37 +242,8 @@ public class EmployeesDao extends ConnectionDao{
             throw new SQLException(e.getMessage());
         }
     }
-//         public boolean checkNationalId(int branchId, int centerId, int natId) throws Exception {
-//
-//        try {
-//            int nationalCount = 0;
-//            Connection conn = getConnection();
-//
-//            String sql = "SELECT COUNT(*) AS NATID"
-//                    + " FROM Employees E "
-//                    + " WHERE E.BRANCHID=? AND E.CENTERID=? AND E.NATIONALITYID=?";
-//
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setInt(1, branchId);
-//            ps.setInt(2, centerId);
-//            ps.setInt(3, natId);
-//
-//            ResultSet rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//                nationalCount = rs.getInt("NATID");
-//            }
-//
-//            rs.close();
-//            ps.close();
-//
-//            return nationalCount > 0;
-//
-//        } catch (SQLException e) {
-//            throw new SQLException(e.getMessage());
-//        }
-//    }
        
      
+       
     
 }

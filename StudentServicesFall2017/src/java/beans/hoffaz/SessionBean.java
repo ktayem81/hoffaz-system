@@ -8,6 +8,7 @@ import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import models.hoffaz.Employees;
 import models.hoffaz.Semester;
 import models.hoffaz.Student;
 
@@ -36,6 +37,19 @@ public class SessionBean implements Serializable {
     private String remoteHost;
     
     private Student student;
+    private Employees employee;
+
+    public Employees getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employees employee) {
+        this.employee = employee;
+    }
+
+    
+
+    
     private Semester selectedSemester;
 
     public String getRoleDescription() {
