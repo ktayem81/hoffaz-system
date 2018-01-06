@@ -207,7 +207,7 @@ public class AddEditTripBean  implements Serializable{
             }
             branchList = branchDao.branchList();
             centerList = centerDao.buildCenters();
-            //employeesList=employeesDao.buildEmployees();
+            employeesList=employeesDao.getEmployees(branchId, centerId, employeeId);
 
         } catch (Exception ex) {
             Logger.getLogger(AddEditTripBean.class.getName()).log(Level.SEVERE, null, ex);

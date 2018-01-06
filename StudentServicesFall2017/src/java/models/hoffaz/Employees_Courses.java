@@ -7,6 +7,8 @@ package models.hoffaz;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
+
 
 /**
  *
@@ -15,12 +17,20 @@ import java.sql.Timestamp;
 public class Employees_Courses implements Serializable{
    private int employeeId;
    private int courseId;
-   private Timestamp date;
+   private Date dateOf;
    private int duration;
    private String description;
    private String place;
    private String certficatNumber;
+  private Timestamp updateDate; 
 
+    public Timestamp getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
+    }
     public Employees_Courses() {
     }
 
@@ -40,13 +50,15 @@ public class Employees_Courses implements Serializable{
         this.courseId = courseId;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public Date getDateOf() {
+        return dateOf;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setDateOf(Date dateOf) {
+        this.dateOf = dateOf;
     }
+
+    
 
     public int getDuration() {
         return duration;
@@ -78,6 +90,10 @@ public class Employees_Courses implements Serializable{
 
     public void setCertficatNumber(String certficatNumber) {
         this.certficatNumber = certficatNumber;
+    }
+
+    public void setDate(Timestamp timestamp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    
