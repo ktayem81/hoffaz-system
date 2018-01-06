@@ -163,7 +163,7 @@ public class TripDao extends ConnectionDao{
 
             String sql = "UPDATE TRIP T "
                     + "SET T.EMPLOYEEID=?,"
-                    + "    T.TRIPDESCRIPTION=?,"
+                    + "    T.TRIPDESCRIPTION=?"
                     + "    WHERE T.TRIPID=? "
                     + "      AND T.BRANCHID=? "
                     + "      AND T.CENTERID=? ";
@@ -188,7 +188,7 @@ public class TripDao extends ConnectionDao{
         Connection conn = getConnection();
 
         try {
-            String sql = "DELETE FROM TRIP WHERE WHERE BRANCHID=? AND CENTERID=? AND TRIPID=?";
+            String sql = "DELETE FROM TRIP WHERE BRANCHID=? AND CENTERID=? AND TRIPID=?";
             PreparedStatement ps = conn.prepareStatement(sql);
            
             ps.setInt(1, branchId);

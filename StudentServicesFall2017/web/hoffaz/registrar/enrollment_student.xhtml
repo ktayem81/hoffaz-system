@@ -21,6 +21,22 @@
                                  
                                  dir="#{langBean.dir}">  
                         
+                        <p:outputLabel value="#{msgs.semester_desc_en}:" for="semester"/>
+                        <p:selectOneMenu value="#{manageClassRoomBean.rowId}" 
+                                     id="semester_id"
+                                     style="width:170px; float:#{langBean.styleFloat} direction:#{langBean.dir}"
+                                     panelStyle="float:#{langBean.styleFloat}">
+                            <p:ajax listener="#{manageClassRoomBean.updateClassRoomFilter()}" update=":manage_class_room_form:manage_class_room_table"/>
+                        <f:selectItem itemLabel="#{msgs.select_one}"
+                                      itemValue=""/>
+                        <f:selectItems var="semesterId"
+                                       value="#{manageClassRoomBean.semesterIdList}" 
+                                       itemLabel="#{semester_Year}/#{semesterId.semesterIdLookUp}"
+                                       itemValue="#{semesterId.rowId}"/>
+                    </p:selectOneMenu>
+                        <p:outputLabel/>
+                        <h:message for="semester" styleClass="errorMsg"/>
+                        
                         <p:outputLabel value="#{msgs.student_name_en}/#{msgs.student_number_en}:" for="student_n"/>
                         <p:inputText id="student_n"
                                      style="width:170px"

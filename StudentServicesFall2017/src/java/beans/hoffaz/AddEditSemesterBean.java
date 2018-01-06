@@ -34,6 +34,7 @@ public class AddEditSemesterBean implements Serializable{
     
     private ArrayList<SemesterDef> semesterDefList = new ArrayList<>();
 
+    private String rowId;
     private int branchId;
     private String branchName;
     private int centerId;
@@ -52,6 +53,14 @@ public class AddEditSemesterBean implements Serializable{
     private String updateHostIp;
     private String updateHostOS;
 
+    public String getRowId() {
+        return rowId;
+    }
+
+    public void setRowId(String rowId) {
+        this.rowId = rowId;
+    }
+    
     public int getBranchId() {
         return branchId;
     }
@@ -225,6 +234,8 @@ public class AddEditSemesterBean implements Serializable{
             if (semesterId > 0) {
                 Semester semester = sessionBean.getSelectedSemester();//semesterDao.getSemester(branchId, centerId, semesterId, semesterYear);
 
+                this.rowId = semester.getRowId();
+                
                 this.branchId = semester.getBranchId();
                 this.branchName = semester.getBranchName();
                 this.centerId = semester.getCenterId();
@@ -266,6 +277,8 @@ public class AddEditSemesterBean implements Serializable{
 
         try {
 
+            semester.setRowId(rowId);
+            
             semester.setBranchId(branchId);
             semester.setBranchName(branchName);
             semester.setCenterId(centerId);

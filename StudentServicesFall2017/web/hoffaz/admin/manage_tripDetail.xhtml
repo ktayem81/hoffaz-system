@@ -12,11 +12,12 @@
         <ui:decorate template="/app_templates/app_template.xhtml"> 
 
             <h:form id="manage_tripDetail_form">  
+                <p:inputText value="tripDetails" disabled="#{manageTripDetailBean.tripDetails==null}"/>
 
                 <p:dataTable id="manage_tripDetail_table"
                              styleClass="dataTable"
                              var="tripDetail"
-                             value="#{manageTripDetailBean.tripDetails}"                    
+                             value="#{manageTripDetailBean.tripDetails}"                  
                              selection="#{manageTripDetailBean.selectedTripDetail}"
                              rowKey="#{tripDetail.stopId}"                    
                              rows="10"     

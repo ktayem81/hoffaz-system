@@ -37,6 +37,8 @@
                         
                        
                        
+                        
+                       
 
                         <p:outputLabel value="#{msgs.trip_driver}:" for="trip_driver"/>
                         <p:selectOneMenu value="#{addEditTripBean.employeeId}"
@@ -45,10 +47,10 @@
                                          requiredMessage=" #{msgs.required_msg}">
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
-                            <f:selectItems var="type"
+                            <f:selectItems var="driver"
                                            value="#{addEditTripBean.employeesList}" 
-                                           itemLabel="#{type.employeeCategoryDesc}"
-                                           itemValue="#{type.employeeCategoryId}"/>                             
+                                           itemLabel="#{driver.firstName} #{driver.familyName}"
+                                           itemValue="#{driver.employeeId}"/>                             
                         </p:selectOneMenu>
                         <h:message for="trip_driver" styleClass="errorMsg"/>                    
 

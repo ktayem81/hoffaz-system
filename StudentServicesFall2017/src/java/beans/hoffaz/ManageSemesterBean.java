@@ -31,7 +31,10 @@ public class ManageSemesterBean implements Serializable{
     
     private final SemesterDao semesterDao = new SemesterDao();
     private ArrayList<Semester> semesters;
+    
+    private String rowId;
 
+    
     public Semester getSelectedSemester() {
         return selectedSemester;
     }
@@ -56,6 +59,15 @@ public class ManageSemesterBean implements Serializable{
         this.sessionBean = sessionBean;
     }
 
+    public String getRowId() {
+        return rowId;
+    }
+
+    public void setRowId(String rowId) {
+        this.rowId = rowId;
+    }
+
+    
     
     @Inject
     private SessionBean sessionBean;

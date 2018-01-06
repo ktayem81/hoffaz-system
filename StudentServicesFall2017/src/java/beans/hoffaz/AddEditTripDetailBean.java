@@ -160,6 +160,7 @@ public class AddEditTripDetailBean  implements Serializable{
     public void setSessionBean(SessionBean sessionBean) {
         this.sessionBean = sessionBean;
     }
+    
      @PostConstruct
     public void init() {
 
@@ -184,8 +185,8 @@ public class AddEditTripDetailBean  implements Serializable{
                 
 
             }
-            branchList = branchDao.branchList();
-            centerList = centerDao.buildCenters();
+            //branchList = branchDao.branchList();
+            //centerList = centerDao.buildCenters();
             tripList=tripDao.buildTrips(branchId, centerId);
 
         } catch (Exception ex) {
@@ -197,9 +198,15 @@ public class AddEditTripDetailBean  implements Serializable{
         TripDetail tripDetail = new TripDetail();
 
         try {
-            tripDetail.setTripId(tripId);
+            tripDetail.setBranchId(branchId);
+            tripDetail.setBranchName(branchDesc);
+            tripDetail.setCenterId(centerId);
+            tripDetail.setCenterName(centerDesc);
             tripDetail.setStopDescription(stopDescription);
-            
+            tripDetail.setStopId(stopId);
+            tripDetail.setTripDesc(tripDesc);
+            tripDetail.setTripId(tripId);
+                    
 
             if (sessionBean.getSelectedItemId() > 0) {
 

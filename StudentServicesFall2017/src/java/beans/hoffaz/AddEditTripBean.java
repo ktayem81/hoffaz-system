@@ -38,11 +38,11 @@ public class AddEditTripBean  implements Serializable{
     private final BranchDao branchDao = new BranchDao();
     private final CenterDao centerDao = new CenterDao();
     private final EmployeesDao employeesDao = new EmployeesDao ();
-   
     
     private ArrayList<Branch> branchList = new ArrayList<>();
     private ArrayList<Center> centerList = new ArrayList<>();
     private ArrayList<Employees> employeesList = new ArrayList<>();
+    
     private int branchId; 
     private String branchName;
     private int centerId; 
@@ -188,8 +188,14 @@ public class AddEditTripBean  implements Serializable{
         insertEmployeeId = Integer.parseInt(sessionBean.getUsername());
 
         tripId = sessionBean.getSelectedItemId();
+        
+        
 
         try {
+            //branchList = branchDao.branchList();
+            //centerList = centerDao.buildCenters();
+            employeesList=employeesDao.getEmployees(branchId, centerId,5 );
+        
             if (tripId > 0) {
                 Trip trip = tripDao.getTrip(branchId, centerId, tripId);
                
@@ -205,9 +211,6 @@ public class AddEditTripBean  implements Serializable{
                 this.tripDescription=trip.getTripDescription();
 
             }
-            branchList = branchDao.branchList();
-            centerList = centerDao.buildCenters();
-            employeesList=employeesDao.getEmployees(branchId, centerId, employeeId);
 
         } catch (Exception ex) {
             Logger.getLogger(AddEditTripBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -218,6 +221,11 @@ public class AddEditTripBean  implements Serializable{
         Trip trip = new Trip();
 
         try {
+            trip.setBranchId(branchId);
+            trip.setBranchName(branchName);
+            trip.setCenterId(centerId);
+            trip.setCenterName(centerName);
+            trip.setTripId(tripId);
             trip.setTripDescription(tripDescription);
             trip.setEmployeeId(employeeId);
             

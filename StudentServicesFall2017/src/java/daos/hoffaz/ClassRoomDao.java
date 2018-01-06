@@ -240,7 +240,7 @@ public class ClassRoomDao extends ConnectionDao {
             ClassRoom classRoom = null;
             Connection conn = getConnection();
 
-            String sql = "SELECT CR.BRANCHID,B.BRANCHNAME,CR.CENTERID,C.CENTERNAME, "
+            String sql = "SELECT S.ROWID,CR.BRANCHID,B.BRANCHNAME,CR.CENTERID,C.CENTERNAME, "
                     + " CR.CLASS_ROOM_ID,CR.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,E.FAMILYNAME, "
                     + " CR.COST, "
                     + " CR.CLASS_ID,CR.LEVEL_ID,CD.CLASS_NAME,CL.LEVEL_NAME,CR.SEMESTER_ID,SD.SEMESTER_DESC AS LOOKUP,CR.SEMESTER_YEAR, "
@@ -286,7 +286,7 @@ public ArrayList<ClassRoom> getClassRoomsfilter(int branchId, int centerId, int 
         try {
             Connection conn = getConnection();
 
-            String sql = "SELECT CR.ROWID,CR.BRANCHID,B.BRANCHNAME,CR.CENTERID,C.CENTERNAME, "
+            String sql = "SELECT S.ROWID,CR.ROWID,CR.BRANCHID,B.BRANCHNAME,CR.CENTERID,C.CENTERNAME, "
                     + " CR.CLASS_ROOM_ID,CR.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,E.FAMILYNAME, "
                     + " CR.COST, "
                     + " CR.CLASS_ID,CR.LEVEL_ID,CD.CLASS_NAME,CL.LEVEL_NAME,CR.SEMESTER_ID,SD.SEMESTER_DESC AS LOOKUP,CR.SEMESTER_YEAR, "
