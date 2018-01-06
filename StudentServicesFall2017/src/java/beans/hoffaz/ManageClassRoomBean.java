@@ -36,6 +36,7 @@ public class ManageClassRoomBean implements Serializable{
     
     private ArrayList<Semester> semesterIdList = new ArrayList<>();
     
+    private String rowId;
     private int semesterId;
     private int semesterYear;
 
@@ -79,6 +80,14 @@ public class ManageClassRoomBean implements Serializable{
 
     public void setSemesterYear(int semesterYear) {
         this.semesterYear = semesterYear;
+    }
+
+    public String getRowId() {
+        return rowId;
+    }
+
+    public void setRowId(String rowId) {
+        this.rowId = rowId;
     }
 
     public SessionBean getSessionBean() {

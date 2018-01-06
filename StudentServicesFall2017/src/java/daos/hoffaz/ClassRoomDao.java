@@ -28,7 +28,7 @@ public class ClassRoomDao extends ConnectionDao {
         try {
             Connection conn = getConnection();
 
-            String sql = "SELECT CR.BRANCHID,B.BRANCHNAME,CR.CENTERID,C.CENTERNAME, "
+            String sql = "SELECT CR.ROWID,CR.BRANCHID,B.BRANCHNAME,CR.CENTERID,C.CENTERNAME, "
                     + " CR.CLASS_ROOM_ID,CR.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,E.FAMILYNAME, "
                     + " CR.COST, "
                     + " CR.CLASS_ID,CR.LEVEL_ID,CD.CLASS_NAME,CL.LEVEL_NAME,CR.SEMESTER_ID,SD.SEMESTER_DESC AS LOOKUP,CR.SEMESTER_YEAR, "
@@ -66,6 +66,8 @@ public class ClassRoomDao extends ConnectionDao {
 
     private ClassRoom populateClassRoom(ResultSet rs) throws SQLException {
         ClassRoom classRoom = new ClassRoom();
+        
+        classRoom.setRowId(rs.getString("ROWID"));
 
         classRoom.setBranchId(rs.getInt("BRANCHID"));
         classRoom.setBranchName(rs.getString("BRANCHNAME"));
@@ -284,7 +286,7 @@ public ArrayList<ClassRoom> getClassRoomsfilter(int branchId, int centerId, int 
         try {
             Connection conn = getConnection();
 
-            String sql = "SELECT CR.BRANCHID,B.BRANCHNAME,CR.CENTERID,C.CENTERNAME, "
+            String sql = "SELECT CR.ROWID,CR.BRANCHID,B.BRANCHNAME,CR.CENTERID,C.CENTERNAME, "
                     + " CR.CLASS_ROOM_ID,CR.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,E.FAMILYNAME, "
                     + " CR.COST, "
                     + " CR.CLASS_ID,CR.LEVEL_ID,CD.CLASS_NAME,CL.LEVEL_NAME,CR.SEMESTER_ID,SD.SEMESTER_DESC AS LOOKUP,CR.SEMESTER_YEAR, "

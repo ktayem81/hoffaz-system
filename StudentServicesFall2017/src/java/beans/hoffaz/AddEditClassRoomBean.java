@@ -48,6 +48,8 @@ public class AddEditClassRoomBean implements Serializable {
     private ArrayList<Semester> semesterIdList = new ArrayList<>();
     private ArrayList<Employees> employeesList = new ArrayList<>();
 
+    private String rowId;
+    
     private int branchId;
     private String branchName;
     private int centerId;
@@ -320,6 +322,32 @@ public class AddEditClassRoomBean implements Serializable {
     public void setSessionBean(SessionBean sessionBean) {
         this.sessionBean = sessionBean;
     }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getLevelName() {
+        return levelName;
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+
+    public String getRowId() {
+        return rowId;
+    }
+
+    public void setRowId(String rowId) {
+        this.rowId = rowId;
+    }
+    
+    
     @Inject
     private SessionBean sessionBean;
 
@@ -336,6 +364,8 @@ public class AddEditClassRoomBean implements Serializable {
             if (classRoomId > 0) {
                 ClassRoom classRoom = sessionBean.getSelectedClassRoom();//semesterDao.getSemester(branchId, centerId, semesterId, semesterYear);
 
+                this.rowId = classRoom.getRowId();
+                
                 this.branchId = classRoom.getBranchId();
                 this.branchName = classRoom.getBranchName();
                 this.centerId = classRoom.getCenterId();
@@ -369,15 +399,14 @@ public class AddEditClassRoomBean implements Serializable {
                 this.updateDate = classRoom.getUpdateDate();
                 this.updateHostIp = classRoom.getUpdateHostIp();
                 this.updateHostOS = classRoom.getUpdateHostOS();
-
+                
+                //for update semester
+                classLevelList = classLevelDao.buildClassLevel(branchId, centerId);
+                semesterIdList = semesterDao.getSemesterIdList(branchId, centerId, semesterYear);
             }
 
             semesterYearList = semesterDao.getSemesterYearList(branchId, centerId);
             classDefList = classDefDao.buildClassDef(branchId, centerId);
-            
-            //for update semester
-            classLevelList = classLevelDao.buildClassLevel(branchId, centerId);
-            semesterIdList = semesterDao.getSemesterIdList(branchId, centerId, semesterYear);
             
             employeesList = employeesDao.getEmployees(branchId, centerId, employeeCatagory);
 
@@ -398,7 +427,8 @@ public class AddEditClassRoomBean implements Serializable {
         java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(t);
 
         try {
-
+            classRoom.setRowId(rowId);
+            
             classRoom.setBranchId(branchId);
             classRoom.setBranchName(branchName);
             classRoom.setCenterId(centerId);

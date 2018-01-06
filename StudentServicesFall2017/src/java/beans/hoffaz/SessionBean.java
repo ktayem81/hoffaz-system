@@ -262,7 +262,7 @@ public class SessionBean implements Serializable {
     
     public void resetData(){
       this.student = null;
-      this.selectedItemId=0;
+      this.selectedItemId=-1;
     }
 
     public void navigate(String url) {

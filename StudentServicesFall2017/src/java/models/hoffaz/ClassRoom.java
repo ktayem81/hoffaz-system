@@ -39,6 +39,7 @@ public class ClassRoom {
     private Timestamp updateDate;
     private String updateHostIp;
     private String updateHostOS;
+    private String rowId;
 
     public ClassRoom() {
     }
@@ -251,5 +252,12 @@ public class ClassRoom {
         this.updateHostOS = updateHostOS;
     }
 
-    
+    public String getRowId() {
+        return rowId;
+    }
+
+    public void setRowId(String rowId) {
+        this.rowId = rowId;
+    }
+ 
 }

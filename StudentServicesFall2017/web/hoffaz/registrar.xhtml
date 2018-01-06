@@ -1,6 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui"> 
 
@@ -9,9 +8,12 @@
     <p:commandButton   value="#{msgs.add_student}"  
                        styleClass="ribbonButton" 
                        style="float:#{langBean.styleFloat};"
-                       actionListener="#{sessionBean.setMenuIndex(2)}"
                        action="/hoffaz/registrar/add_edit_student.xhtml">
+         <f:actionListener binding="#{sessionBean.setMenuIndex(2)}"/>
+        <f:actionListener binding="#{sessionBean.setSelectedItemId(-1)}"/>
+        <f:actionListener binding="#{addEditStudentBean.init()}"/>
     </p:commandButton>
+    
     <p:commandButton   value="#{msgs.manage_student}"  
                        styleClass="ribbonButton" 
                        style="float:#{langBean.styleFloat};"
@@ -24,6 +26,7 @@
                        actionListener="#{sessionBean.setMenuIndex(2)}"
                        action="/hoffaz/registrar/manage_class_def.xhtml">
     </p:commandButton> 
+    
     <p:commandButton   value="#{msgs.add_level_class_en}"  
                        styleClass="ribbonButton" 
                        style="float:#{langBean.styleFloat};"
