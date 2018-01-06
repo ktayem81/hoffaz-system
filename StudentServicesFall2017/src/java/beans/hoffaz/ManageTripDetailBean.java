@@ -85,7 +85,7 @@ public class ManageTripDetailBean  implements Serializable{
 
     public void deleteSelectedTripDetail() {
         try {
-            tripDetailDao.deleteTripDetail(sessionBean.getBranchId(), sessionBean.getCenterId(), selectedTripDetail.getStopId());
+            tripDetailDao.deleteTripDetail(sessionBean.getBranchId(), sessionBean.getCenterId(),selectedTripDetail.getTripId(), selectedTripDetail.getStopId());
 
         } catch (Exception ex) {
             Logger.getLogger(ManageTripDetailBean.class.getName()).log(Level.SEVERE, null, ex);

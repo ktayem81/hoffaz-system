@@ -11,10 +11,49 @@
     </h:head>
     <h:body>
         <ui:decorate template="/app_templates/app_template.xhtml">
-            <h:form id="add_place">            
+            <h:form id="add_trip">            
                 <p:messages id="msgs" closable="true" globalOnly="true"/>
 
-               
+                <p:panel header="#{msgs.trip_info}"                            
+                         style="min-height:300px; 
+                                direction:#{langBean.dir};margin-top:10px; font-size:10pt">
+                    <h:panelGrid id="add"
+                                 style="float: #{langBean.styleFloat};" 
+                                 columns="3"                              
+                                 dir="#{langBean.dir}">
+                       
+
+                        <p:outputLabel value="#{msgs.trip_name}:" for="trip_name"/>
+                        <p:selectOneMenu value="#{addEditTripDetailBean.tripId}"
+                                         id="trip_name"
+                                         required="true"                                                                                  
+                                         requiredMessage=" #{msgs.required_msg}">
+                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                          itemValue=""/>
+                            <f:selectItems var="trip"
+                                           value="#{addEditTripDetailBean.tripList}" 
+                                           itemLabel="#{trip.tripDescription}"
+                                           itemValue="#{trip.tripId}"/>                             
+                        </p:selectOneMenu>
+                        <h:message for="trip_name" styleClass="errorMsg"/>                    
+
+                        
+
+                        <p:outputLabel value="#{msgs.trip_info}:" for="trip_desc"/>
+                        <p:inputText id="trip_desc"
+                                     style="width:300px"
+                                     value="#{addEditTripDetailBean.stopDescription}"                                      
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage="#{msgs.required_msg}">
+                        </p:inputText>
+                        <h:message for="trip_desc" styleClass="errorMsg"/>
+
+                                                             
+
+                                               
+                    </h:panelGrid>
+                </p:panel>
 
                 <p:commandButton value="#{msgs.save}"
                                  styleClass="commandButton"
@@ -31,8 +70,10 @@
                                  style="float:#{langBean.styleFloat}"                                 
                                  action="/hoffaz/admin/add_edit_tripDetail.xhtml"  />                                   
             </h:form>
-
-        </ui:decorate>         
+       
+    
+</ui:decorate>         
     </h:body>
 </html>
+    
 

@@ -12,6 +12,7 @@ package models.hoffaz;
  */
 public class TripDetail {
 
+    private String rowId;
     private int branchId;
     private String branchName;
     private int centerId;
@@ -22,6 +23,14 @@ public class TripDetail {
     private String stopDescription;
 
     public TripDetail() {
+    }
+
+    public String getRowId() {
+        return rowId;
+    }
+
+    public void setRowId(String rowId) {
+        this.rowId = rowId;
     }
 
     public int getBranchId() {

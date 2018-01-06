@@ -12,6 +12,7 @@ import models.hoffaz.ClassRoom;
 import models.hoffaz.Employees;
 import models.hoffaz.Semester;
 import models.hoffaz.Student;
+import models.hoffaz.TripDetail;
 
 /**
  *
@@ -39,6 +40,10 @@ public class SessionBean implements Serializable {
     
     private Student student;
     private Employees employee;
+    
+    private Semester selectedSemester;
+    private ClassRoom selectedClassRoom;
+    private TripDetail selectedTripDetail;
 
     public Employees getEmployee() {
         return employee;
@@ -48,12 +53,16 @@ public class SessionBean implements Serializable {
         this.employee = employee;
     }
 
-    
+    public TripDetail getSelectedTripDetail() {
+        return selectedTripDetail;
+    }
+
+    public void setSelectedTripDetail(TripDetail selectedTripDetail) {
+        this.selectedTripDetail = selectedTripDetail;
+    }
 
     
-    private Semester selectedSemester;
-    private ClassRoom selectedClassRoom;
-
+    
     public String getRoleDescription() {
         return roleDescription;
     }

@@ -27,7 +27,7 @@ public class TripDetailDao extends ConnectionDao {
         try {
             Connection conn = getConnection();
 
-            String sql = "SELECT T.BRANCHID,B.BRANCHNAME,T.CENTERID,C.CENTERNAME,T.TRIPID,TR.TRIPDESCRIPTION,T.STOPID,T.STOPDESCRIPTION  "
+            String sql = "SELECT T.ROWID,T.BRANCHID,B.BRANCHNAME,T.CENTERID,C.CENTERNAME,T.TRIPID,TR.TRIPDESCRIPTION,T.STOPID,T.STOPDESCRIPTION  "
                     + " FROM TRIPDETAIL T  "
                     + "                      LEFT JOIN BRANCH B ON T.BRANCHID=B.BRANCHID  "
                     + "                      LEFT JOIN CENTER C ON T.BRANCHID=C.BRANCHID AND T.CENTERID=C.CENTERID  "
@@ -59,6 +59,7 @@ public class TripDetailDao extends ConnectionDao {
 
         TripDetail tripDetail = new TripDetail();
 
+        tripDetail.setRowId(rs.getString("ROWID"));
         tripDetail.setBranchId(rs.getInt("BRANCHID"));
         tripDetail.setBranchName(rs.getString("BRANCHNAME"));
         tripDetail.setCenterId(rs.getInt("CENTERID"));
@@ -80,7 +81,7 @@ public class TripDetailDao extends ConnectionDao {
         Connection conn = getConnection();
 
         try {
-            String sql = "SELECT T.BRANCHID,B.BRANCHNAME,T.CENTERID,C.CENTERNAME,T.TRIPID,TR.TRIPDESCRIPTION,T.STOPID,T.STOPDESCRIPTION FROM TRIPDETAIL T "
+            String sql = "SELECT T.ROWID,T.BRANCHID,B.BRANCHNAME,T.CENTERID,C.CENTERNAME,T.TRIPID,TR.TRIPDESCRIPTION,T.STOPID,T.STOPDESCRIPTION FROM TRIPDETAIL T "
                     + " LEFT JOIN BRANCH B ON T.BRANCHID=B.BRANCHID "
                     + " LEFT JOIN CENTER C ON T.CENTERID=C.CENTERID "
                     + " LEFT JOIN TRIP TR ON T.TRIPID=TR.TRIPID "
@@ -206,24 +207,27 @@ public class TripDetailDao extends ConnectionDao {
         }
     }
 
-    public TripDetail getTripDetail(int branchId, int centerId,int tripId, int stopId) throws Exception {
+    public TripDetail getTripDetail(String rowId)//int branchId, int centerId,int tripId, int stopId) 
+            throws Exception {
         try {
             TripDetail tripDetail = null;
             Connection conn = getConnection();
 
-            String sql = "SELECT T.BRANCHID,B.BRANCHNAME,T.CENTERID,C.CENTERNAME,T.TRIPID,TR.TRIPDESCRIPTION,T.STOPID,T.STOPDESCRIPTION  "
+            String sql = "SELECT T.ROWID,T.BRANCHID,B.BRANCHNAME,T.CENTERID,C.CENTERNAME,T.TRIPID,TR.TRIPDESCRIPTION,T.STOPID,T.STOPDESCRIPTION  "
                     + " FROM TRIPDETAIL T  "
                     + "                      LEFT JOIN BRANCH B ON T.BRANCHID=B.BRANCHID  "
                     + "                      LEFT JOIN CENTER C ON T.BRANCHID=C.BRANCHID AND T.CENTERID=C.CENTERID  "
                     + "                      LEFT JOIN TRIP TR ON T.BRANCHID=TR.BRANCHID AND T.CENTERID=TR.CENTERID AND T.TRIPID=TR.TRIPID  "
-                    + "                      WHERE T.BRANCHID=? AND T.CENTERID=? AND T.TRIPID=? AND T.STOPID=?"
+                    + "                      WHERE T.ROWID=?"
+                    //+ "T.BRANCHID=? AND T.CENTERID=? AND T.TRIPID=? AND T.STOPID=?"
                     + "                      ORDER BY T.TRIPID,T.STOPID";
 
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, branchId);
-            ps.setInt(2, centerId);
-            ps.setInt(3, tripId);
-            ps.setInt(4, stopId);
+             ps.setString(1, rowId);
+//            ps.setInt(1, branchId);
+//            ps.setInt(2, centerId);
+//            ps.setInt(3, tripId);
+//            ps.setInt(4, stopId);
 
             ResultSet rs = ps.executeQuery();
 

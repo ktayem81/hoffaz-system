@@ -33,13 +33,15 @@ public class AddEditTripDetailBean  implements Serializable{
     /**
      * Creates a new instance of AddEditTripdetailBean
      */ 
-     private final TripDetailDao tripDetailDao = new TripDetailDao();
+    private final TripDetailDao tripDetailDao = new TripDetailDao();
     private final TripDao tripDao = new TripDao();
     private final BranchDao branchDao = new BranchDao();
     private final CenterDao centerDao = new CenterDao();
     private ArrayList<Branch> branchList = new ArrayList<>();
     private ArrayList<Center> centerList = new ArrayList<>();
     private ArrayList<Trip> tripList = new ArrayList<>();
+    
+    private String rowId;
     private int branchId; 
     private String branchDesc;
     private int centerId;
@@ -48,7 +50,15 @@ public class AddEditTripDetailBean  implements Serializable{
     private String stopDescription;
     private int tripId; 
     private String tripDesc;
-     private int insertTripId;
+    private int insertTripId;
+
+    public String getRowId() {
+        return rowId;
+    }
+
+    public void setRowId(String rowId) {
+        this.rowId = rowId;
+    }
 
     public int getInsertTripId() {
         return insertTripId;
@@ -172,7 +182,8 @@ public class AddEditTripDetailBean  implements Serializable{
 
         try {
             if (stopId > 0) {
-                TripDetail tripDetail = tripDetailDao.getTripDetail(branchId, centerId, stopId);
+                
+                TripDetail tripDetail = tripDetailDao.getTripDetail(rowId);//branchId, centerId,tripId, stopId);
                
                 this.branchId = tripDetail.getBranchId();
                 this.branchDesc = tripDetail.getBranchName();
