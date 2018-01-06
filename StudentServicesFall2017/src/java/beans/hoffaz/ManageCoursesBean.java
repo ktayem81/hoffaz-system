@@ -41,6 +41,7 @@ public class ManageCoursesBean implements Serializable {
     
     public ManageCoursesBean() {
     }
+    
      @PostConstruct
     public void init(){
         try {

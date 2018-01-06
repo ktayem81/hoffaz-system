@@ -108,8 +108,8 @@ public class CourseDao extends ConnectionDao{
 
             String sql = "UPDATE COURSES "
                     + "SET COURSENAME=?,"
-                    + "    COURSEDESCRIPTION=?,"
-                    + "WHERE COURSEID=?";
+                    + " COURSEDESCRIPTION=? "
+                    + " WHERE COURSEID=? ";
             
             PreparedStatement ps = conn.prepareStatement(sql);
             
@@ -147,10 +147,9 @@ public class CourseDao extends ConnectionDao{
             Courses course = null;
             Connection conn = getConnection();
 
-            String sql = "SINSERT INTO COURSES C "
-                    + "       (C.COURSEID,C.COURSENAME,C.COURSEDESCRIPTION) "
-                    + "           VALUES ((SELECT NVL(MAX(COURSEID),0)+1 AS courseId FROM COURSES),?,?) "
-                    + "WHERE C.COURSEID=?";
+            String sql = "SELECT COURSEID,COURSENAME,COURSEDESCRIPTION "
+                    + "FROM COURSES "
+                    + " WHERE COURSEID=?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, courseId);

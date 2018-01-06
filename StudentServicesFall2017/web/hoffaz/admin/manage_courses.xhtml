@@ -9,21 +9,21 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-       <<ui:decorate template="/app_templates/app_template.xhtml"> 
+        <ui:decorate template="/app_templates/app_template.xhtml"> 
               
     <h:form id="manage_course_form">  
         
         
        <p:dataTable id="manage_course_table"
                     styleClass="dataTable"
-                    var="course"
+                    var="co"
                     value="#{ManageCoursesBean.courses}"                    
                     selection="#{ManageCoursesBean.selectedCourse}"
-                    rowKey="#{course.courseId}"                    
+                    rowKey="#{co.courseId}"                    
                     rows="10"     
                     rowsPerPageTemplate="5,10,20"
                     dir="#{langBean.dir}"
-                    emptyMessage="#{msgs.no_centers}"
+                    emptyMessage="#{msgs.no_courses}"
                     paginator="true"
                     paginatorPosition="top" 
                     paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
@@ -41,26 +41,26 @@
 
             <p:column headerText="#{msgs.course_id}"
                       style="width:20%;"
-                      filterBy="#{course.courseId}"
+                      filterBy="#{co.courseId}"
                       filterMatchMode="contains"
-                      sortBy="#{course.courseId}">                    
-                <h:outputText value="#{course.courseId}"/>  
+                      sortBy="#{co.courseId}">                    
+                <h:outputText value="#{co.courseId}"/>  
             </p:column>
             
             <p:column headerText="#{msgs.course_name}"
                       style="width:20%;"
-                      filterBy="#{course.courseName}"
+                      filterBy="#{co.courseName}"
                       filterMatchMode="contains"
-                      sortBy="#{course.courseName}">                    
-                <h:outputText value="#{course.courseName}"/>  
+                      sortBy="#{co.courseName}">                    
+                <h:outputText value="#{co.courseName}"/>  
             </p:column>
             
-            <p:column headerText="#{msgs.comments}"
+            <p:column headerText="#{msgs.description}"
                       style="width:20%"
-                      filterBy="#{course.courseDescription}"
+                      filterBy="#{co.courseDescription}"
                       filterMatchMode="contains"
-                      sortBy="#{course.courseDescription}">                    
-                <h:outputText value="#{course.courseDescription}"/>  
+                      sortBy="#{co.courseDescription}">                    
+                <h:outputText value="#{co.courseDescription}"/>  
             </p:column>
            
             
@@ -75,7 +75,7 @@
                                          style="float:#{langBean.styleFloat}"
                                          update="@form"
                                          disabled="#{ManageCoursesBean.selectedCourse==null}" 
-                                         onclick="return confirm('#{msgs.confirm_delete_center}?');"
+                                         onclick="return confirm('#{msgs.confirm_delete_course}?');"
                                          actionListener="#{ManageCoursesBean.deleteSelectedCourse()}"
                                          action="/hoffaz/admin/manage_courses.xhtml" />
                         
