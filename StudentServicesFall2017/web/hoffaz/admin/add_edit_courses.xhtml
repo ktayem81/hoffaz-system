@@ -24,7 +24,7 @@
                         <p:outputLabel value="#{msgs.tutorial_name}:" for="tutorial_name"/>
                         <p:inputText id="tutorial_name"
                                      style="width:300px"
-                                     value=""                                      
+                                     value="#{addEditCoursesBean.courseName}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
@@ -35,21 +35,13 @@
 
                                         
 
-                        <p:outputLabel value="#{msgs.tutorial_num}:" for="tutorial_num"/>
-                        <p:inputText id="tutorial_num"
-                                     value="#{addEditEventBean.placeEn}"
-                                     style="width:300px"
-                                     required="true"
-                                     maxlength="512"
-                                     requiredMessage=" #{msgs.required_msg}">
-                        </p:inputText> 
-                        <h:message for="tutorial_num" styleClass="errorMsg"/>
+                       
 
                         
 
                         <p:outputLabel value="#{msgs.description}:" for="description"/>
                         <p:inputTextarea id="description"
-                                     value="#{addEditEventBean.placeAr}"
+                                         value="#{addEditCoursesBean.courseDescription}"
                                      style="width:600px"
                                      required="true"
                                      maxlength="512"
@@ -67,14 +59,14 @@
                                  iconPos="#{langBean.styleFloat}"
                                  ajax="false"
                                  style="float:#{langBean.styleFloat}"                                                                   
-                                 actionListener="#{addEditEventBean.saveEvent()}" />
+                                 actionListener="#{addEditCoursesBean.saveCourse()}" />
                 <p:commandButton value="#{msgs.cancel}"
                                  icon="ui-icon-cancel"  
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  immediate="true" 
                                  style="float:#{langBean.styleFloat}"                                 
-                                 action="manage_events"  />                                   
+                                 action="/hoffaz/admin/add_edit_courses.xhtml"  />                                   
             </h:form>
         
 </ui:decorate>         

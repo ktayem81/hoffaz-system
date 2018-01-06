@@ -10,41 +10,37 @@ package models.hoffaz;
  * @author eng_ayman
  */
 public class Courses {
-    private int course_Id;
-    private String course_Name;
-    private String course_description;
+    private int courseId;
+    private String courseName;
+    private String courseDescription;
 
     public Courses() {
     }
 
-    public Courses(int course_Id, String course_Name, String course_description) {
-        this.course_Id = course_Id;
-        this.course_Name = course_Name;
-        this.course_description = course_description;
+    public int getCourseId() {
+        return courseId;
     }
 
-    public int getCourse_Id() {
-        return course_Id;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
-    public void setCourse_Id(int course_Id) {
-        this.course_Id = course_Id;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public String getCourse_Name() {
-        return course_Name;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public void setCourse_Name(String course_Name) {
-        this.course_Name = course_Name;
+    public String getCourseDescription() {
+        return courseDescription;
     }
 
-    public String getCourse_description() {
-        return course_description;
+    public void setCourseDescription(String courseDescription) {
+        this.courseDescription = courseDescription;
     }
 
-    public void setCourse_description(String course_description) {
-        this.course_description = course_description;
-    }
+    
     
 }
