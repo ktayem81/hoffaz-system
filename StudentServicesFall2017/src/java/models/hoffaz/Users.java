@@ -5,46 +5,67 @@
  */
 package models.hoffaz;
 
+import java.io.Serializable;
+
 /**
  *
  * @author eng_ayman
  */
-public class Users {
-private int employee_Id;
-private String user_Name;
-private String password;
-private int password_Hash;
-private String salt;
-private String hash_Function;
-private int lock;
+public class Users implements Serializable{
+    private int employeeId;
+    private String firstName;
+    private String secondName;
+    private String thirdName;
+    private String familyName;
+    private String userName;
+    private String password;
 
-    public Users() {
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public Users(int employee_Id, String user_Name, String password, int password_Hash, String salt, String hash_Function, int lock) {
-        this.employee_Id = employee_Id;
-        this.user_Name = user_Name;
-        this.password = password;
-        this.password_Hash = password_Hash;
-        this.salt = salt;
-        this.hash_Function = hash_Function;
-        this.lock = lock;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public int getEmployee_Id() {
-        return employee_Id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setEmployee_Id(int employee_Id) {
-        this.employee_Id = employee_Id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getUser_Name() {
-        return user_Name;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setUser_Name(String user_Name) {
-        this.user_Name = user_Name;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public String getThirdName() {
+        return thirdName;
+    }
+
+    public void setThirdName(String thirdName) {
+        this.thirdName = thirdName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -55,36 +76,12 @@ private int lock;
         this.password = password;
     }
 
-    public int getPassword_Hash() {
-        return password_Hash;
+
+
+
+
+    public Users() {
     }
 
-    public void setPassword_Hash(int password_Hash) {
-        this.password_Hash = password_Hash;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public String getHash_Function() {
-        return hash_Function;
-    }
-
-    public void setHash_Function(String hash_Function) {
-        this.hash_Function = hash_Function;
-    }
-
-    public int getLock() {
-        return lock;
-    }
-
-    public void setLock(int lock) {
-        this.lock = lock;
-    }
-
+   
 }
