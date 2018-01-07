@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+       <ui:decorate template="/app_templates/app_template.xhtml"> 
+              
+    <h:form id="manage_user_form">  
+        
+        
+       <p:dataTable id="manage_user_table"
+                    styleClass="dataTable"
+                    var="user"
+                    value="#{manageUsersBean.users}"                    
+                    selection="#{manageUsersBean.selectedUser}"
+                    rowKey="#{user.employeeId}"                    
+                    rows="10"     
+                    rowsPerPageTemplate="5,10,20"
+                    dir="#{langBean.dir}"
+                    emptyMessage="#{msgs.no_users}"
+                    paginator="true"
+                    paginatorPosition="top" 
+                    paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
+                     >
+					 
+					   
+            <f:facet name="header" id="header">
+                #{msgs.user_info}
+            </f:facet>   
+            
+           <p:ajax event="rowSelectRadio"
+                   update=":manage_user_form:manage_user_table"/>
+           
+            <p:column selectionMode="single" style="width:5%; text-align:center;"/>
+
+            <p:column headerText="#{msgs.user_num}"
+                      style="width:20%;"
+                      filterBy="#{user.employeeId}"
+                      filterMatchMode="contains"
+                      sortBy="#{user.employeeId}">                    
+                <h:outputText value="#{user.employeeId}"/>  
+            </p:column>
+            
+            <p:column headerText="#{msgs.username}"
+                      style="width:20%;"
+                      filterBy="#{user.userName}"
+                      filterMatchMode="contains"
+                      sortBy="#{user.userName}">                    
+                <h:outputText value="#{user.userName}"/>  
+            </p:column>
+            
+            <p:column headerText="#{msgs.password}"
+                      style="width:20%"
+                      filterBy="#{user.password}"
+                      filterMatchMode="contains"
+                      sortBy="#{user.password}">                    
+                <h:outputText value="#{user.password}"/>  
+            </p:column>
+           
+            
+           
+            <f:facet name="footer">
+                <p:toolbar style="border: none">
+                    <p:toolbarGroup align="#{languageBean.screenLeft}">
+                        <p:commandButton value="#{msgs.delete}"
+                                         icon="ui-icon-minus"                                  
+                                         iconPos="#{langBean.styleFloat}"
+                                         styleClass="commandButton"
+                                         style="float:#{langBean.styleFloat}"
+                                         update="@form"
+                                         disabled="#{manageUsersBean.selectedUser==null}" 
+                                         onclick="return confirm('#{msgs.confirm_delete_course}?');"
+                                         actionListener="#{manageUsersBean.deleteSelectedUser()}"
+                                         action="/hoffaz/admin/manage_users.xhtml" />
+                        
+                        <p:commandButton value="#{msgs.edit}"
+                                         icon="ui-icon-pencil"                                  
+                                         iconPos="#{langBean.styleFloat}"
+                                         styleClass="commandButton"
+                                         style="float:#{langBean.styleFloat}"                                                                                                
+                                         disabled="#{manageUsersBean.selectedUser==null}"                                                 
+                                         actionListener="#{manageUsersBean.saveSelectedItemId()}"
+                                         action="/hoffaz/admin/add_edit_users.xhtml" />
+                    </p:toolbarGroup>
+                </p:toolbar>
+            </f:facet>
+
+
+        </p:dataTable>
+
+        <p:commandButton value="#{msgs.add}"
+                         icon="ui-icon-plus"                                  
+                         iconPos="#{langBean.styleFloat}"
+                         styleClass="commandButton"
+                         style="float:#{langBean.styleFloat}" 
+                         actionListener="#{sessionBean.setSelectedItemId(-1)}"
+                         action="/hoffaz/admin/add_edit_users.xhtml"/>                
+    </h:form>
+
+        </ui:decorate>
+    </h:body>
+</html>
+
