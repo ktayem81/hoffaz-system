@@ -108,11 +108,14 @@ public class EmployeesDao extends ConnectionDao{
             throw new SQLException(e.getMessage());
         }
 
-        String sql = "INSERT INTO EMPLOYEES (EMPLOYEEID,FIRSTNAME,SECONDNAME,THIRDNAME,FAMILYNAME,"
-                + "BRANCHID,CENTERID,PHONE,"
-                + "WHATSUP,ADDRESSDETIALS,"
-                + "NATIONALITY,NATIONALITYID,EMPLOYEECATEGORYID,SALARY) "                 
-                + " VALUES ((SELECT NVL(MAX(EMPLOYEEID),0)+1 AS employeetId FROM EMPLOYEES WHERE BRANCHID=? AND CENTERID=?)+1, "
+        String sql = "INSERT INTO EMPLOYEES ("
+                + "EMPLOYEEID,"
+                + "FIRSTNAME,SECONDNAME,THIRDNAME,FAMILYNAME,"
+                + "BRANCHID,CENTERID,"
+                + "PHONE,WHATSUP,ADDRESSDETIALS,"
+                + "NATIONALITY,NATIONALITYID,"
+                + "EMPLOYEECATEGORYID,SALARY) "                 
+                + " VALUES ((SELECT NVL(MAX(EMPLOYEEID),0)+1 AS employeetId FROM EMPLOYEES), "
                 + "?,?,?,?,?, "
                 + "?,?,?,?,?, "
                 + "?,?,?)";
@@ -164,9 +167,7 @@ public class EmployeesDao extends ConnectionDao{
                     + "    E.NATIONALITYID=?, "
                     + "    E.EMPLOYEECATEGORYID=?, "
                     + "    E.SALARY=? "
-                    + "    WHERE E.EMPLOYEEID=? "
-                    + "      AND E.BRANCHID=? "
-                    + "      AND E.CENTERID=? ";
+                    + "    WHERE E.EMPLOYEEID=? ";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             
@@ -187,8 +188,6 @@ public class EmployeesDao extends ConnectionDao{
             ps.setInt(10, employee.getEmployeeCategoryId());
             ps.setInt(11, employee.getSalary());
             ps.setInt(12, employee.getEmployeeId());
-            ps.setInt(13, employee.getBranchId());
-            ps.setInt(14, employee.getCenterId());
 
             ps.executeUpdate();
             
@@ -201,11 +200,11 @@ public class EmployeesDao extends ConnectionDao{
         Connection conn = getConnection();
         
         try {
-            String sql = "DELETE FROM EMPLOYEES WHERE BRANCHID=? AND CENTERID=? AND EMPLOYEEID=?";                               
+            String sql = "DELETE FROM EMPLOYEES WHERE EMPLOYEEID=?";                               
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, branchId);
-            ps.setInt(2, centerId);
-            ps.setInt(3, employeetId);
+            //ps.setInt(1, branchId);
+           // ps.setInt(2, centerId);
+            ps.setInt(1, employeetId);
             
             ps.executeUpdate();
 
@@ -218,14 +217,13 @@ public class EmployeesDao extends ConnectionDao{
         try {   
             Employees employee = null;
             Connection conn = getConnection();
-            
-                    
-            String sql = "SELECT E.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,E.BRANCHID,B.BRANCHNAME,E.CENTERID,C.CENTERNAME,E.PHONE,E.WHATSUP,E.ADDRESSDETIALS,E.NATIONALITY,N.NATIONALITYDESC,E.NATIONALITYID,E.EMPLOYEECATEGORYID,EC.CATEGORYDESCRIPTION,E.SALARY "
+                        
+            String sql = "SELECT E.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,E.FAMILYNAME,E.BRANCHID,B.BRANCHNAME,E.CENTERID,C.CENTERNAME,E.PHONE,E.WHATSUP,E.ADDRESSDETIALS,E.NATIONALITY,N.NATIONALITYDESC,E.NATIONALITYID,E.EMPLOYEECATEGORYID,EC.CATEGORYDESCRIPTION,E.SALARY "
                     + " FROM EMPLOYEES E "
                     + " LEFT JOIN BRANCH B ON  E.BRANCHID=B.BRANCHID "
-                    + " LEFT JOIN CENTER C ON  E.CENTERID=C.CENTERID "                  
+                    + " LEFT JOIN CENTER C ON  E.BRANCHID=C.BRANCHID AND E.CENTERID=C.CENTERID "                  
                     + " LEFT JOIN NATIONALITY N ON  E.NATIONALITY=N.NATIONALITY "  
-                    + " LEFT JOIN EMPLOYEECATEGORIES EC ON  E.EMPLOYEECATEGORYID=EC.EMPLOYEECATEGORYID "
+                    + " LEFT JOIN EMPLOYEECATEGORIES EC ON  E.EMPLOYEECATEGORYID=EC.EMPLOYEECATEGORYID " 
                     + " WHERE  E.EMPLOYEEID=?";
             
             PreparedStatement ps = conn.prepareStatement(sql);            

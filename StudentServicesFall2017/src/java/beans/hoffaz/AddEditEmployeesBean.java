@@ -295,7 +295,7 @@ public class AddEditEmployeesBean implements Serializable {
 
         branchId = sessionBean.getBranchId();
         centerId = sessionBean.getCenterId();
-        insertEmployeeId = Integer.parseInt(sessionBean.getUsername());
+        //insertEmployeeId = Integer.parseInt(sessionBean.getUsername());
 
         employeeId = sessionBean.getSelectedItemId();
 
