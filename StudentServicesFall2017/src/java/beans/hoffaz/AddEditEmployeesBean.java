@@ -70,7 +70,30 @@ public class AddEditEmployeesBean implements Serializable {
     private int salary;
     @Inject
     private SessionBean sessionBean;
+    
+    
 
+    public EmployeesDao getEmployeeDao() {
+        return employeeDao;
+    }
+
+    public NationalityDao getNationalityDao() {
+        return nationalityDao;
+    }
+
+    public BranchDao getBranchDao() {
+        return branchDao;
+    }
+
+    public CenterDao getCenterDao() {
+        return centerDao;
+    }
+
+    public EmployeeCategoryDao getEmployeeCategory() {
+        return employeeCategory;
+    }
+
+    
     public int getInsertEmployeeId() {
         return insertEmployeeId;
     }
@@ -266,6 +289,7 @@ public class AddEditEmployeesBean implements Serializable {
     
     public AddEditEmployeesBean() {
     }
+    
     @PostConstruct
     public void init() {
 
@@ -277,7 +301,7 @@ public class AddEditEmployeesBean implements Serializable {
 
         try {
             if (employeeId > 0) {
-                Employees employee = employeeDao.getEmployee(branchId, centerId, employeeId);
+                Employees employee = employeeDao.getEmployee(employeeId);
                 
                 this.firstName = employee.getFirstName();
                 this.secondName = employee.getSecondName();
@@ -297,7 +321,7 @@ public class AddEditEmployeesBean implements Serializable {
             nationalityList = nationalityDao.getNationalityList();
            // branchList=branchDao.buildBranches();
            // centerList=centerDao.buildCenters();
-//            employeescategoriesList =employeeCategory.getEmployeeCategory(employeeId);
+           employeescategoriesList =employeeCategory.getEmployeeCategory();
 
         } catch (Exception ex) {
             Logger.getLogger(AddEditEmployeesBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -305,7 +329,7 @@ public class AddEditEmployeesBean implements Serializable {
     }
     public void saveEmployee() {
         
-        int employeeId = Integer.parseInt(sessionBean.getUsername());
+        //employeeId = Integer.parseInt(sessionBean.getUsername());
        
         Employees employee = new Employees();
         
@@ -331,7 +355,7 @@ public class AddEditEmployeesBean implements Serializable {
                 employeeDao.insertEmployee(employee);
             }
             
-            sessionBean.setEmployee(employee);
+           // sessionBean.setEmployee(employee);
             
             
             

@@ -19,14 +19,14 @@ import models.hoffaz.Employee_Category;
  * @author khale
  */
 public class EmployeeCategoryDao extends ConnectionDao{
-    public ArrayList<Employee_Category> getEmployeeCategory( int employeeId) {
+    public ArrayList<Employee_Category> getEmployeeCategory() {
 
         ArrayList<Employee_Category> employeeCategoryList = new ArrayList<>();
         
         try {
             Connection conn = getConnection();
 
-            String sql = " SELECT CATEGORYDESCRIPTION "
+            String sql = " SELECT * "
                     + " FROM EMPLOYEECATEGORIES";
                     
 

@@ -29,18 +29,17 @@ public class EmployeesDao extends ConnectionDao{
         try {
             Connection conn = getConnection();
 
-            String sql = "SELECT E.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,E.BRANCHID,B.BRANCHNAME,E.CENTERID,C.CENTERNAME,E.PHONE,E.WHATSUP,E.ADDRESSDETIALS,E.NATIONALITY,N.NATIONALITYDESC,E.NATIONALITYID,E.EMPLOYEECATEGORYID,EC.CATEGORYDESCRIPTION,E.SALARY "
+            String sql = "SELECT E.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,E.FAMILYNAME,E.BRANCHID,B.BRANCHNAME,E.CENTERID,C.CENTERNAME,E.PHONE,E.WHATSUP,E.ADDRESSDETIALS,E.NATIONALITY,N.NATIONALITYDESC,E.NATIONALITYID,E.EMPLOYEECATEGORYID,EC.CATEGORYDESCRIPTION,E.SALARY "
                     + " FROM EMPLOYEES E "
                     + " LEFT JOIN BRANCH B ON  E.BRANCHID=B.BRANCHID "
                     + " LEFT JOIN CENTER C ON  E.BRANCHID=C.BRANCHID AND E.CENTERID=C.CENTERID "                  
                     + " LEFT JOIN NATIONALITY N ON  E.NATIONALITY=N.NATIONALITY "  
-                    + " LEFT JOIN EMPLOYEECATEGORIES EC ON  E.EMPLOYEECATEGORYID=EC.EMPLOYEECATEGORYID "  
-                    + " WHERE E.BRANCHID=? AND E.CENTERID=? "
+                    + " LEFT JOIN EMPLOYEECATEGORIES EC ON  E.EMPLOYEECATEGORYID=EC.EMPLOYEECATEGORYID " 
                     + " ORDER BY E.EMPLOYEEID ";
             
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setInt(1, branchId);
-                ps.setInt(2, centerId);
+                //ps.setInt(1, branchId);
+                //ps.setInt(2, centerId);
                 
                 ResultSet rs = ps.executeQuery();
                 
@@ -58,7 +57,10 @@ public class EmployeesDao extends ConnectionDao{
     }
      private Employees populateEmployees(ResultSet rs) throws SQLException {
         Employees employee = new Employees();
-        
+ //E.,E.,E.,E.,
+ //E.BRANCHID,B.BRANCHNAME,E.CENTERID,C.CENTERNAME,
+ //E.PHONE,E.WHATSUP,E.ADDRESSDETIALS,
+ //E.NATIONALITY,N.NATIONALITYDESC,E.NATIONALITYID,E.EMPLOYEECATEGORYID,EC.CATEGORYDESCRIPTION,E.SALARY "       
         employee.setEmployeeId(rs.getInt("EMPLOYEEID"));
         employee.setFirstName(rs.getString("FIRSTNAME"));
         employee.setSecondName(rs.getString("SECONDNAME"));
@@ -212,7 +214,7 @@ public class EmployeesDao extends ConnectionDao{
             throw new SQLException(e.getMessage());
         }
     }
-         public Employees getEmployee(int branchId, int centerId, int employeetId) throws Exception {
+         public Employees getEmployee( int employeetId) throws Exception {
         try {   
             Employees employee = null;
             Connection conn = getConnection();
@@ -224,12 +226,12 @@ public class EmployeesDao extends ConnectionDao{
                     + " LEFT JOIN CENTER C ON  E.CENTERID=C.CENTERID "                  
                     + " LEFT JOIN NATIONALITY N ON  E.NATIONALITY=N.NATIONALITY "  
                     + " LEFT JOIN EMPLOYEECATEGORIES EC ON  E.EMPLOYEECATEGORYID=EC.EMPLOYEECATEGORYID "
-                    + " WHERE E.BRANCHID=? AND E.CENTERID=? AND E.EMPLOYEEID=?";
+                    + " WHERE  E.EMPLOYEEID=?";
             
             PreparedStatement ps = conn.prepareStatement(sql);            
-            ps.setInt(1, branchId);
-            ps.setInt(2, centerId);
-            ps.setInt(3, employeetId);
+           // ps.setInt(1, branchId);
+           // ps.setInt(2, centerId);
+            ps.setInt(1, employeetId);
             
             ResultSet rs = ps.executeQuery();           
 
