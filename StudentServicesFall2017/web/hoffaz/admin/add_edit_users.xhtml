@@ -12,34 +12,44 @@
             <h:form id="add_user_tutorials">            
                 <p:messages id="msgs" closable="true" globalOnly="true"/>
 
-                <p:panel header="#{msgs.employee_tutorials_info}"                            
+                <p:panel header="#{msgs.user_info}"                            
                          style="min-height:200px; 
                                 direction:#{langBean.dir};margin-top:10px; font-size:10pt">
                     <h:panelGrid id="add"
                                  style="float: #{langBean.styleFloat};" 
                                  columns="3"                              
                                  dir="#{langBean.dir}">
-                        <p:outputLabel value="#{msgs.tutorial_name}:" for="tutorial_name"/>
-                        <p:inputText id="tutorial_name"
+<!--                        <p:outputLabel value="#{msgs.user_num}:" for="user_num"/>
+                        <p:inputText id="user_num"
                                      style="width:300px"
-                                     value="#{addEditCoursesBean.courseName}"                                      
+                                     value="#{addEdiitUsersBean.employeeId}"                                      
                                      required="true"
                                      maxlength="512"
                                      requiredMessage="#{msgs.required_msg}">
                         </p:inputText>
-                        <h:message for="tutorial_name" styleClass="errorMsg"/>
+                        <h:message for="user_num" styleClass="errorMsg"/>-->
+
+                        <p:outputLabel value="#{msgs.username}:" for="user_name"/>
+                        <p:inputText id="user_name"
+                                     style="width:300px"
+                                     value="#{addEdiitUsersBean.userName}"                                      
+                                     required="true"
+                                     maxlength="512"
+                                     requiredMessage="#{msgs.required_msg}">
+                        </p:inputText>
+                        <h:message for="user_name" styleClass="errorMsg"/>
 
                         
 
-                        <p:outputLabel value="#{msgs.description}:" for="description"/>
-                        <p:inputTextarea id="description"
-                                         value="#{addEditCoursesBean.courseDescription}"
+                        <p:outputLabel value="#{msgs.password}:" for="pass"/>
+                        <p:inputTextarea id="pass"
+                                         value="#{addEdiitUsersBean.password}"
                                      style="width:600px"
                                      required="true"
                                      maxlength="512"
                                      requiredMessage=" #{msgs.required_msg}">
                         </p:inputTextarea>
-                        <h:message for="description" styleClass="errorMsg"/>                                        
+                        <h:message for="pass" styleClass="errorMsg"/>                                        
 
                                                
                     </h:panelGrid>
@@ -51,14 +61,14 @@
                                  iconPos="#{langBean.styleFloat}"
                                  ajax="false"
                                  style="float:#{langBean.styleFloat}"                                                                   
-                                 actionListener="#{addEditCoursesBean.saveCourse()}" />
+                                 actionListener="#{addEdiitUsersBean.saveUser()}" />
                 <p:commandButton value="#{msgs.cancel}"
                                  icon="ui-icon-cancel"  
                                  iconPos="#{langBean.styleFloat}"
                                  styleClass="commandButton"
                                  immediate="true" 
                                  style="float:#{langBean.styleFloat}"                                 
-                                 action="/hoffaz/admin/add_edit_courses.xhtml"  />                                   
+                                 action="/hoffaz/admin/add_edit_users.xhtml"  />                                   
             </h:form>
         
 </ui:decorate>         

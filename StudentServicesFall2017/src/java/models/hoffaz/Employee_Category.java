@@ -10,32 +10,31 @@ package models.hoffaz;
  * @author eng_ayman
  */
 public class Employee_Category {
-    private int employee_Category_Id;
-    private int category_Description;
+    private int employeeCategoryId;
+    private String categoryDescription;
 
     public Employee_Category() {
     }
 
-    public Employee_Category(int employee_Category_Id, int category_Description) {
-        this.employee_Category_Id = employee_Category_Id;
-        this.category_Description = category_Description;
+    public int getEmployeeCategoryId() {
+        return employeeCategoryId;
     }
 
-    public int getEmployee_Category_Id() {
-        return employee_Category_Id;
+    public void setEmployeeCategoryId(int employeeCategoryId) {
+        this.employeeCategoryId = employeeCategoryId;
     }
 
-    public void setEmployee_Category_Id(int employee_Category_Id) {
-        this.employee_Category_Id = employee_Category_Id;
+    public String getCategoryDescription() {
+        return categoryDescription;
     }
 
-    public int getCategory_Description() {
-        return category_Description;
+    public void setCategoryDescription(String categoryDescription) {
+        this.categoryDescription = categoryDescription;
     }
 
-    public void setCategory_Description(int category_Description) {
-        this.category_Description = category_Description;
-    }
+   
+
+    
     
 
 }

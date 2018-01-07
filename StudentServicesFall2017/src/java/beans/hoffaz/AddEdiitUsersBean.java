@@ -120,10 +120,7 @@ public class AddEdiitUsersBean implements  Serializable{
     @PostConstruct
     public void init() {
 
-        
-        
-        
-
+   
         employeeId = sessionBean.getSelectedItemId();
         
         
@@ -156,11 +153,11 @@ public class AddEdiitUsersBean implements  Serializable{
         Users user = new Users();
 
         try {
-            user.setEmployeeId(employeeId);
+           user.setEmployeeId(employeeId);
             user.setFirstName(firstName);
-            user.setSecondName(secondName);
+           user.setSecondName(secondName);
             user.setThirdName(thirdName);
-            user.setFamilyName(familyName);
+           user.setFamilyName(familyName);
             user.setUserName(userName);
             user.setPassword(password);
             

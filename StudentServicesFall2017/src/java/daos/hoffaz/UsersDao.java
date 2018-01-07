@@ -92,7 +92,7 @@ public class UsersDao extends ConnectionDao{
 
         String sql = "INSERT INTO USERS U "
                 + "       (U.EMPLOYEEID,U.USERNAME,U.PASSWORD) "
-                + "           VALUES (?,?,?) ";
+                + "           VALUES (?,?,?)";
 
         PreparedStatement ps = conn.prepareStatement(sql);
 
