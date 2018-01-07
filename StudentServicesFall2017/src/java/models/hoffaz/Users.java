@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author eng_ayman
  */
-public class Users implements Serializable{
+public class Users {
     private int employeeId;
     private String firstName;
     private String secondName;

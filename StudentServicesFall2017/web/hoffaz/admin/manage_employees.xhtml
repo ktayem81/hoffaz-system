@@ -132,7 +132,7 @@
                                                  disabled="#{ManageEmployeesBean.selectedEmployee==null}" 
                                                  onclick="return confirm('#{msgs.confirm_delete_student}?');"
                                                  actionListener="#{ManageEmployeesBean.deleteSelectedEmployee()}"
-                                                 action="/hoffaz/registrar/manage_employees.xhtml" />
+                                                 action="/hoffaz/admin/manage_employees.xhtml" />
                                 <p:commandButton value="#{msgs.edit}"
                                                  icon="ui-icon-pencil"                                  
                                                  iconPos="#{langBean.styleFloat}"
@@ -140,7 +140,7 @@
                                                  style="float:#{langBean.styleFloat}"                                                                                                
                                                  disabled="#{ManageEmployeesBean.selectedEmployee==null}"                                                 
                                                  actionListener="#{ManageEmployeesBean.saveSelectedItemId()}"
-                                                 action="add_edit_employees" />
+                                                 action="/hoffaz/admin/add_edit_employees" />
                             </p:toolbarGroup>
                         </p:toolbar>
                     </f:facet>
@@ -154,7 +154,7 @@
                                  styleClass="commandButton"
                                  style="float:#{langBean.styleFloat}" 
                                  actionListener="#{sessionBean.setSelectedItemId(-1)}"
-                                 action="/hoffaz/registrar/add_edit_employees" />                
+                                 action="/hoffaz/admin/add_edit_employees" />                
             </h:form>
 
         </ui:decorate>   

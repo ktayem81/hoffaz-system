@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.hoffaz.Center;
 import models.hoffaz.Employees;
 
 /**
@@ -33,10 +32,10 @@ public class EmployeesDao extends ConnectionDao{
             String sql = "SELECT E.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,E.BRANCHID,B.BRANCHNAME,E.CENTERID,C.CENTERNAME,E.PHONE,E.WHATSUP,E.ADDRESSDETIALS,E.NATIONALITY,N.NATIONALITYDESC,E.NATIONALITYID,E.EMPLOYEECATEGORYID,EC.CATEGORYDESCRIPTION,E.SALARY "
                     + " FROM EMPLOYEES E "
                     + " LEFT JOIN BRANCH B ON  E.BRANCHID=B.BRANCHID "
-                    + " LEFT JOIN CENTER C ON  E.CENTERID=C.CENTERID "                  
+                    + " LEFT JOIN CENTER C ON  E.BRANCHID=C.BRANCHID AND E.CENTERID=C.CENTERID "                  
                     + " LEFT JOIN NATIONALITY N ON  E.NATIONALITY=N.NATIONALITY "  
                     + " LEFT JOIN EMPLOYEECATEGORIES EC ON  E.EMPLOYEECATEGORYID=EC.EMPLOYEECATEGORYID "  
-                    + " WHERE S.BRANCHID=? AND S.CENTERID=?"
+                    + " WHERE E.BRANCHID=? AND E.CENTERID=?"
                     + " ORDER BY E.EMPLOYEEID";
             
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -162,7 +161,7 @@ public class EmployeesDao extends ConnectionDao{
                     + "    E.NATIONALITY=?, "
                     + "    E.NATIONALITYID=?, "
                     + "    E.EMPLOYEECATEGORYID=?, "
-                    + "    E.SALARY=?, "
+                    + "    E.SALARY=? "
                     + "    WHERE E.EMPLOYEEID=? "
                     + "      AND E.BRANCHID=? "
                     + "      AND E.CENTERID=? ";

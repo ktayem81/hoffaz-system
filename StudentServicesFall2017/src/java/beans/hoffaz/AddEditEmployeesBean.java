@@ -23,7 +23,6 @@ import models.hoffaz.Center;
 import models.hoffaz.Employee_Category;
 import models.hoffaz.Employees;
 import models.hoffaz.Nationality;
-import models.hoffaz.Student;
 
 /**
  *
@@ -48,8 +47,9 @@ public class AddEditEmployeesBean implements Serializable {
     private ArrayList<Center> centerList = new ArrayList<>();
     private ArrayList<Employee_Category> employeescategoriesList = new ArrayList<>();
 
-    @Inject
-    private SessionBean sessionBean;
+    
+    
+    
     private int employeeId;
     private String firstName;
     private String secondName;
@@ -68,6 +68,8 @@ public class AddEditEmployeesBean implements Serializable {
     private int employeeCategoryId;
     private String employeeCategoryDesc;
     private int salary;
+    @Inject
+    private SessionBean sessionBean;
 
     public int getInsertEmployeeId() {
         return insertEmployeeId;
@@ -293,8 +295,8 @@ public class AddEditEmployeesBean implements Serializable {
                 
             }
             nationalityList = nationalityDao.getNationalityList();
-            branchList=branchDao.buildBranches();
-            centerList=centerDao.buildCenters();
+           // branchList=branchDao.buildBranches();
+           // centerList=centerDao.buildCenters();
           //  employeescategoriesList =;
 
         } catch (Exception ex) {
