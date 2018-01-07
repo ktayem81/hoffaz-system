@@ -35,8 +35,8 @@ public class EmployeesDao extends ConnectionDao{
                     + " LEFT JOIN CENTER C ON  E.BRANCHID=C.BRANCHID AND E.CENTERID=C.CENTERID "                  
                     + " LEFT JOIN NATIONALITY N ON  E.NATIONALITY=N.NATIONALITY "  
                     + " LEFT JOIN EMPLOYEECATEGORIES EC ON  E.EMPLOYEECATEGORYID=EC.EMPLOYEECATEGORYID "  
-                    + " WHERE E.BRANCHID=? AND E.CENTERID=?"
-                    + " ORDER BY E.EMPLOYEEID";
+                    + " WHERE E.BRANCHID=? AND E.CENTERID=? "
+                    + " ORDER BY E.EMPLOYEEID ";
             
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setInt(1, branchId);
@@ -110,9 +110,9 @@ public class EmployeesDao extends ConnectionDao{
                 + "BRANCHID,CENTERID,PHONE,"
                 + "WHATSUP,ADDRESSDETIALS,"
                 + "NATIONALITY,NATIONALITYID,EMPLOYEECATEGORYID,SALARY) "                 
-                + " VALUES ((SELECT NVL(MAX(EMPLOYEEID),0)+1 AS employeetId FROM EMPLOYEES WHERE BRANCHID=? AND CENTERID=?)+1,"
-                + "?,?,?,?,?,"
-                + "?,?,?,?,?,"
+                + " VALUES ((SELECT NVL(MAX(EMPLOYEEID),0)+1 AS employeetId FROM EMPLOYEES WHERE BRANCHID=? AND CENTERID=?)+1, "
+                + "?,?,?,?,?, "
+                + "?,?,?,?,?, "
                 + "?,?,?)";
 
         PreparedStatement ps = conn.prepareStatement(sql);

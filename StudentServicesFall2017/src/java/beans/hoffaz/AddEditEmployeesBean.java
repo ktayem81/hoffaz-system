@@ -297,7 +297,7 @@ public class AddEditEmployeesBean implements Serializable {
             nationalityList = nationalityDao.getNationalityList();
            // branchList=branchDao.buildBranches();
            // centerList=centerDao.buildCenters();
-            employeescategoriesList =employeeCategory.getEmployeeCategory(employeeId);
+//            employeescategoriesList =employeeCategory.getEmployeeCategory(employeeId);
 
         } catch (Exception ex) {
             Logger.getLogger(AddEditEmployeesBean.class.getName()).log(Level.SEVERE, null, ex);
