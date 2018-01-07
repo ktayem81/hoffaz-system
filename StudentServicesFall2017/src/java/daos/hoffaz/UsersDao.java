@@ -27,7 +27,7 @@ public class UsersDao extends ConnectionDao{
         try {
             Connection conn = getConnection();
 
-            String sql = "SELECT U.EMPLOYEEID,U.USERNAME,U.PASSWORD "
+            String sql = "SELECT U.EMPLOYEEID,E.FIRSTNAME,E.SECONDNAME,E.THIRDNAME,E.FAMILYNAME,U.USERNAME,U.PASSWORD "
                     + "FROM USERS U "
                     + "LEFT JOIN EMPLOYEES E  ON U.EMPLOYEEID=E.EMPLOYEEID "
                     + "ORDER BY U.EMPLOYEEID";
@@ -56,6 +56,10 @@ public class UsersDao extends ConnectionDao{
         Users user = new Users();
 
         user.setEmployeeId(rs.getInt("EMPLOYEEID"));
+        user.setFirstName(rs.getString("FIRSTNAME"));
+        user.setSecondName(rs.getString("SECONDNAME"));
+        user.setThirdName(rs.getString("THIRDNAME"));
+        user.setFamilyName(rs.getString("FAMILYNAME"));
         user.setUserName(rs.getString("USERNAME"));
         user.setPassword(rs.getString("PASSWORD"));
         
