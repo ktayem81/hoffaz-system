@@ -27,7 +27,7 @@ public class UsersDao extends ConnectionDao{
         try {
             Connection conn = getConnection();
 
-            String sql = "SELECT U.EMPLOYEEID,U.USERNAME,U.PASSWORD,U.FIRSTNAME,U.SECONDNAME,U.THIRDNAME,U.FAMILYNAME "
+            String sql = "SELECT U.EMPLOYEEID,U.USERNAME,U.PASSWORD "
                     + "FROM USERS U "
                     + "LEFT JOIN EMPLOYEES E  ON U.EMPLOYEEID=E.EMPLOYEEID "
                     + "ORDER BY U.EMPLOYEEID";
@@ -58,10 +58,7 @@ public class UsersDao extends ConnectionDao{
         user.setEmployeeId(rs.getInt("EMPLOYEEID"));
         user.setUserName(rs.getString("USERNAME"));
         user.setPassword(rs.getString("PASSWORD"));
-        user.setFirstName(rs.getString("FIRSTNAME"));
-        user.setSecondName(rs.getString("SECONDNAME"));
-        user.setThirdName(rs.getString("THIRDNAME"));
-        user.setFamilyName("FAMILYNAME");
+        
         return user;
     }
 
@@ -69,38 +66,37 @@ public class UsersDao extends ConnectionDao{
 
         Connection conn = getConnection();
 
-        String sqlBranchNo = "SELECT NVL(MAX(BRANCHID),0)+1 AS branchId FROM BRANCH";
+//        String sqlBranchNo = "SELECT NVL(MAX(BRANCHID),0)+1 AS branchId FROM BRANCH";
+//
+//        PreparedStatement ps1 = conn.prepareStatement(sqlBranchNo);
+//
+//        try {
+//            // ps1.setInt(1, student.getBranchId());
+//            // ps1.setInt(2, student.getCenterId());
+//
+//            ResultSet rs = ps1.executeQuery();
+//
+//            while (rs.next()) {
+//                branch.setBranchId(rs.getInt("branchId"));
+//            }
+//
+//            rs.close();
+//            ps1.close();
+//        } catch (SQLException e) {
+//            throw new SQLException(e.getMessage());
+//        }
 
-        PreparedStatement ps1 = conn.prepareStatement(sqlBranchNo);
-
-        try {
-            // ps1.setInt(1, student.getBranchId());
-            // ps1.setInt(2, student.getCenterId());
-
-            ResultSet rs = ps1.executeQuery();
-
-            while (rs.next()) {
-                branch.setBranchId(rs.getInt("branchId"));
-            }
-
-            rs.close();
-            ps1.close();
-        } catch (SQLException e) {
-            throw new SQLException(e.getMessage());
-        }
-
-        String sql = "INSERT INTO BRANCH B "
-                + "       (B.BRANCHID,B.BRANCHNAME,B.DESCRIPTION,B.GOVERNORATE_ID,B.PHONE) "
-                + "           VALUES ((SELECT NVL(MAX(BRANCHID),0)+1 AS branchId FROM BRANCH),?,?,?,?) ";
+        String sql = "INSERT INTO USERS U "
+                + "       (U.EMPLOYEEID,U.USERNAME,U.PASSWORD) "
+                + "           VALUES (?,?,?) ";
 
         PreparedStatement ps = conn.prepareStatement(sql);
 
         try {
-            ps.setString(1, branch.getBranchName());
-            ps.setString(2, branch.getDescription());
-            ps.setInt(3, branch.getGovernorateId());
-            ps.setString(4, branch.getPhone());
-
+            ps.setInt(1, user.getEmployeeId());
+            ps.setString(2, user.getUserName());
+            ps.setString(3, user.getPassword());
+           
             ps.executeUpdate();
 
             ps.close();
@@ -110,24 +106,21 @@ public class UsersDao extends ConnectionDao{
         }
     }
 
-    public void updateBranch(Branch branch) throws Exception {
+    public void updateUser(Users user) throws Exception {
         try {
             Connection conn = getConnection();
 
-            String sql = "UPDATE BRANCH "
-                    + "SET BRANCHNAME=?,"
-                    + "    DESCRIPTION=?,"
-                    + "    GOVERNORATE_ID=?,"
-                    + "    PHONE=?"
-                    + "    WHERE BRANCHID=?";
+            String sql = "UPDATE USERS "
+                    + "SET USERNAME=?,"
+                    + "    PASSWORD=? "
+                    + "    WHERE EMPLOYEEID=?";
             
             PreparedStatement ps = conn.prepareStatement(sql);
             
-            ps.setString(1, branch.getBranchName());
-            ps.setString(2, branch.getDescription());
-            ps.setInt(3, branch.getGovernorateId());
-            ps.setString(4, branch.getPhone());
-            ps.setInt(5, branch.getBranchId());
+            ps.setString(1, user.getUserName());
+            ps.setString(2, user.getPassword());
+            ps.setInt(3, user.getEmployeeId());
+            
 
             ps.executeUpdate();
 
@@ -137,14 +130,14 @@ public class UsersDao extends ConnectionDao{
         }
     }
 
-    public void deleteBranch(int branchId) throws Exception {
+    public void deleteUser(int userId) throws Exception {
         Connection conn = getConnection();
 
         try {
-            String sql = "DELETE FROM BRANCH WHERE BRANCHID=?";
+            String sql = "DELETE FROM USERS WHERE EMPLOYEEID=?";
             PreparedStatement ps = conn.prepareStatement(sql);
            
-            ps.setInt(1, branchId);
+            ps.setInt(1, userId);
             
             ps.executeUpdate();
 
@@ -154,29 +147,29 @@ public class UsersDao extends ConnectionDao{
         }
     }
 
-    public Branch getBranch(int branchId) throws Exception {
+    public Users getUser(int userId) throws Exception {
         try {
-            Branch branch = null;
+            Users user = null;
             Connection conn = getConnection();
 
-            String sql = "SELECT B.BRANCHID,B.BRANCHNAME,B.DESCRIPTION,B.GOVERNORATE_ID,G.DESCRIPTION AS GOVER_DESC,B.PHONE "
-                    + "FROM BRANCH B "
-                    + "LEFT JOIN GOVERNORATE G  ON B.GOVERNORATE_ID=G.GOVERNORATEID "
-                    + "WHERE B.BRANCHID=?";
+            String sql = "SELECT U.EMPLOYEEID,U.USERNAME,U.PASSWORD "
+                    + "FROM USERS U "
+                    + "LEFT JOIN EMPLOYEES E  ON U.EMPLOYEEID=E.EMPLOYEEID "
+                    + " WHERE U.EMPLOYEEID=?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, branchId);
+            ps.setInt(1, userId);
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                branch = populateBranch(rs);
+                user = populateUser(rs);
             }
 
             rs.close();
             ps.close();
 
-            return branch;
+            return user;
         } catch (SQLException e) {
             throw new SQLException(e.getMessage());
         }
