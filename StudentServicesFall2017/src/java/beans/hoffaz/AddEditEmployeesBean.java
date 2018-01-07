@@ -7,7 +7,7 @@ package beans.hoffaz;
 
 import daos.hoffaz.BranchDao;
 import daos.hoffaz.CenterDao;
-import daos.hoffaz.EmployeesCategoriesDao;
+import daos.hoffaz.EmployeeCategoryDao;
 import daos.hoffaz.EmployeesDao;
 import daos.hoffaz.NationalityDao;
 import java.io.Serializable;
@@ -40,7 +40,7 @@ public class AddEditEmployeesBean implements Serializable {
     private final NationalityDao nationalityDao = new NationalityDao();
     private final BranchDao branchDao = new BranchDao();
     private final CenterDao centerDao = new CenterDao();
-    private final EmployeesCategoriesDao employeeCategoriesDao = new EmployeesCategoriesDao();
+    private final  EmployeeCategoryDao employeeCategory = new EmployeeCategoryDao();
 
     private ArrayList<Nationality> nationalityList = new ArrayList<>();
     private ArrayList<Branch> branchList = new ArrayList<>();
@@ -297,7 +297,7 @@ public class AddEditEmployeesBean implements Serializable {
             nationalityList = nationalityDao.getNationalityList();
            // branchList=branchDao.buildBranches();
            // centerList=centerDao.buildCenters();
-          //  employeescategoriesList =;
+            employeescategoriesList =employeeCategory.getEmployeeCategory(employeeId);
 
         } catch (Exception ex) {
             Logger.getLogger(AddEditEmployeesBean.class.getName()).log(Level.SEVERE, null, ex);

@@ -27,11 +27,11 @@ public class EmployeeCategoryDao extends ConnectionDao{
             Connection conn = getConnection();
 
             String sql = " SELECT CATEGORYDESCRIPTION "
-                    + " FROM EMPLOYEECATEGORIES "
-                    + " WHERE EMPLOYEECATEGORYID=?";
+                    + " FROM EMPLOYEECATEGORIES";
+                    
 
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, employeeId);
+          //  ps.setInt(1, employeeId);
           
            
 

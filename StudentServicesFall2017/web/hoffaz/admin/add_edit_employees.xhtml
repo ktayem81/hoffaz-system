@@ -15,7 +15,7 @@
                 <p:messages id="msgs" closable="true" globalOnly="true"/>
 
                 <p:panel header="#{msgs.employee_info}"                            
-                         style="min-height:500px; 
+                         style="min-height:450px; 
                                 direction:#{langBean.dir};margin-top:10px; font-size:10pt">
                     <h:panelGrid id="add"
                                  style="float: #{langBean.styleFloat};" 
@@ -63,35 +63,7 @@
                         <h:message for="user_faname" styleClass="errorMsg"/>
                         
                         
-                        <p:outputLabel value="#{msgs.branch_name}:" for="branch_name"/>
-                        <p:selectOneMenu value="#{addEditEmployeesBean.branchId}"
-                                         id="branch_name"
-                                         required="true"                                                                                  
-                                         requiredMessage=" #{msgs.required_msg}">
-                            <f:selectItem itemLabel="#{msgs.select_one}"
-                                          itemValue=""/>
-                            <f:selectItems var="branch"
-                                           value="#{addEditEmployeesBean.branchList}" 
-                                           itemLabel="#{branch.branchName}"
-                                           itemValue="#{branch.branchId}"/>                             
-                        </p:selectOneMenu>
-                        <h:message for="center_name" styleClass="errorMsg"/> 
-                        <p:outputLabel value="#{msgs.center_name}:" for="center_name"/>
-                        <p:selectOneMenu value="#{addEditEmployeesBean.centerId}"
-                                         id="center_name"
-                                         required="true"                                                                                  
-                                         requiredMessage=" #{msgs.required_msg}">
-                            <f:selectItem itemLabel="#{msgs.select_one}"
-                                          itemValue=""/>
-                            <f:selectItems var="center"
-                                           value="#{addEditEmployeesBean.centerList}" 
-                                           itemLabel="#{center.centerName}"
-                                           itemValue="#{center.centerId}"/>                             
-                        </p:selectOneMenu>
-                        <h:message for="center_name" styleClass="errorMsg"/> 
-                        
-
-                       <p:outputLabel value="#{msgs.tele}:" for="tele"/>
+                        <p:outputLabel value="#{msgs.tele}:" for="tele"/>
                         <p:inputText id="tele"
                                      value="#{addEditEmployeesBean.phone}"
                                      style="width:200px"
@@ -109,6 +81,10 @@
                                      requiredMessage=" #{msgs.required_msg}">
                         </p:inputText>
                         <h:message for="whatsapp" styleClass="errorMsg"/>
+                        
+
+                       
+                        
 
                         <p:outputLabel value="#{msgs.address}:" for="address"/>
                         <p:inputTextarea id="address"
@@ -147,14 +123,14 @@
                         <p:outputLabel value="#{msgs.user_roll}:" for="user_roll"/>
                         <p:selectOneMenu value="#{addEditEmployeesBean.employeeCategoryId}"
                                          id="user_roll"
-                                         required="true"                                                                                  
+                                         required="false"                                                                                  
                                          requiredMessage=" #{msgs.required_msg}">
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
                             <f:selectItems var="ec"
                                            value="#{addEditEmployeesBean.employeescategoriesList}" 
-                                           itemLabel="#{ec.category_Description}"
-                                           itemValue="#{ec.employee_Category_Id}"/>                             
+                                           itemLabel="#{ec.categoryDescription}"
+                                           itemValue="#{ec.employeeCategoryId}"/>                             
                         </p:selectOneMenu>
                         <h:message for="Nationality" styleClass="errorMsg"/> 
                         <p:outputLabel value="#{msgs.salary}:" for="salary"/>
