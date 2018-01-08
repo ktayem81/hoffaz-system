@@ -8,15 +8,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" 
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>#{msgs.grades_report}</title>
+        <title>#{msgs.grades_en}</title>
     </h:head>
 
     <h:body>
         <ui:decorate template="/app_templates/app_template.xhtml">
-            <h:form id="report_form">            
+            <h:form id="grades_form">            
                 <p:messages id="msgs" closable="true" globalOnly="true"/>
 
-                <p:panel header="#{msgs.grades_grades_report}"                            
+                <p:panel header="#{msgs.grades_en}"                            
                          style="min-height:130px; 
                          direction:#{langBean.dir};margin-top:10px; font-size:10pt">
 
@@ -24,16 +24,7 @@
                                  style="float: #{langBean.styleFloat};text-align: right" 
                                  columns="5" 
                                  dir="#{langBean.dir}"> 
-                        <p:outputLabel value="#{msgs.studentId}:" for="studentid"/>
-                        <p:inputText id="studentid" style="width:170px"
-                                     value="#{managePaerntReportBean.studentIdd}"                                   
-                                     required="true"
-                                     maxlength="20"
-                                     requiredMessage="#{msgs.required_msg}">
-                        </p:inputText>
-                        <p:outputLabel/><p:outputLabel/>
-                        <h:message for="grade" styleClass="errorMsg"/>
-                        
+
                         <p:outputLabel value="#{msgs.semester_desc_en}:" for="semester_year"/>
                         <p:selectOneMenu value="#{manageClassRoomBean.semesterYear}" 
                                          id="semester_year"
@@ -43,7 +34,6 @@
                                          panelStyle="float:#{langBean.styleFloat}">
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
-                            
                             <f:selectItems var="semester_Year"
                                            value="#{addEditClassRoomBean.semesterYearList}" 
                                            itemLabel="#{semester_Year}"
@@ -57,11 +47,10 @@
                                          required="true"
                                          requiredMessage=" #{msgs.required_msg}"
                                          panelStyle="float:#{langBean.styleFloat}">
-                            
-                            <p:ajax listener="#{manageClassRoomBean.updateClassRoomFilter()}" update=":report_form:manage_grades_table"/>
+                            <p:ajax listener="#{manageClassRoomBean.updateClassRoomFilter()}" update=":grades_form:manage_grades_table"/>
                             <f:selectItem itemLabel="#{msgs.select_one}"
                                           itemValue=""/>
-                            <f:selectItems var="semester_Id"
+                            <f:selectItems var="semesterId"
                                            value="#{manageClassRoomBean.semesterIdList}" 
                                            itemLabel="#{semesterId.semesterIdLookUp}"
                                            itemValue="#{semesterId.semesterId}"/>
@@ -100,7 +89,7 @@
                         <h:message for="semester_id" styleClass="errorMsg"/>
                         <h:message for="class_Id" styleClass="errorMsg"/>
                         <h:message for="class_level_id" styleClass="errorMsg"/>
-
+                        
                         <p:commandButton value="#{msgs.show}"
                                          icon="ui-icon-save"                                  
                                          iconPos="#{langBean.styleFloat}"
@@ -108,7 +97,7 @@
                                          style="float:#{langBean.styleFloat}"
                                          update="@form"
                                          disabled="false}" 
-                                         action="#{managePaerntReportBean.buildStudentsGrade(semester_year, semester_id, class_Id, class_level_id,studentid)}" />
+                                         action="#{manageStudentGradesBean.buildStudentsGrade(semester_year,semester_id,class_Id,class_level_id)}" />
                     </h:panelGrid>
 
                 </p:panel>
@@ -117,7 +106,9 @@
                 <p:dataTable id="manage_grades_table"
                              styleClass="dataTable"
                              var="grades"
-                             value="#{managePaerntReportBean.studentsGrades}"                                     
+                             value="#{manageStudentGradesBean.studentsGrades}"                    
+                             selection="#{manageStudentGradesBean.selectedStudentGrade}"
+                             rowKey="#{grades.studentId}"                    
                              rows="10"     
                              rowsPerPageTemplate="5,10,20"
                              dir="#{langBean.dir}"
@@ -129,24 +120,17 @@
                     <f:facet name="header" id="header">
                         #{msgs.grades_en}
                     </f:facet>  
-                   <f:facet name="fullName" id="fullName">
-                       #{grades.firstName} #{grades.secondName} #{grades.thirdName} #{grades.familyName}
-                    </f:facet>  
-                    <p:column headerText="#{msgs.class_name_en}"
-                              style="width:25%"
-                              filterBy="#{grades.class_id}"
+                    <p:ajax event="rowSelectRadio"
+                            update=":grades_form:manage_grades_table"/>     
+                    <p:column selectionMode="single" style="width:5%;text-align:center;"/>
+                    <p:column headerText="#{msgs.name}"
+                              style="width:50%"
+                              filterBy="#{grades.firstName}"
                               filterMatchMode="contains"
-                              sortBy="#{grades.class_id}">                    
-                        <h:outputText value="#{grades.class_id}"/>
+                              sortBy="#{grades.firstName}">                    
+                        <h:outputText value="#{grades.firstName} #{grades.secondName} #{grades.thirdName} #{grades.familyName}"/>
                     </p:column>
 
-                    <p:column headerText="#{msgs.level_name_en}"
-                              style="width:25%"
-                              filterBy="#{grades.level_id}"
-                              filterMatchMode="contains"
-                              sortBy="#{grades.level_id}">                    
-                        <h:outputText value="#{grades.level_id}"/>
-                    </p:column>
                     <p:column headerText="#{msgs.grade_en}"
                               style="width:25%"
                               filterBy="#{grades.grade}"
@@ -154,6 +138,31 @@
                               sortBy="#{grades.grade}"> 
                         <h:outputText value="#{grades.grade}"/>             
                     </p:column>
+
+                    <f:facet name="footer">
+                        <p:toolbar style="border: none">
+                            <p:toolbarGroup align="#{languageBean.screenLeft}">
+                                <p:commandButton value="#{msgs.update}"
+                                                 icon="ui-icon-save"                                  
+                                                 iconPos="#{langBean.styleFloat}"
+                                                 styleClass="commandButton"
+                                                 style="float:#{langBean.styleFloat}"
+                                                 update="@form"
+                                                 disabled="#{manageStudentGradesBean.selectedStudentGrade==null}" 
+                                                
+                                                 action="update_studentgrades.xhtml" />
+                                <p:commandButton value="#{msgs.cancel}"
+                                                 icon="ui-icon-save"                                  
+                                                 iconPos="#{langBean.styleFloat}"
+                                                 styleClass="commandButton"
+                                                 style="float:#{langBean.styleFloat}"
+                                                 update="@form"
+                                                 disabled="#{manageStudentGradesBean.selectedStudentGrade==null}" 
+                                                 action="manage_studentgrades.xhtml" />
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+
                 </p:dataTable>
 
             </h:form>

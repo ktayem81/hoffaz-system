@@ -1,34 +1,114 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://primefaces.org/ui"> 
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
+    <h:head>
+        <title>#{msgs.attendence_en}</title>
+    </h:head>
 
-            <h:form id="attendence_form">     
-                
+    <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml">
+            <h:form id="attendence_form">            
                 <p:messages id="msgs" closable="true" globalOnly="true"/>
-                    <h:panelGrid id="add_student_grid"
-                                 style="float: #{langBean.styleFloat};text-align: right" 
-                                 columns="6" 
+
+                <p:panel header="#{msgs.attendence_en}"                            
+                         style="min-height:100px; 
+                         direction:#{langBean.dir};margin-top:10px; font-size:10pt">
+                    <h:panelGrid id="attendence"
+                                 style="float: #{langBean.styleFloat};text-align: match-parent" 
+                                 columns="3" 
                                  dir="#{langBean.dir}">  
-                        
-                       
-                 </h:panelGrid>
-                <p:commandButton value="#{msgs.save}"
-                                 styleClass="commandButton"
-                                 icon="ui-icon-disk"
-                                 iconPos="#{langBean.styleFloat}"
-                                 ajax="false"
-                                 style="float:#{langBean.styleFloat}"                                                                   
-                                 actionListener="#{addStudentBean.saveStudent()}" />
-                <p:commandButton value="#{msgs.cancel}"
-                                 icon="ui-icon-cancel"  
-                                 iconPos="#{langBean.styleFloat}"
-                                 styleClass="commandButton"
-                                 immediate="true" 
-                                 style="float:#{langBean.styleFloat}"                                 
-                                 action="manage_events"/> 
+
+                        <p:outputLabel value="#{msgs.classRoomID}:"/>
+                        <p:selectOneMenu value="#{manageStudentGradesBean.roomList}"
+                                         id="class_room"
+                                         style="width:140px; float:#{langBean.styleFloat}; direction:#{langBean.dir}"                               
+                                         required="true" panelStyle="float:#{langBean.styleFloat}"                                                                                  
+                                         requiredMessage=" #{msgs.required_msg}">
+                            
+                            <f:selectItem itemLabel="#{msgs.select_one}"
+                                          itemValue=""/>
+                            <f:selectItems var="room" 
+                                           value="#{manageStudentGradesBean.roomList}" 
+                                           itemLabel="#{room.class_Room_Id}"
+                                           itemValue="#{room.class_Room_Id}"/>                             
+                            <p:ajax listener="#{manageStudentGradesBean.updateTable(room)}" update=":attendence_form:manage_attendence_table"/>
+                        </p:selectOneMenu>
+
+                        <h:message for="class_room" styleClass="errorMsg"/> 
+                        <p:outputLabel value="#{msgs.date}:" for="date_label"/>
+                        <p:calendar id="date_label"
+                                    value="#{manageStudentAttendenceBean.date_r}"
+                                    dir="ltr"
+                                    mindate=""
+                                    pattern="yyyy-MM-dd" 
+                                    navigator="true"
+                                    required="true"
+                                    yearRange="c-10:c+1"
+                                    timeInput="true"
+                                    requiredMessage=" #{msgs.required_msg}"/>
+
+                        <h:message for="period_from" styleClass="errorMsg"/> 
+                    </h:panelGrid>
+
+                </p:panel>
+                <p:dataTable id="manage_attendence_table"
+                             styleClass="dataTable"
+                             var="attendence"
+                             value="#{manageStudentAttendenceBean.studentsAttendence}"                                      
+                             rows="10"     
+                             editable="true" 
+                             editMode="cell"
+                             rowsPerPageTemplate="5,10,20"
+                             dir="#{langBean.dir}"
+                             emptyMessage="#{msgs.no_students}"
+                             paginator="true"
+                             paginatorPosition="top" 
+                             paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
+                             >
+                    <p:ajax event="rowSelect"
+                            update=":attendence_form:manage_attendence_table"/>
+
+                    <f:facet name="header" id="header">
+                        #{msgs.attendence_en}
+                    </f:facet>
+
+                    <p:column selectionMode="multi" style="width:10%"/>
+
+                    <p:column headerText="#{msgs.name}"
+                              style="width:50%"
+                              filterBy="#{attendence.firstName}"
+                              filterMatchMode="contains"
+                              sortBy="#{attendence.firstName}">                    
+                        <h:outputText value="#{attendence.firstName}"/>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <p:toolbar style="border: none">
+                            <p:toolbarGroup align="#{languageBean.screenLeft}">
+                                <p:commandButton value="#{msgs.save}"
+                                                 icon="ui-icon-save"                                  
+                                                 iconPos="#{langBean.styleFloat}"
+                                                 styleClass="commandButton"
+                                                 style="float:#{langBean.styleFloat}"
+                                                 update="@form"
+
+                                                 onclick="return confirm('#{msgs.confirm_Save_change}?');"
+                                                 actionListener="#{manageAttendenceBean.insertStudentAttendence()}"
+                                                 action="studentattendence.xhtml" />
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </f:facet>
+
+                </p:dataTable>
+
             </h:form>
-      
-</ui:composition>
-  
+
+        </ui:decorate>
+    </h:body>
+</html>
+

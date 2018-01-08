@@ -1,12 +1,120 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>#{msgs.contests}</title>
     </h:head>
-    <h:body>
-        Hello from Facelets
+
+ <h:body>
+        <ui:decorate template="/app_templates/app_template.xhtml"> 
+    <h:form id="manage_contest_form">  
+        
+        
+       <p:dataTable id="manage_contest_table"
+                    styleClass="dataTable"
+                    var="student"
+                    value="#{manageContestBean.contest}"                    
+                    selection="#{manageContestBean.selectedStudent}"
+                    rowKey="#{student.contestId}"                    
+                    rows="5"     
+                    rowsPerPageTemplate="5,10,20"
+                    dir="#{langBean.dir}"
+                    emptyMessage="#{msgs.no_students}"
+                    paginator="true"
+                    paginatorPosition="top" 
+                    paginatorTemplate="#{langBean.isEnglish? '{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}' : '{RowsPerPageDropdown} {LastPageLink} {NextPageLink} {PageLinks} {PreviousPageLink} {FirstPageLink}'}"
+                     >
+					 
+					   
+            <f:facet name="header" id="header">
+                #{msgs.contests}
+            </f:facet>   
+            
+           <p:ajax event="rowSelectRadio"
+                   update=":manage_contest_form:manage_contest_table"/>
+           
+            <p:column selectionMode="single" style="width:5%;text-align:center;"/>
+
+            <p:column headerText="#{msgs.student_id}"
+                      style="width:20%;"
+                      filterBy="#{student.studentId}"
+                      filterMatchMode="contains"
+                      sortBy="#{student.studentId}">                    
+                <h:outputText value="#{student.studentId}"/>  
+            </p:column>
+            
+            <p:column headerText="#{msgs.semester}"
+                      style="width:20%"
+                      filterBy="#{student.semesterId}"
+                      filterMatchMode="contains"
+                      sortBy="#{student.semesterId}">                    
+                <h:outputText value="#{student.semesterId}"/>  
+            </p:column>
+            <p:column headerText="#{msgs.partsNumber}"
+                      style="width:20%"
+                      filterBy="#{student.partNumbers}"
+                      filterMatchMode="contains"
+                      sortBy="#{student.partNumbers}">                    
+                <h:outputText value="#{student.partNumbers}"/>  
+            </p:column>
+            <p:column headerText="#{msgs.grade_en}"
+                      style="width:20%"
+                      filterBy="#{student.grade}"
+                      filterMatchMode="contains"
+                      sortBy="#{student.grade}">                    
+                <h:outputText value="#{student.grade}"/>  
+            </p:column>
+            <p:column headerText="#{msgs.orderNo}"
+                      style="width:20%"
+                      filterBy="#{student.orderNo}"
+                      filterMatchMode="contains"
+                      sortBy="#{student.orderNo}">                    
+                <h:outputText value="#{student.orderNo}"/>  
+            </p:column>
+            
+            <f:facet name="footer">
+                <p:toolbar style="border: none">
+                    <p:toolbarGroup align="#{languageBean.screenLeft}">
+                        <p:commandButton value="#{msgs.delete}"
+                                         icon="ui-icon-minus"                                  
+                                         iconPos="#{langBean.styleFloat}"
+                                         styleClass="commandButton"
+                                         style="float:#{langBean.styleFloat}"
+                                         update="@form"
+                                         disabled="#{manageContestBean.selectedStudent==null}" 
+                                         onclick="return confirm('#{msgs.confirm_delete_student}?');"
+                                         actionListener="#{manageContestBean.deleteSelectedStudent()}"
+                                         action="/hoffaz/registrar/manage_students.xhtml" />
+                        <p:commandButton value="#{msgs.edit}"
+                                         icon="ui-icon-pencil"                                  
+                                         iconPos="#{langBean.styleFloat}"
+                                         styleClass="commandButton"
+                                         style="float:#{langBean.styleFloat}"                                                                                                
+                                         disabled="#{manageContestBean.selectedStudent==null}"                                                 
+                                         actionListener="#{manageContestBean.saveSelectedStudentId()}"
+                                         action="/hoffaz/" />
+                    </p:toolbarGroup>
+                </p:toolbar>
+            </f:facet>
+
+
+        </p:dataTable>
+
+        <p:commandButton value="#{msgs.add}"
+                         icon="ui-icon-plus"                                  
+                         iconPos="#{langBean.styleFloat}"
+                         styleClass="commandButton"
+                         style="float:#{langBean.styleFloat}" 
+                         actionListener="#{sessionBean.setSelectedStudentId(-1)}"
+                         action="/hoffaz/" />                
+    </h:form>
+
+        </ui:decorate>         
     </h:body>
 </html>
 

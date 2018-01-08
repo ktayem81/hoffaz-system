@@ -8,14 +8,20 @@
                        styleClass="ribbonButton" 
                        style="float:#{langBean.styleFloat};"
                        actionListener="#{sessionBean.setMenuIndex(2)}"
-                     action="teacher/studentgrades.xhtml">      
+                     action="/hoffaz/teacher/manage_studentgrades.xhtml">
     </p:commandButton>
     
-     <p:commandButton   value="#{msgs.attendence_en}"  
+    <p:commandButton   value="#{msgs.attendence_en}"  
                        styleClass="ribbonButton" 
                        style="float:#{langBean.styleFloat};"
                        actionListener="#{sessionBean.setMenuIndex(2)}"
-                     action="teacher/studentattendence.xhtml">      
+                       action="/hoffaz/teacher/studentattendence.xhtml">
+    </p:commandButton>
+  <p:commandButton   value="#{msgs.contest}"  
+                       styleClass="ribbonButton" 
+                       style="float:#{langBean.styleFloat};"
+                       actionListener="#{sessionBean.setMenuIndex(2)}"
+                     action="/hoffaz/teacher/branchcontest.xhtml">
     </p:commandButton>
 
 </ui:composition>
